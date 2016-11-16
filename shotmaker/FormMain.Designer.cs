@@ -109,6 +109,9 @@
             treeNode17.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
             this.treeViewMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode17});
+            this.treeViewMain.ShowLines = false;
+            this.treeViewMain.ShowPlusMinus = false;
+            this.treeViewMain.ShowRootLines = false;
             this.treeViewMain.Size = new System.Drawing.Size(480, 406);
             this.treeViewMain.TabIndex = 0;
             this.treeViewMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
