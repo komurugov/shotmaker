@@ -42,11 +42,13 @@
             System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("1. Navigate to AUU home page", new System.Windows.Forms.TreeNode[] {
             treeNode7});
             System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Password is encrypted");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
+        "ehavior in case of long text.", new System.Windows.Forms.TreeNode[] {
             treeNode9});
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
             System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("3. Click \"Log In\" button", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode(resources.GetString("treeViewMain.Nodes"), new System.Windows.Forms.TreeNode[] {
             treeNode11,
             treeNode12});
             System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
@@ -61,17 +63,7 @@
             treeNode15});
             System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Execution: OLSS-4589-TE-Sprint-4-Saratov", new System.Windows.Forms.TreeNode[] {
             treeNode16});
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
-            "1",
-            "a",
-            "b"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
-            "2",
-            "",
-            "",
-            ""}, -1);
             this.treeViewMain = new System.Windows.Forms.TreeView();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // treeViewMain
@@ -97,13 +89,14 @@
             treeNode9.Name = "Node15";
             treeNode9.Text = "Password is encrypted";
             treeNode10.Name = "Node14";
-            treeNode10.Text = "2. Enter valid credentials of \'user1\' from Data";
+            treeNode10.Text = "2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
+    "ehavior in case of long text.";
             treeNode11.Name = "Node17";
             treeNode11.Text = "AUU System Information page is open";
             treeNode12.Name = "Node18";
             treeNode12.Text = "Current user is \'user1\'";
             treeNode13.Name = "Node16";
-            treeNode13.Text = "3. Click \"Log In\" button";
+            treeNode13.Text = resources.GetString("treeNode13.Text");
             treeNode14.Name = "Node11";
             treeNode14.Text = "Steps";
             treeNode15.Name = "Node7";
@@ -116,28 +109,15 @@
             treeNode17.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
             this.treeViewMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode17});
-            this.treeViewMain.Size = new System.Drawing.Size(462, 406);
+            this.treeViewMain.Size = new System.Drawing.Size(480, 406);
             this.treeViewMain.TabIndex = 0;
             this.treeViewMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            // 
-            // listView1
-            // 
-            this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.listView1.Location = new System.Drawing.Point(803, 52);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(365, 327);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1312, 482);
-            this.Controls.Add(this.listView1);
+            this.ClientSize = new System.Drawing.Size(560, 482);
             this.Controls.Add(this.treeViewMain);
             this.Name = "FormMain";
             this.Text = "Form1";
@@ -148,7 +128,6 @@
         #endregion
 
         private System.Windows.Forms.TreeView treeViewMain;
-        private System.Windows.Forms.ListView listView1;
     }
 }
 
