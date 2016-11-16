@@ -28,41 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("Installed OLSS and ECM 5.0 Server");
-            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("Installed OLSS Client and AUU");
-            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Preconditions", new System.Windows.Forms.TreeNode[] {
-            treeNode52,
-            treeNode53});
-            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("Internal Authentication");
-            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("OLSS user \'user1\' with privileges to login into AUU Web UI");
-            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
-            treeNode55,
-            treeNode56});
-            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("AUU Login page with \"User name\" and \"Password\" without \"Domain\"");
-            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("1. Navigate to AUU home page", new System.Windows.Forms.TreeNode[] {
-            treeNode58});
-            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("Password is encrypted");
-            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Installed OLSS and ECM 5.0 Server");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Installed OLSS Client and AUU");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Preconditions", new System.Windows.Forms.TreeNode[] {
+            treeNode18,
+            treeNode19});
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Internal Authentication");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("OLSS user \'user1\' with privileges to login into AUU Web UI");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
+            treeNode21,
+            treeNode22});
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("AUU Login page with \"User name\" and \"Password\" without \"Domain\"");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("1. Navigate to AUU home page", new System.Windows.Forms.TreeNode[] {
+            treeNode24});
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("Password is encrypted");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
         "ehavior in case of long text.", new System.Windows.Forms.TreeNode[] {
-            treeNode60});
+            treeNode26});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
-            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
-            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode(resources.GetString("treeViewMain.Nodes"), new System.Windows.Forms.TreeNode[] {
-            treeNode62,
-            treeNode63});
-            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
-            treeNode59,
-            treeNode61,
-            treeNode64});
-            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Verification: 1", new System.Windows.Forms.TreeNode[] {
-            treeNode57,
-            treeNode65});
-            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ", new System.Windows.Forms.TreeNode[] {
-            treeNode54,
-            treeNode66});
-            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Execution: OLSS-4589-TE-Sprint-4-Saratov", new System.Windows.Forms.TreeNode[] {
-            treeNode67});
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode(resources.GetString("treeViewMain.Nodes"), new System.Windows.Forms.TreeNode[] {
+            treeNode28,
+            treeNode29});
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
+            treeNode25,
+            treeNode27,
+            treeNode30});
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Verification: 1", new System.Windows.Forms.TreeNode[] {
+            treeNode23,
+            treeNode31});
+            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ", new System.Windows.Forms.TreeNode[] {
+            treeNode20,
+            treeNode32});
+            System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Execution: OLSS-4589-TE-Sprint-4-Saratov", new System.Windows.Forms.TreeNode[] {
+            treeNode33});
             this.treeViewMain = new System.Windows.Forms.TreeView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,45 +79,45 @@
             // 
             this.treeViewMain.Location = new System.Drawing.Point(37, 54);
             this.treeViewMain.Name = "treeViewMain";
-            treeNode52.Name = "Node4";
-            treeNode52.Text = "Installed OLSS and ECM 5.0 Server";
-            treeNode53.Name = "Node6";
-            treeNode53.Text = "Installed OLSS Client and AUU";
-            treeNode54.Name = "Node3";
-            treeNode54.Text = "Preconditions";
-            treeNode55.Name = "Node9";
-            treeNode55.Text = "Internal Authentication";
-            treeNode56.Name = "Node10";
-            treeNode56.Text = "OLSS user \'user1\' with privileges to login into AUU Web UI";
-            treeNode57.Name = "Node8";
-            treeNode57.Text = "Data";
-            treeNode58.Name = "Node13";
-            treeNode58.Text = "AUU Login page with \"User name\" and \"Password\" without \"Domain\"";
-            treeNode59.Name = "Node12";
-            treeNode59.Text = "1. Navigate to AUU home page";
-            treeNode60.Name = "Node15";
-            treeNode60.Text = "Password is encrypted";
-            treeNode61.Name = "Node14";
-            treeNode61.Text = "2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
+            treeNode18.Name = "Node4";
+            treeNode18.Text = "Installed OLSS and ECM 5.0 Server";
+            treeNode19.Name = "Node6";
+            treeNode19.Text = "Installed OLSS Client and AUU";
+            treeNode20.Name = "Node3";
+            treeNode20.Text = "Preconditions";
+            treeNode21.Name = "Node9";
+            treeNode21.Text = "Internal Authentication";
+            treeNode22.Name = "Node10";
+            treeNode22.Text = "OLSS user \'user1\' with privileges to login into AUU Web UI";
+            treeNode23.Name = "Node8";
+            treeNode23.Text = "Data";
+            treeNode24.Name = "Node13";
+            treeNode24.Text = "AUU Login page with \"User name\" and \"Password\" without \"Domain\"";
+            treeNode25.Name = "Node12";
+            treeNode25.Text = "1. Navigate to AUU home page";
+            treeNode26.Name = "Node15";
+            treeNode26.Text = "Password is encrypted";
+            treeNode27.Name = "Node14";
+            treeNode27.Text = "2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
     "ehavior in case of long text.";
-            treeNode62.Name = "Node17";
-            treeNode62.Text = "AUU System Information page is open";
-            treeNode63.Name = "Node18";
-            treeNode63.Text = "Current user is \'user1\'";
-            treeNode64.Name = "Node16";
-            treeNode64.Text = resources.GetString("treeNode64.Text");
-            treeNode65.Name = "Node11";
-            treeNode65.Text = "Steps";
-            treeNode66.Name = "Node7";
-            treeNode66.Text = "Verification: 1";
-            treeNode67.Checked = true;
-            treeNode67.Name = "Node2";
-            treeNode67.Text = "Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ";
-            treeNode68.Checked = true;
-            treeNode68.Name = "Node0";
-            treeNode68.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
+            treeNode28.Name = "Node17";
+            treeNode28.Text = "AUU System Information page is open";
+            treeNode29.Name = "Node18";
+            treeNode29.Text = "Current user is \'user1\'";
+            treeNode30.Name = "Node16";
+            treeNode30.Text = resources.GetString("treeNode30.Text");
+            treeNode31.Name = "Node11";
+            treeNode31.Text = "Steps";
+            treeNode32.Name = "Node7";
+            treeNode32.Text = "Verification: 1";
+            treeNode33.Checked = true;
+            treeNode33.Name = "Node2";
+            treeNode33.Text = "Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ";
+            treeNode34.Checked = true;
+            treeNode34.Name = "Node0";
+            treeNode34.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
             this.treeViewMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode68});
+            treeNode34});
             this.treeViewMain.ShowLines = false;
             this.treeViewMain.ShowPlusMinus = false;
             this.treeViewMain.ShowRootLines = false;
@@ -209,7 +209,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
-            this.Text = "Form1";
+            this.Text = "QA Screenshot Maker";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
