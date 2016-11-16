@@ -15,6 +15,8 @@ namespace shotmaker
         public FormMain()
         {
             InitializeComponent();
+
+            treeViewMain.ExpandAll();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)

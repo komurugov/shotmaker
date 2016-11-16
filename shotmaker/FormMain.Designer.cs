@@ -70,14 +70,14 @@
             "",
             "",
             ""}, -1);
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.treeViewMain = new System.Windows.Forms.TreeView();
             this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
-            // treeView1
+            // treeViewMain
             // 
-            this.treeView1.Location = new System.Drawing.Point(37, 29);
-            this.treeView1.Name = "treeView1";
+            this.treeViewMain.Location = new System.Drawing.Point(37, 29);
+            this.treeViewMain.Name = "treeViewMain";
             treeNode1.Name = "Node4";
             treeNode1.Text = "Installed OLSS and ECM 5.0 Server";
             treeNode2.Name = "Node6";
@@ -114,11 +114,11 @@
             treeNode17.Checked = true;
             treeNode17.Name = "Node0";
             treeNode17.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            this.treeViewMain.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode17});
-            this.treeView1.Size = new System.Drawing.Size(462, 406);
-            this.treeView1.TabIndex = 0;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            this.treeViewMain.Size = new System.Drawing.Size(462, 406);
+            this.treeViewMain.TabIndex = 0;
+            this.treeViewMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // listView1
             // 
@@ -138,7 +138,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1312, 482);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.treeViewMain);
             this.Name = "FormMain";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -147,7 +147,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.TreeView treeViewMain;
         private System.Windows.Forms.ListView listView1;
     }
 }
