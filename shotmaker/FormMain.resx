@@ -120,10 +120,10 @@
   <data name="treeViewMain.Nodes" xml:space="preserve">
     <value>3. Click "Log In" button.  Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text. </value>
   </data>
-  <data name="treeNode13.Text" xml:space="preserve">
+  <data name="treeNode30.Text" xml:space="preserve">
     <value>3. Click "Log In" button.  Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text. </value>
   </data>
-  <metadata name="menuStrip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="textBox1.Text" xml:space="preserve">
+    <value>3. Click "Log In" button.  Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text.   Here some flood to demonstrate behavior in case of very very long text. </value>
+  </data>
 </root>
