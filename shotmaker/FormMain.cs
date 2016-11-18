@@ -18,6 +18,7 @@ namespace shotmaker
 
             treeViewMain.ExpandAll();
             treeView1.ExpandAll();
+            treeView2.ExpandAll();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
