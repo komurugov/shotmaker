@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("SKIPPED: Installed OLSS and ECM 5.0 Server");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Installed OLSS Client and AUU");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("PASSED: Installed OLSS Client and AUU");
             System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Preconditions", new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2});
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Internal Authentication");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("OLSS user \'user1\' with privileges to login into AUU Web UI");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("PASSED: Internal Authentication");
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
             treeNode4,
             treeNode5});
@@ -84,14 +84,17 @@
             treeNode1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             treeNode1.Name = "Node4";
             treeNode1.Text = "SKIPPED: Installed OLSS and ECM 5.0 Server";
+            treeNode2.ForeColor = System.Drawing.Color.Green;
             treeNode2.Name = "Node6";
-            treeNode2.Text = "Installed OLSS Client and AUU";
+            treeNode2.Text = "PASSED: Installed OLSS Client and AUU";
             treeNode3.Name = "Node3";
             treeNode3.Text = "Preconditions";
+            treeNode4.ForeColor = System.Drawing.Color.Green;
             treeNode4.Name = "Node9";
-            treeNode4.Text = "Internal Authentication";
+            treeNode4.Text = "PASSED: Internal Authentication";
+            treeNode5.ForeColor = System.Drawing.Color.Green;
             treeNode5.Name = "Node10";
-            treeNode5.Text = "OLSS user \'user1\' with privileges to login into AUU Web UI";
+            treeNode5.Text = "PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI";
             treeNode6.Name = "Node8";
             treeNode6.Text = "Data";
             treeNode7.ForeColor = System.Drawing.Color.Green;
@@ -126,13 +129,13 @@
             this.treeViewMain.ShowLines = false;
             this.treeViewMain.ShowPlusMinus = false;
             this.treeViewMain.ShowRootLines = false;
-            this.treeViewMain.Size = new System.Drawing.Size(480, 283);
+            this.treeViewMain.Size = new System.Drawing.Size(480, 340);
             this.treeViewMain.TabIndex = 0;
             this.treeViewMain.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(41, 585);
+            this.button1.Location = new System.Drawing.Point(40, 628);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 2;
@@ -141,7 +144,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(122, 585);
+            this.button2.Location = new System.Drawing.Point(121, 628);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 3;
@@ -150,7 +153,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(203, 585);
+            this.button3.Location = new System.Drawing.Point(202, 628);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 4;
@@ -160,7 +163,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(442, 585);
+            this.button4.Location = new System.Drawing.Point(441, 628);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
@@ -172,7 +175,7 @@
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(38, 483);
+            this.label1.Location = new System.Drawing.Point(37, 526);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(479, 75);
             this.label1.TabIndex = 7;
@@ -182,7 +185,7 @@
             // textBox1
             // 
             this.textBox1.BackColor = System.Drawing.SystemColors.Control;
-            this.textBox1.Location = new System.Drawing.Point(38, 399);
+            this.textBox1.Location = new System.Drawing.Point(37, 442);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
