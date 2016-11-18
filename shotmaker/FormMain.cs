@@ -17,6 +17,7 @@ namespace shotmaker
             InitializeComponent();
 
             treeViewMain.ExpandAll();
+            treeView1.ExpandAll();
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -50,6 +51,11 @@ namespace shotmaker
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void treeView1_AfterSelect_1(object sender, TreeViewEventArgs e)
         {
 
         }
