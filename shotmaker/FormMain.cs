@@ -19,6 +19,7 @@ namespace shotmaker
             treeViewMain.ExpandAll();
             treeView1.ExpandAll();
             treeView2.ExpandAll();
+            
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
@@ -38,7 +39,7 @@ namespace shotmaker
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            Screenshotable s = treeView1.SelectedNode.Tag as Screenshotable;            
         }
 
         private void button3_Click(object sender, EventArgs e)
