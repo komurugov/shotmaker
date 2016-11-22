@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 namespace shotmaker
 {
-    public partial class FormMain : Form
+    public partial class FormMain : Form, IDomainView
     {
+        IPresenter presenter;
         public FormMain()
         {
             InitializeComponent();
 
-            treeViewMain.ExpandAll();
-            treeView1.ExpandAll();
+
+            presenter = new ShotmakerPresenter(this as IDomainView);            
+
             treeView2.ExpandAll();
             
         }
@@ -60,6 +62,28 @@ namespace shotmaker
         private void treeView1_AfterSelect_1(object sender, TreeViewEventArgs e)
         {
 
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            var selectedItem = (IModelDTO)treeView2.SelectedNode.Tag;
+
+            presenter.DoPass(selectedItem);
+        }
+        
+        private void button14_Click(object sender, EventArgs e)
+        {
+            presenter.LoadFile("Path");           
+        }
+
+        public void UpdateElement(string item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reload(IModelDTO dto)
+        {
+            throw new NotImplementedException();
         }
     }
 }
