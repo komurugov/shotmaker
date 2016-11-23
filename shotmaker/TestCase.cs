@@ -21,10 +21,6 @@ namespace shotmaker
 
     class TestCaseScenario
     {
-        public string ExecutionID { get; private set; }
-        public string ExecutionTitle { get; private set; }
-        public string ID { get; private set; }
-        public string Title { get; private set; }
         public List<string> Preconditions { get; private set; }
         public List<ScenarioVerification> Verifications { get; private set; }
 
@@ -38,7 +34,9 @@ namespace shotmaker
 
     class TestCase
     {
-        public TestCaseScenario Scenario { get; private set; }
+        public string ExecutionIDAndTitle { get; private set; }
+        public string IDAndTitle { get; private set; }
+
         public List<Precondition> Preconditions { get; private set; }
         public List<Verification> Verifications { get; private set; }
 
@@ -52,30 +50,26 @@ namespace shotmaker
 
     abstract class Screenshotable
     {
-        public bool Skip() { return false; }
         public TStatus Status { get; private set; }
+        public TResult Result { get; private set; }
+
+        public string Text { get; private set; }
+
+        public bool MakeScreenshot(TResult result) { return false; }
+        public bool Skip() { return false; }
         public bool Show() { return false; }
     }
 
-    abstract class ScreenshotableWithoutResult : Screenshotable
+    class Precondition : Screenshotable
     {
-        public bool MakeScreenshot() { return false; }
-    }
-    
-    class Precondition : ScreenshotableWithoutResult
-    {
-
     }
 
-    class Data : ScreenshotableWithoutResult
+    class Data : Screenshotable
     {
-
     }
 
     class StepResult : Screenshotable
     {
-        public bool MakeScreenshot(TResult result) { return false; }
-        public TResult Result { get; private set; }
     }
 
     class Step
