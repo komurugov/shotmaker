@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace shotmaker
 {
-    public class test1DTO
+    public class Xml2TestCaseDTO
     {
 
 

@@ -7,27 +7,6 @@ using System.Xml;
 
 namespace shotmaker
 {
-    class ScenarioStepAndExpectedResults
-    {
-        public string Step { get; private set; }
-        public List<string> ExpectedResults { get; private set; }
-    }
-
-    class ScenarioVerification
-    {
-        public List<string> Data { get; private set; }
-        public List<ScenarioStepAndExpectedResults> StepAndExpectedResults { get; private set; }
-    }
-
-    class TestCaseScenario
-    {
-        public List<string> Preconditions { get; private set; }
-        public List<ScenarioVerification> Verifications { get; private set; }
-
-        static TestCaseScenario LoadFromXml(XmlDocument doc) { return null; }
-        static TestCaseScenario LoadFromXml(string fileName) { return null; }
-    }
-
     public enum TResult { Passed, Failed }
 
     enum TStatus { None, Done, Skipped }
@@ -37,10 +16,9 @@ namespace shotmaker
         public string ExecutionIDAndTitle { get; private set; }
         public string IDAndTitle { get; private set; }
 
-        public List<Precondition> Preconditions { get; private set; }
+        public List<Setup> Setups { get; private set; }
         public List<Verification> Verifications { get; private set; }
 
-        static TestCase LoadScenarioFromXml(string fileName) { return null; }
         public void ClearSession() { }
         private string _outputDir;
         public bool CheckOutputDir(string dirName) { return false; }
@@ -48,19 +26,31 @@ namespace shotmaker
     }
 
 
-    abstract class Screenshotable
+    interface IScreenshotable
     {
-        public TStatus Status { get; private set; }
-        public TResult Result { get; private set; }
+        TStatus Status { get; set; }
+        TResult Result { get; set; }
 
-        public string Text { get; private set; }
+        string Text { get; set; }
+
+        bool MakeScreenshot(TResult result);
+        bool Skip();
+        bool Show();
+    }
+
+    class Screenshotable : IScreenshotable
+    {
+        public TStatus Status { get; set; }
+        public TResult Result { get; set; }
+
+        public string Text { get; set; }
 
         public bool MakeScreenshot(TResult result) { return false; }
         public bool Skip() { return false; }
         public bool Show() { return false; }
     }
 
-    class Precondition : Screenshotable
+    class Setup : Screenshotable
     {
     }
 

@@ -76,7 +76,7 @@ namespace shotmaker
         private void button14_Click(object sender, EventArgs e)
         {
             //            presenter.LoadFile("Path");           
-            var serializer = new XmlSerializer(typeof(test1DTO.rss));
+            var serializer = new XmlSerializer(typeof(Xml2TestCaseDTO.rss));
             //            var xml = XmlReader.Create("C:\\proj\\shotmaker\\task\\test case.xml");
             //            if (openFileDialog1.ShowDialog() == DialogResult.OK)
 
@@ -94,7 +94,7 @@ namespace shotmaker
 
                 var xml = XmlReader.Create(s/*openFileDialog1.FileName*/);
 
-                var dto = serializer.Deserialize(xml) as test1DTO.rss;
+                var dto = serializer.Deserialize(xml) as Xml2TestCaseDTO.rss;
 
                 MessageBox.Show(dto.channel.item.title.ToString());
             }
