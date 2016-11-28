@@ -17,6 +17,7 @@ namespace shotmaker
 
 
 
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
@@ -186,12 +187,12 @@ namespace shotmaker
         public partial class rssChannelItemCustomfieldCustomfieldvalues
         {
 
-            private rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue customfieldvalueField;
+            private string customfieldvalueField;
 
             private rssChannelItemCustomfieldCustomfieldvaluesStep[] stepsField;
 
             /// <remarks/>
-            public rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue customfieldvalue
+            public string customfieldvalue
             {
                 get
                 {
@@ -214,60 +215,6 @@ namespace shotmaker
                 set
                 {
                     this.stepsField = value;
-                }
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue
-        {
-
-            private ushort keyField;
-
-            private bool keyFieldSpecified;
-
-            private string valueField;
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public ushort key
-            {
-                get
-                {
-                    return this.keyField;
-                }
-                set
-                {
-                    this.keyField = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlIgnoreAttribute()]
-            public bool keySpecified
-            {
-                get
-                {
-                    return this.keyFieldSpecified;
-                }
-                set
-                {
-                    this.keyFieldSpecified = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlTextAttribute()]
-            public string Value
-            {
-                get
-                {
-                    return this.valueField;
-                }
-                set
-                {
-                    this.valueField = value;
                 }
             }
         }
@@ -530,8 +477,6 @@ namespace shotmaker
                 }
             }
         }
-
-
 
 
 

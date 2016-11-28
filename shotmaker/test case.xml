@@ -77,79 +77,6 @@
 
           </customfieldvalues>
         </customfield>
-        <customfield id="customfield_12805" key="com.xpandit.plugins.xray:manual-test-steps-export-custom-field">
-          <customfieldname>Manual Test Steps (Export)</customfieldname>
-          <customfieldvalues>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13201" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Material Usage</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11702"><![CDATA[to person]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13206" key="ru.mail.jira.plugins.lf.queryfields:mailru-linked-field">
-          <customfieldname>Occurred in this Build</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue><![CDATA[ ]]></customfieldvalue>
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12704" key="com.idalko.jira.plugins.igrid:originIdCFType">
-          <customfieldname>OriginId</customfieldname>
-          <customfieldvalues>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12807" key="com.xpandit.plugins.xray:test-precondition-custom-field">
-          <customfieldname>Pre-Condition association with a Test</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>[]</customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13202" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Quality Inspection Reason</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11705"><![CDATA[quality check]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13200" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Quality Inspection Report Type</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11700"><![CDATA[QR Quality Report]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12300" key="com.pyxis.greenhopper.jira:gh-lexo-rank">
-          <customfieldname>Rank</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>0|i06bux:</customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_10400" key="com.pyxis.greenhopper.jira:gh-global-rank">
-          <customfieldname>Rank (Obsolete)</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>9223372036854775807</customfieldvalue>
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13052" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Regression Type</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11548"><![CDATA[Unknown]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13029" key="com.onresolve.jira.groovy.groovyrunner:scripted-field">
-          <customfieldname>Serial Number</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue><![CDATA[68051]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
         <customfield id="customfield_13208" key="com.atlassian.jira.plugin.system.customfieldtypes:textarea">
           <customfieldname>Setup</customfieldname>
           <customfieldvalues>
@@ -160,53 +87,6 @@
               &lt;br/&gt;
               For configuration details please see Data field.
             </customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13100" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Teams</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11607"><![CDATA[Saratov]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13054" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Test Category</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11550"><![CDATA[Integration]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12806" key="com.xpandit.plugins.xray:test-sets-custom-field">
-          <customfieldname>Test Sets association with a Test</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>[]</customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12800" key="com.xpandit.plugins.xray:test-type-custom-field">
-          <customfieldname>Test Type</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>Manual</customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12808" key="com.xpandit.plugins.xray:test-run-status-custom-field">
-          <customfieldname>TestRunStatus</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>PASS</customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13205" key="ru.mail.jira.plugins.lf.queryfields:mailru-linked-field">
-          <customfieldname>Verified in this Build</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue><![CDATA[ ]]></customfieldvalue>
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_12900" key="com.j-tricks.jql-plugin:jqlt-field">
-          <customfieldname>jqltField</customfieldname>
-          <customfieldvalues>
 
           </customfieldvalues>
         </customfield>
