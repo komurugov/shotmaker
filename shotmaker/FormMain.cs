@@ -78,9 +78,21 @@ namespace shotmaker
             //            presenter.LoadFile("Path");           
             var serializer = new XmlSerializer(typeof(test1DTO.rss));
             //            var xml = XmlReader.Create("C:\\proj\\shotmaker\\task\\test case.xml");
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+
+            string[] files = new string[] {
+            "C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
+            "C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
+            "C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
+            "C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
+            "C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
+            "C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
+            "C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
+            };
+            foreach (string s in files)
             { 
-                var xml = XmlReader.Create(openFileDialog1.FileName);
+
+                var xml = XmlReader.Create(s/*openFileDialog1.FileName*/);
 
                 var dto = serializer.Deserialize(xml) as test1DTO.rss;
 
