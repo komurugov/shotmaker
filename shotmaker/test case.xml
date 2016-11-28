@@ -1,44 +1,8 @@
 <rss version="0.92" >
   <channel>
-    <title>SparkFlow</title>
-    <link>http://sparkflow.collaboration.agilent.com</link>
-    <description>This file is an XML representation of an issue</description>
-    <language>en-us</language>
-    <build-info>
-      <version>6.4.13</version>
-      <build-number>64028</build-number>
-      <build-date>25-02-2016</build-date>
-    </build-info>
-
     <item>
       <title>[OLSS-2634] TC-OLSS-AIC-Client-Connection-String</title>
       <customfields>
-        <customfield id="customfield_13032" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Customer Type</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11521"><![CDATA[Internal]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13019" key="com.atlassian.jira.plugin.system.customfieldtypes:select">
-          <customfieldname>Defect Category</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue key="11510"><![CDATA[Unknown]]></customfieldvalue>
-
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_13207" key="ru.mail.jira.plugins.lf.queryfields:mailru-linked-field">
-          <customfieldname>Fixed in this Build</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue><![CDATA[ ]]></customfieldvalue>
-          </customfieldvalues>
-        </customfield>
-        <customfield id="customfield_10005" key="com.pyxis.greenhopper.jira:gh-global-rank">
-          <customfieldname>Global Rank</customfieldname>
-          <customfieldvalues>
-            <customfieldvalue>9223372036854775807</customfieldvalue>
-          </customfieldvalues>
-        </customfield>
         <customfield id="customfield_12804" key="com.xpandit.plugins.xray:manual-test-steps-custom-field">
           <customfieldname>Manual Test Steps</customfieldname>
           <customfieldvalues>

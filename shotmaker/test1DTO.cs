@@ -16,6 +16,7 @@ namespace shotmaker
 
 
 
+
         /// <remarks/>
         [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
         [System.Xml.Serialization.XmlRootAttribute(Namespace = "", IsNullable = false)]
@@ -59,83 +60,7 @@ namespace shotmaker
         public partial class rssChannel
         {
 
-            private string titleField;
-
-            private string linkField;
-
-            private string descriptionField;
-
-            private string languageField;
-
-            private rssChannelBuildinfo buildinfoField;
-
             private rssChannelItem itemField;
-
-            /// <remarks/>
-            public string title
-            {
-                get
-                {
-                    return this.titleField;
-                }
-                set
-                {
-                    this.titleField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string link
-            {
-                get
-                {
-                    return this.linkField;
-                }
-                set
-                {
-                    this.linkField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string description
-            {
-                get
-                {
-                    return this.descriptionField;
-                }
-                set
-                {
-                    this.descriptionField = value;
-                }
-            }
-
-            /// <remarks/>
-            public string language
-            {
-                get
-                {
-                    return this.languageField;
-                }
-                set
-                {
-                    this.languageField = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("build-info")]
-            public rssChannelBuildinfo buildinfo
-            {
-                get
-                {
-                    return this.buildinfoField;
-                }
-                set
-                {
-                    this.buildinfoField = value;
-                }
-            }
 
             /// <remarks/>
             public rssChannelItem item
@@ -147,59 +72,6 @@ namespace shotmaker
                 set
                 {
                     this.itemField = value;
-                }
-            }
-        }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class rssChannelBuildinfo
-        {
-
-            private string versionField;
-
-            private ushort buildnumberField;
-
-            private string builddateField;
-
-            /// <remarks/>
-            public string version
-            {
-                get
-                {
-                    return this.versionField;
-                }
-                set
-                {
-                    this.versionField = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("build-number")]
-            public ushort buildnumber
-            {
-                get
-                {
-                    return this.buildnumberField;
-                }
-                set
-                {
-                    this.buildnumberField = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlElementAttribute("build-date")]
-            public string builddate
-            {
-                get
-                {
-                    return this.builddateField;
-                }
-                set
-                {
-                    this.builddateField = value;
                 }
             }
         }
@@ -314,9 +186,22 @@ namespace shotmaker
         public partial class rssChannelItemCustomfieldCustomfieldvalues
         {
 
+            private rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue customfieldvalueField;
+
             private rssChannelItemCustomfieldCustomfieldvaluesStep[] stepsField;
 
-            private rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue customfieldvalueField;
+            /// <remarks/>
+            public rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue customfieldvalue
+            {
+                get
+                {
+                    return this.customfieldvalueField;
+                }
+                set
+                {
+                    this.customfieldvalueField = value;
+                }
+            }
 
             /// <remarks/>
             [System.Xml.Serialization.XmlArrayItemAttribute("step", IsNullable = false)]
@@ -331,17 +216,58 @@ namespace shotmaker
                     this.stepsField = value;
                 }
             }
+        }
+
+        /// <remarks/>
+        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
+        public partial class rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue
+        {
+
+            private ushort keyField;
+
+            private bool keyFieldSpecified;
+
+            private string valueField;
 
             /// <remarks/>
-            public rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue customfieldvalue
+            [System.Xml.Serialization.XmlAttributeAttribute()]
+            public ushort key
             {
                 get
                 {
-                    return this.customfieldvalueField;
+                    return this.keyField;
                 }
                 set
                 {
-                    this.customfieldvalueField = value;
+                    this.keyField = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlIgnoreAttribute()]
+            public bool keySpecified
+            {
+                get
+                {
+                    return this.keyFieldSpecified;
+                }
+                set
+                {
+                    this.keyFieldSpecified = value;
+                }
+            }
+
+            /// <remarks/>
+            [System.Xml.Serialization.XmlTextAttribute()]
+            public string Value
+            {
+                get
+                {
+                    return this.valueField;
+                }
+                set
+                {
+                    this.valueField = value;
                 }
             }
         }
@@ -604,62 +530,6 @@ namespace shotmaker
                 }
             }
         }
-
-        /// <remarks/>
-        [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true)]
-        public partial class rssChannelItemCustomfieldCustomfieldvaluesCustomfieldvalue
-        {
-
-            private ushort keyField;
-
-            private bool keyFieldSpecified;
-
-            private string valueField;
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlAttributeAttribute()]
-            public ushort key
-            {
-                get
-                {
-                    return this.keyField;
-                }
-                set
-                {
-                    this.keyField = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlIgnoreAttribute()]
-            public bool keySpecified
-            {
-                get
-                {
-                    return this.keyFieldSpecified;
-                }
-                set
-                {
-                    this.keyFieldSpecified = value;
-                }
-            }
-
-            /// <remarks/>
-            [System.Xml.Serialization.XmlTextAttribute()]
-            public string Value
-            {
-                get
-                {
-                    return this.valueField;
-                }
-                set
-                {
-                    this.valueField = value;
-                }
-            }
-        }
-
-
 
 
 
