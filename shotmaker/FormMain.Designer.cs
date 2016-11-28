@@ -29,40 +29,40 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("SKIPPED: Installed OLSS and ECM 5.0 Server");
-            System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("PASSED: Installed OLSS Client and AUU");
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Preconditions", new System.Windows.Forms.TreeNode[] {
-            treeNode35,
-            treeNode36});
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("PASSED: Internal Authentication");
-            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI");
-            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
-            treeNode38,
-            treeNode39});
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("PASSED: AUU Login page with \"User name\" and \"Password\" without \"Domain\"");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("1. Navigate to AUU home page", new System.Windows.Forms.TreeNode[] {
-            treeNode41});
-            System.Windows.Forms.TreeNode treeNode43 = new System.Windows.Forms.TreeNode("FAILED: Password is encrypted");
-            System.Windows.Forms.TreeNode treeNode44 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
+            System.Windows.Forms.TreeNode treeNode52 = new System.Windows.Forms.TreeNode("SKIPPED: Installed OLSS and ECM 5.0 Server");
+            System.Windows.Forms.TreeNode treeNode53 = new System.Windows.Forms.TreeNode("PASSED: Installed OLSS Client and AUU");
+            System.Windows.Forms.TreeNode treeNode54 = new System.Windows.Forms.TreeNode("Preconditions", new System.Windows.Forms.TreeNode[] {
+            treeNode52,
+            treeNode53});
+            System.Windows.Forms.TreeNode treeNode55 = new System.Windows.Forms.TreeNode("PASSED: Internal Authentication");
+            System.Windows.Forms.TreeNode treeNode56 = new System.Windows.Forms.TreeNode("PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI");
+            System.Windows.Forms.TreeNode treeNode57 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
+            treeNode55,
+            treeNode56});
+            System.Windows.Forms.TreeNode treeNode58 = new System.Windows.Forms.TreeNode("PASSED: AUU Login page with \"User name\" and \"Password\" without \"Domain\"");
+            System.Windows.Forms.TreeNode treeNode59 = new System.Windows.Forms.TreeNode("1. Navigate to AUU home page", new System.Windows.Forms.TreeNode[] {
+            treeNode58});
+            System.Windows.Forms.TreeNode treeNode60 = new System.Windows.Forms.TreeNode("FAILED: Password is encrypted");
+            System.Windows.Forms.TreeNode treeNode61 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
         "ehavior in case of long text.", new System.Windows.Forms.TreeNode[] {
-            treeNode43});
-            System.Windows.Forms.TreeNode treeNode45 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
-            System.Windows.Forms.TreeNode treeNode46 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
-            System.Windows.Forms.TreeNode treeNode47 = new System.Windows.Forms.TreeNode(resources.GetString("treeView2.Nodes"), new System.Windows.Forms.TreeNode[] {
-            treeNode45,
-            treeNode46});
-            System.Windows.Forms.TreeNode treeNode48 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
-            treeNode42,
-            treeNode44,
-            treeNode47});
-            System.Windows.Forms.TreeNode treeNode49 = new System.Windows.Forms.TreeNode("Verification: 1", new System.Windows.Forms.TreeNode[] {
-            treeNode40,
-            treeNode48});
-            System.Windows.Forms.TreeNode treeNode50 = new System.Windows.Forms.TreeNode("Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ", new System.Windows.Forms.TreeNode[] {
-            treeNode37,
-            treeNode49});
-            System.Windows.Forms.TreeNode treeNode51 = new System.Windows.Forms.TreeNode("Execution: OLSS-4589-TE-Sprint-4-Saratov", new System.Windows.Forms.TreeNode[] {
-            treeNode50});
+            treeNode60});
+            System.Windows.Forms.TreeNode treeNode62 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
+            System.Windows.Forms.TreeNode treeNode63 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
+            System.Windows.Forms.TreeNode treeNode64 = new System.Windows.Forms.TreeNode(resources.GetString("treeView2.Nodes"), new System.Windows.Forms.TreeNode[] {
+            treeNode62,
+            treeNode63});
+            System.Windows.Forms.TreeNode treeNode65 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
+            treeNode59,
+            treeNode61,
+            treeNode64});
+            System.Windows.Forms.TreeNode treeNode66 = new System.Windows.Forms.TreeNode("Verification: 1", new System.Windows.Forms.TreeNode[] {
+            treeNode57,
+            treeNode65});
+            System.Windows.Forms.TreeNode treeNode67 = new System.Windows.Forms.TreeNode("Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ", new System.Windows.Forms.TreeNode[] {
+            treeNode54,
+            treeNode66});
+            System.Windows.Forms.TreeNode treeNode68 = new System.Windows.Forms.TreeNode("Execution: OLSS-4589-TE-Sprint-4-Saratov", new System.Windows.Forms.TreeNode[] {
+            treeNode67});
             this.button13 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.button14 = new System.Windows.Forms.Button();
@@ -74,6 +74,7 @@
             this.button17 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
             this.treeView2 = new System.Windows.Forms.TreeView();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // button13
@@ -175,59 +176,63 @@
             this.treeView2.BackColor = System.Drawing.SystemColors.Control;
             this.treeView2.Location = new System.Drawing.Point(98, 80);
             this.treeView2.Name = "treeView2";
-            treeNode35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            treeNode35.Name = "Node4";
-            treeNode35.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode35.Text = "SKIPPED: Installed OLSS and ECM 5.0 Server";
-            treeNode36.Name = "Node6";
-            treeNode36.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode36.Text = "PASSED: Installed OLSS Client and AUU";
-            treeNode37.Name = "Node3";
-            treeNode37.Text = "Preconditions";
-            treeNode38.Name = "Node9";
-            treeNode38.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode38.Text = "PASSED: Internal Authentication";
-            treeNode39.Name = "Node10";
-            treeNode39.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode39.Text = "PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI";
-            treeNode40.Name = "Node8";
-            treeNode40.Text = "Data";
-            treeNode41.Name = "Node13";
-            treeNode41.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode41.Text = "PASSED: AUU Login page with \"User name\" and \"Password\" without \"Domain\"";
-            treeNode42.Name = "Node12";
-            treeNode42.Text = "1. Navigate to AUU home page";
-            treeNode43.Name = "Node15";
-            treeNode43.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode43.Text = "FAILED: Password is encrypted";
-            treeNode44.Name = "Node14";
-            treeNode44.Text = "2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
+            treeNode52.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            treeNode52.Name = "Node4";
+            treeNode52.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode52.Text = "SKIPPED: Installed OLSS and ECM 5.0 Server";
+            treeNode53.Name = "Node6";
+            treeNode53.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode53.Text = "PASSED: Installed OLSS Client and AUU";
+            treeNode54.Name = "Node3";
+            treeNode54.Text = "Preconditions";
+            treeNode55.Name = "Node9";
+            treeNode55.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode55.Text = "PASSED: Internal Authentication";
+            treeNode56.Name = "Node10";
+            treeNode56.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode56.Text = "PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI";
+            treeNode57.Name = "Node8";
+            treeNode57.Text = "Data";
+            treeNode58.Name = "Node13";
+            treeNode58.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode58.Text = "PASSED: AUU Login page with \"User name\" and \"Password\" without \"Domain\"";
+            treeNode59.Name = "Node12";
+            treeNode59.Text = "1. Navigate to AUU home page";
+            treeNode60.Name = "Node15";
+            treeNode60.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode60.Text = "FAILED: Password is encrypted";
+            treeNode61.Name = "Node14";
+            treeNode61.Text = "2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
     "ehavior in case of long text.";
-            treeNode45.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            treeNode45.Name = "Node17";
-            treeNode45.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode45.Text = "AUU System Information page is open";
-            treeNode46.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            treeNode46.Name = "Node18";
-            treeNode46.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            treeNode46.Text = "Current user is \'user1\'";
-            treeNode47.Name = "Node16";
-            treeNode47.Text = resources.GetString("treeNode47.Text");
-            treeNode48.Name = "Node11";
-            treeNode48.Text = "Steps";
-            treeNode49.Name = "Node7";
-            treeNode49.Text = "Verification: 1";
-            treeNode50.Name = "Node2";
-            treeNode50.Text = "Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ";
-            treeNode51.Name = "Node0";
-            treeNode51.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
+            treeNode62.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            treeNode62.Name = "Node17";
+            treeNode62.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode62.Text = "AUU System Information page is open";
+            treeNode63.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            treeNode63.Name = "Node18";
+            treeNode63.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            treeNode63.Text = "Current user is \'user1\'";
+            treeNode64.Name = "Node16";
+            treeNode64.Text = resources.GetString("treeNode64.Text");
+            treeNode65.Name = "Node11";
+            treeNode65.Text = "Steps";
+            treeNode66.Name = "Node7";
+            treeNode66.Text = "Verification: 1";
+            treeNode67.Name = "Node2";
+            treeNode67.Text = "Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ";
+            treeNode68.Name = "Node0";
+            treeNode68.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode51});
+            treeNode68});
             this.treeView2.ShowLines = false;
             this.treeView2.ShowPlusMinus = false;
             this.treeView2.ShowRootLines = false;
             this.treeView2.Size = new System.Drawing.Size(480, 340);
             this.treeView2.TabIndex = 25;
+            // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
             // 
             // FormMain
             // 
@@ -264,6 +269,7 @@
         private System.Windows.Forms.Button button17;
         private System.Windows.Forms.Button button18;
         private System.Windows.Forms.TreeView treeView2;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

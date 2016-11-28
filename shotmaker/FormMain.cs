@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace shotmaker
 {
-    public partial class FormMain : Form, IDomainView
+    public partial class FormMain : Form/*, IDomainView*/
     {
-        IPresenter presenter;
+//        IPresenter presenter;
         public FormMain()
         {
             InitializeComponent();
 
 
-            presenter = new ShotmakerPresenter(this as IDomainView);            
+//            presenter = new ShotmakerPresenter(this as IDomainView);            
 
             treeView2.ExpandAll();
             
@@ -41,7 +43,7 @@ namespace shotmaker
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Screenshotable s = treeView1.SelectedNode.Tag as Screenshotable;            
+            //Screenshotable s = treeView1.SelectedNode.Tag as Screenshotable;            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -68,12 +70,22 @@ namespace shotmaker
         {
             var selectedItem = (IModelDTO)treeView2.SelectedNode.Tag;
 
-            presenter.DoPass(selectedItem);
+//          presenter.DoPass(selectedItem);
         }
-        
+
         private void button14_Click(object sender, EventArgs e)
         {
-            presenter.LoadFile("Path");           
+            //            presenter.LoadFile("Path");           
+            var serializer = new XmlSerializer(typeof(test1DTO.rss));
+            //            var xml = XmlReader.Create("C:\\proj\\shotmaker\\task\\test case.xml");
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            { 
+                var xml = XmlReader.Create(openFileDialog1.FileName);
+
+                var dto = serializer.Deserialize(xml) as test1DTO.rss;
+
+                MessageBox.Show(dto.channel.item.title.ToString());
+            }
         }
 
         public void UpdateElement(string item)
@@ -81,9 +93,9 @@ namespace shotmaker
             throw new NotImplementedException();
         }
 
-        public void Reload(IModelDTO dto)
-        {
-            throw new NotImplementedException();
-        }
+        //public void Reload(IModelDTO dto)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
