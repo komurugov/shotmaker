@@ -7,70 +7,104 @@ using System.Xml;
 
 namespace shotmaker
 {
-    public enum TResult { Passed, Failed }
-
-    enum TStatus { None, Done, Skipped }
-
-    class TestCase
+    public class TestCase : IModel
     {
-        public string ExecutionIDAndTitle { get; private set; }
-        public string IDAndTitle { get; private set; }
+        public string ExecutionIdAndTitle { get; set; }
+        public string IdAndTitle { get; set; }
 
-        public List<Setup> Setups { get; private set; }
-        public List<Verification> Verifications { get; private set; }
+        public List<Setup> Setups { get; set; }
+        public List<Verification> Verifications { get; set; }
 
         public void ClearSession() { }
         private string _outputDir;
         public bool CheckOutputDir(string dirName) { return false; }
-        public string OutputDir { get { return _outputDir; } set { _outputDir = value; ClearSession(); } }
+
+		public void LoadFile(string path)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeTestExecution(string name)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ChangeOutputFolder(string path)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void DoPassed(ModelItem selectedItem)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void DoFailed(ModelItem selectedItem)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void DoSkipped(ModelItem selectedItem)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void Show(ModelItem selectedItem)
+		{
+			throw new NotImplementedException();
+		}
+
+		public string OutputDir { get { return _outputDir; } set { _outputDir = value; ClearSession(); } }
     }
 
+	public enum Result { Passed, Failed }
+	public enum Status { None, Done, Skipped }
 
-    interface IScreenshotable
+	public interface IScreenshotable
     {
-        TStatus Status { get; set; }
-        TResult Result { get; set; }
+		Status Status { get; set; }
+        Result Result { get; set; }
 
         string Text { get; set; }
 
-        bool MakeScreenshot(TResult result);
+        bool MakeScreenshot(Result result);
         bool Skip();
         bool Show();
     }
 
-    class Screenshotable : IScreenshotable
+    public class Screenshotable : IScreenshotable
     {
-        public TStatus Status { get; set; }
-        public TResult Result { get; set; }
+        public Status Status { get; set; }
+        public Result Result { get; set; }
 
         public string Text { get; set; }
 
-        public bool MakeScreenshot(TResult result) { return false; }
+        public bool MakeScreenshot(Result result) { return false; }
         public bool Skip() { return false; }
         public bool Show() { return false; }
     }
 
-    class Setup : Screenshotable
+    public class Setup : Screenshotable
     {
     }
 
-    class Data : Screenshotable
+    public class Data : Screenshotable
     {
     }
 
-    class StepResult : Screenshotable
+    public class StepResult : Screenshotable
     {
     }
 
-    class Step
+    public class Step
     {
-        public List<StepResult> Results { get; private set; }
+        public List<StepResult> Results { get; set; }
     }
 
-    class Verification
+    public class Verification
     {
-        public List<Data> Data { get; private set; }
-        public List<Step> Steps { get; private set; }
+        public List<Data> Data { get; set; }
+        public List<Step> Steps { get; set; }
     }
     
 

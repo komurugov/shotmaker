@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using shotmaker.BLL;
 
 namespace shotmaker
 {
@@ -16,7 +17,8 @@ namespace shotmaker
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+			Presenter presenter = new Presenter();
+            Application.Run(new FormMain(new Presenter()));
         }
     }
 }

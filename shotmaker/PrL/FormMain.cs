@@ -1,4 +1,5 @@
-﻿using System;
+﻿using shotmaker.PrL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,17 +13,21 @@ using System.Xml.Serialization;
 
 namespace shotmaker
 {
-    public partial class FormMain : Form/*, IDomainView*/
+    public partial class FormMain : Form, IView
     {
 //        IPresenter presenter;
-        public FormMain()
+        public FormMain(IPresenter presenter)
         {
+
             InitializeComponent();
 
+			presenter.SetView(this);
 
 //            presenter = new ShotmakerPresenter(this as IDomainView);            
 
             treeView2.ExpandAll();
+
+
             
         }
 
@@ -68,7 +73,6 @@ namespace shotmaker
 
         private void button18_Click(object sender, EventArgs e)
         {
-            var selectedItem = (IModelDTO)treeView2.SelectedNode.Tag;
 
 //          presenter.DoPass(selectedItem);
         }
@@ -105,9 +109,29 @@ namespace shotmaker
             throw new NotImplementedException();
         }
 
-        //public void Reload(IModelDTO dto)
-        //{
-        //    throw new NotImplementedException();
-        //}
-    }
+		private void textBox1_TextChanged(object sender, EventArgs e)
+		{
+
+		}
+
+		public string GetTestExecutionName()
+		{
+			throw new NotImplementedException();
+		}
+
+		public string GetOuputFolderPath()
+		{
+			throw new NotImplementedException();
+		}
+
+		public void ShowMessage(string message)
+		{
+			throw new NotImplementedException();
+		}
+
+		//public void Reload(IModelDTO dto)
+		//{
+		//    throw new NotImplementedException();
+		//}
+	}
 }
