@@ -1,4 +1,4 @@
-﻿namespace shotmaker
+﻿namespace ScreenshotMaker.PrL
 {
     partial class FormMain
     {

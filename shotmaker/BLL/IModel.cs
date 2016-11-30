@@ -1,4 +1,4 @@
-﻿namespace shotmaker
+﻿namespace ScreenshotMaker.BLL
 {
     internal interface IModel
     {

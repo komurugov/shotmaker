@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
-namespace shotmaker
+namespace ScreenshotMaker.BLL
 {
-    public class TestCase : IModel
+    public class TestCase
     {
         public string ExecutionIdAndTitle { get; set; }
         public string IdAndTitle { get; set; }
@@ -18,11 +14,6 @@ namespace shotmaker
         public void ClearSession() { }
         private string _outputDir;
         public bool CheckOutputDir(string dirName) { return false; }
-
-		public void LoadFile(string path)
-		{
-			throw new NotImplementedException();
-		}
 
 		public void ChangeTestExecution(string name)
 		{
@@ -57,7 +48,7 @@ namespace shotmaker
 		public string OutputDir { get { return _outputDir; } set { _outputDir = value; ClearSession(); } }
     }
 
-	public enum Result { Passed, Failed }
+	public enum Result { Unknown, Passed, Failed }
 	public enum Status { None, Done, Skipped }
 
 	public interface IScreenshotable
@@ -66,6 +57,7 @@ namespace shotmaker
         Result Result { get; set; }
 
         string Text { get; set; }
+		bool HasScreenshot();
 
         bool MakeScreenshot(Result result);
         bool Skip();
@@ -74,6 +66,8 @@ namespace shotmaker
 
     public class Screenshotable : IScreenshotable
     {
+	    private string _screenshotFileName;
+
         public Status Status { get; set; }
         public Result Result { get; set; }
 
@@ -82,7 +76,12 @@ namespace shotmaker
         public bool MakeScreenshot(Result result) { return false; }
         public bool Skip() { return false; }
         public bool Show() { return false; }
-    }
+
+		public bool HasScreenshot()
+		{
+			throw new NotImplementedException();
+		}
+	}
 
     public class Setup : Screenshotable
     {
@@ -106,12 +105,4 @@ namespace shotmaker
         public List<Data> Data { get; set; }
         public List<Step> Steps { get; set; }
     }
-    
-
-
-    public class Tree<T> : List<Tree<T>>
-    {
-        public T Value { get; set; }
-    }
-
 }

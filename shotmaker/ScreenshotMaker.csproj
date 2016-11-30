@@ -46,9 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\IPresenterItem.cs" />
+    <Compile Include="BLL\LoaderTestCaseFromXml.cs" />
     <Compile Include="BLL\ModelItem.cs" />
     <Compile Include="BLL\Presenter.cs" />
     <Compile Include="BLL\PresenterItem.cs" />
+    <Compile Include="BLL\PresenterItemHash.cs" />
+    <Compile Include="BLL\Tree.cs" />
     <Compile Include="PrL\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,10 +62,10 @@
     <Compile Include="BLL\IModel.cs" />
     <Compile Include="BLL\IPresenter.cs" />
     <Compile Include="PrL\IView.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="PrL\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BLL\TestCase.cs" />
     <Compile Include="DAL\Xml2TestCaseDTO.cs" />
+    <Compile Include="BLL\TestCase.cs" />
     <EmbeddedResource Include="PrL\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>

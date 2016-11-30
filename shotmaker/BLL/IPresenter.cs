@@ -1,17 +1,19 @@
 ﻿using System;
-using shotmaker.PrL;
+using ScreenshotMaker.PrL;
 
-namespace shotmaker
+namespace ScreenshotMaker.BLL
 {
-    public interface IPresenter
+	public interface IPresenter
     {
 	    void SetView(IView view);
-        void LoadFile(string path);
-	    void ChangeTestExecution(string name);
-	    void ChangeOutputFolder(string path);
-        void DoPassed(PresenterItem selectedItem);
-	    void DoFailed(PresenterItem selectedItem);
-	    void DoSkipped(PresenterItem selectedItem);
-	    void Show(PresenterItem selectedItem);
+        void LoadFile();
+	    void ChangeTestExecution();
+	    void ChangeOutputFolder();
+     //   void DoPassed(PresenterItemHash selectedItemHash);
+	    //void DoFailed(PresenterItemHash selectedItemHash);
+	    //void DoSkipped(PresenterItemHash selectedItemHash);
+	    //void Show(PresenterItemHash selectedItemHash);
+
+	    Tree<IPresenterItem> GetTree();
     }
 }

@@ -1,4 +1,4 @@
-﻿using shotmaker.PrL;
+﻿using ScreenshotMaker.BLL;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace shotmaker
+namespace ScreenshotMaker.PrL
 {
     public partial class FormMain : Form, IView
     {
@@ -73,35 +73,26 @@ namespace shotmaker
 
         private void button18_Click(object sender, EventArgs e)
         {
-
-//          presenter.DoPass(selectedItem);
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //            presenter.LoadFile("Path");           
-            var serializer = new XmlSerializer(typeof(Xml2TestCaseDTO.rss));
-            //            var xml = XmlReader.Create("C:\\proj\\shotmaker\\task\\test case.xml");
-            //            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-
-            string[] files = new string[] {
-            "C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
-            "C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
-            "C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
-            "C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
-            "C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
-            "C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
-            "C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
-            };
-            foreach (string s in files)
-            { 
-
-                var xml = XmlReader.Create(s/*openFileDialog1.FileName*/);
-
-                var dto = serializer.Deserialize(xml) as Xml2TestCaseDTO.rss;
-
-                MessageBox.Show(dto.channel.item.title.ToString());
-            }
+            //var serializer = new XmlSerializer(typeof(Xml2TestCaseDTO.rss));
+            //string[] files = new string[] {
+            //"C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
+            //"C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
+            //"C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
+            //"C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
+            //"C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
+            //"C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
+            //"C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
+            //};
+            //foreach (string s in files)
+            //{ 
+            //    var xml = XmlReader.Create(s/*openFileDialog1.FileName*/);
+            //    var dto = serializer.Deserialize(xml) as Xml2TestCaseDTO.rss;
+            //    MessageBox.Show(dto.channel.item.title.ToString());
+            //}
         }
 
         public void UpdateElement(string item)
@@ -125,6 +116,16 @@ namespace shotmaker
 		}
 
 		public void ShowMessage(string message)
+		{
+			throw new NotImplementedException();
+		}
+
+		public void RefreshTreeStructure()
+		{
+			throw new NotImplementedException();
+		}
+
+		public string GetInputFileName()
 		{
 			throw new NotImplementedException();
 		}

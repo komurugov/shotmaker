@@ -1,6 +1,7 @@
 ﻿namespace ScreenshotMaker.BLL
 {
-	public class ModelItem
+	public class PresenterItemHash
 	{
+
 	}
 }

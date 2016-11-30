@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "shotmaker", "shotmaker\shotmaker.csproj", "{847A6AF4-15F3-4A12-A355-0E8D1C0B6F6E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenshotMaker", "shotmaker\ScreenshotMaker.csproj", "{847A6AF4-15F3-4A12-A355-0E8D1C0B6F6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

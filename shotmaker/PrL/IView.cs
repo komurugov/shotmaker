@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace shotmaker.PrL
+namespace ScreenshotMaker.PrL
 {
 	public interface IView
 	{
+		void RefreshTreeStructure();
 		void Refresh();
+		string GetInputFileName();
 		string GetTestExecutionName();
 		string GetOuputFolderPath();
 		void ShowMessage(string message);

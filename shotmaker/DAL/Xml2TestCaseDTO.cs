@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace shotmaker
+namespace ScreenshotMaker.DAL
 {
     public class Xml2TestCaseDTO
     {

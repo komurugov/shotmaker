@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using shotmaker.BLL;
+using ScreenshotMaker.BLL;
 
-namespace shotmaker
+namespace ScreenshotMaker.PrL
 {
     static class Program
     {
@@ -18,7 +18,7 @@ namespace shotmaker
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 			Presenter presenter = new Presenter();
-            Application.Run(new FormMain(new Presenter()));
+            Application.Run(new FormMain(presenter));
         }
     }
 }
