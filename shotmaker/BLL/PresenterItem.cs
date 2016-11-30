@@ -14,7 +14,9 @@ namespace ScreenshotMaker.BLL
 		{
 			Text = text;
 		}
+
 		public string Text { get; set; }
+
 		public void DoFail()
 		{
 		}

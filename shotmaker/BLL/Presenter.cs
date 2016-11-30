@@ -10,7 +10,7 @@ namespace ScreenshotMaker.BLL
 {
 	class Presenter : IPresenter
 	{
-		public 	Presenter()
+		public Presenter()
 		{
 		}
 

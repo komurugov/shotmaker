@@ -1,7 +1,7 @@
 ﻿namespace ScreenshotMaker.BLL
 {
-    internal interface IModel
-    {
+	internal interface IModel
+	{
 		void LoadFile(string path);
 		void ChangeTestExecution(string name);
 		void ChangeOutputFolder(string path);
