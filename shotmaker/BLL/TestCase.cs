@@ -32,26 +32,6 @@ namespace ScreenshotMaker.BLL
 			throw new NotImplementedException();
 		}
 
-		public void DoPassed(ModelItem selectedItem)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void DoFailed(ModelItem selectedItem)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void DoSkipped(ModelItem selectedItem)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void Show(ModelItem selectedItem)
-		{
-			throw new NotImplementedException();
-		}
-
 		public string OutputDir
 		{
 			get { return _outputDir; }

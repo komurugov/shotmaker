@@ -48,10 +48,9 @@
   <ItemGroup>
     <Compile Include="BLL\IPresenterItem.cs" />
     <Compile Include="BLL\LoaderTestCaseFromXml.cs" />
-    <Compile Include="BLL\ModelItem.cs" />
+    <Compile Include="BLL\Logger.cs" />
     <Compile Include="BLL\Presenter.cs" />
     <Compile Include="BLL\PresenterItem.cs" />
-    <Compile Include="BLL\PresenterItemHash.cs" />
     <Compile Include="BLL\Tree.cs" />
     <Compile Include="PrL\FormMain.cs">
       <SubType>Form</SubType>
@@ -59,7 +58,6 @@
     <Compile Include="PrL\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="BLL\IModel.cs" />
     <Compile Include="BLL\IPresenter.cs" />
     <Compile Include="PrL\IView.cs" />
     <Compile Include="PrL\Program.cs" />

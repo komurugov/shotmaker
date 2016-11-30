@@ -15,14 +15,14 @@ namespace ScreenshotMaker.PrL
 {
 	public partial class FormMain : Form, IView
 	{
-//        IPresenter presenter;
+        private IPresenter _presenter;
 		public FormMain(IPresenter presenter)
 		{
 			InitializeComponent();
 
 			presenter.SetView(this);
 
-//            presenter = new ShotmakerPresenter(this as IDomainView);            
+			_presenter = presenter;
 
 			treeView2.ExpandAll();
 		}

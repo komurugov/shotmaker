@@ -39,16 +39,6 @@ namespace ScreenshotMaker.BLL
 			item.DoFail();
 		}
 
-		public void DoPassed(PresenterItemHash selectedItemHash)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void DoSkipped(PresenterItemHash selectedItemHash)
-		{
-			throw new NotImplementedException();
-		}
-
 		public void LoadFile(string path)
 		{
 			throw new NotImplementedException();
@@ -57,11 +47,6 @@ namespace ScreenshotMaker.BLL
 		public void SetView(IView view)
 		{
 			_view = view;
-		}
-
-		public void Show(PresenterItemHash selectedItemHash)
-		{
-			throw new NotImplementedException();
 		}
 
 		public void LoadFile()

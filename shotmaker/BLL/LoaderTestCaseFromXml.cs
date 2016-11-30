@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace ScreenshotMaker.BLL
 {
-	static class LoaderTestCaseFromXml
+	public static class LoaderTestCaseFromXml
 	{
-		public static TestCase Load(string path)
+		public static TestCase Load(string path, out string result)
 		{
+			result = null;
 			return null;
 		}
 	}
