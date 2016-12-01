@@ -52,6 +52,7 @@
     <Compile Include="BLL\Presenter.cs" />
     <Compile Include="BLL\PresenterItem.cs" />
     <Compile Include="BLL\Tree.cs" />
+    <Compile Include="DAL\XmlLoader.cs" />
     <Compile Include="PrL\FormMain.cs">
       <SubType>Form</SubType>
     </Compile>

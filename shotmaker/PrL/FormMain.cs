@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Serialization;
+using ScreenshotMaker.DAL;
 
 namespace ScreenshotMaker.PrL
 {
@@ -65,26 +66,6 @@ namespace ScreenshotMaker.PrL
 		{
 		}
 
-		private void button14_Click(object sender, EventArgs e)
-		{
-			//var serializer = new XmlSerializer(typeof(Xml2TestCaseDTO.rss));
-			//string[] files = new string[] {
-			//"C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
-			//};
-			//foreach (string s in files)
-			//{ 
-			//    var xml = XmlReader.Create(s/*openFileDialog1.FileName*/);
-			//    var dto = serializer.Deserialize(xml) as Xml2TestCaseDTO.rss;
-			//    MessageBox.Show(dto.channel.item.title.ToString());
-			//}
-		}
-
 		public void UpdateElement(string item)
 		{
 			throw new NotImplementedException();
@@ -119,9 +100,23 @@ namespace ScreenshotMaker.PrL
 			throw new NotImplementedException();
 		}
 
-		//public void Reload(IModelDTO dto)
-		//{
-		//    throw new NotImplementedException();
-		//}
+		private void button14_Click(object sender, EventArgs e)
+		{
+			//string[] files = new string[] {
+			//"C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
+			//"C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
+			//"C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
+			//"C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
+			//"C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
+			//"C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
+			//"C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
+			//};
+			//foreach (string s in files)
+			//{
+			//	string result;
+			//	var dto = XmlLoader.LoadFromFile(s, out result);
+			//	MessageBox.Show(result + dto.channel.item.title.ToString());
+			//}
+		}
 	}
 }
