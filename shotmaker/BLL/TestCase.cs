@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ScreenshotMaker.BLL
 {
 	public class TestCase
 	{
+		private string _outputDir;
 		public string ExecutionIdAndTitle { get; set; }
 		public string IdAndTitle { get; set; }
 
@@ -15,111 +15,11 @@ namespace ScreenshotMaker.BLL
 		{
 		}
 
-		private string _outputDir;
-
-		public bool CheckOutputDir(string dirName)
+		public bool SetOutputDir(string dirName) // return true if there already is folder for current Test Case in [dirName]
 		{
+			_outputDir = dirName;
+			ClearSession();
 			return false;
 		}
-
-		public void ChangeTestExecution(string name)
-		{
-			throw new NotImplementedException();
-		}
-
-		public void ChangeOutputFolder(string path)
-		{
-			throw new NotImplementedException();
-		}
-
-		public string OutputDir
-		{
-			get { return _outputDir; }
-			set
-			{
-				_outputDir = value;
-				ClearSession();
-			}
-		}
-	}
-
-	public enum Result
-	{
-		Unknown,
-		Passed,
-		Failed
-	}
-
-	public enum Status
-	{
-		None,
-		Done,
-		Skipped
-	}
-
-	public interface IScreenshotable
-	{
-		Status Status { get; set; }
-		Result Result { get; set; }
-
-		string Text { get; set; }
-		bool HasScreenshot();
-
-		bool MakeScreenshot(Result result);
-		bool Skip();
-		bool Show();
-	}
-
-	public class Screenshotable : IScreenshotable
-	{
-		private string _screenshotFileName;
-
-		public Status Status { get; set; }
-		public Result Result { get; set; }
-
-		public string Text { get; set; }
-
-		public bool MakeScreenshot(Result result)
-		{
-			return false;
-		}
-
-		public bool Skip()
-		{
-			return false;
-		}
-
-		public bool Show()
-		{
-			return false;
-		}
-
-		public bool HasScreenshot()
-		{
-			throw new NotImplementedException();
-		}
-	}
-
-	public class Setup : Screenshotable
-	{
-	}
-
-	public class Data : Screenshotable
-	{
-	}
-
-	public class StepResult : Screenshotable
-	{
-	}
-
-	public class Step
-	{
-		public List<StepResult> Results { get; set; }
-	}
-
-	public class Verification
-	{
-		public List<Data> Data { get; set; }
-		public List<Step> Steps { get; set; }
 	}
 }

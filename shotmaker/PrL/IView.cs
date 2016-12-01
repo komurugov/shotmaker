@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScreenshotMaker.PrL
+﻿namespace ScreenshotMaker.PrL
 {
 	public interface IView
 	{
 		void RefreshTreeStructure();
-		void Refresh();
+		void RefreshData();
 		string GetInputFileName();
 		string GetTestExecutionName();
 		string GetOuputFolderPath();

@@ -171,7 +171,6 @@
 			this.button18.TabIndex = 26;
 			this.button18.Text = "&Passed";
 			this.button18.UseVisualStyleBackColor = true;
-			this.button18.Click += new System.EventHandler(this.button18_Click);
 			// 
 			// treeView2
 			// 
@@ -243,7 +242,6 @@
 			this.textBox1.Size = new System.Drawing.Size(300, 20);
 			this.textBox1.TabIndex = 36;
 			this.textBox1.Text = "C:\\JIRA\\Test Cases\\FR2\\OLSS-4818.xml";
-			this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
 			// 
 			// label1
 			// 
