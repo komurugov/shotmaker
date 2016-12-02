@@ -2,9 +2,8 @@
 {
 	public static class LoaderTestCaseFromXml
 	{
-		public static TestCase Load(string path, out string result)
+		public static TestCase Load(string path)
 		{
-			result = null;
 			return null;
 		}
 	}
