@@ -1,7 +1,7 @@
 ﻿using ScreenshotMaker.DAL;
 using System.IO;
 using System.Linq;
-using System.Windows.Forms;
+using HtmlAgilityPack;
 
 namespace ScreenshotMaker.BLL
 {
@@ -25,7 +25,8 @@ namespace ScreenshotMaker.BLL
 
 			rssChannelItemCustomfield field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
 			s = field.customfieldvalues.customfieldvalue;
-//			HtmlDocument doc = new HtmlDocument()
+			HtmlDocument doc = new HtmlDocument();
+
 
 			return null;
 		}
