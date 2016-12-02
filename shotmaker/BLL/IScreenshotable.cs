@@ -1,19 +1,5 @@
 namespace ScreenshotMaker.BLL
 {
-	public enum Result
-	{
-		Unknown,
-		Passed,
-		Failed
-	}
-
-	public enum Status
-	{
-		None,
-		Done,
-		Skipped
-	}
-
 	public interface IScreenshotable
 	{
 		Status Status { get; set; }

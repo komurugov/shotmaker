@@ -1,19 +1,5 @@
 namespace ScreenshotMaker.BLL
 {
-	public enum PresenterItemStatus
-	{
-		None,
-		Done,
-		Skipped
-	}
-
-	public enum PresenterItemResult
-	{
-		Unknown,
-		Passed,
-		Failed
-	}
-
 	public interface IPresenterItem
 	{
 		bool Selectable { get; }
