@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -15,6 +16,12 @@ namespace ScreenshotMaker.DAL
 			XmlReader xmlReader = XmlReader.Create(filePath);
 			
 			return serializer.Deserialize(xmlReader) as rss;
+		}
+
+		public static void Validate(rss testCase)
+		{
+			if(testCase == null || testCase.channel == null || testCase.channel.item == null || testCase.channel.item.title == null)
+				throw new InvalidDataException("Can't parse rss");
 		}
 	}
 }

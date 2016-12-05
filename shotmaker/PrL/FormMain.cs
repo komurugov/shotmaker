@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using ScreenshotMaker.BLL;
+using ScreenshotMaker.DAL;
 
 namespace ScreenshotMaker.PrL
 {
@@ -51,21 +52,21 @@ namespace ScreenshotMaker.PrL
 
 		private void button14_Click(object sender, EventArgs e)
 		{
-			//string[] files = new string[] {
-			//"C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
-			//"C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
-			//};
-			//foreach (string s in files)
-			//{
-			//	string result;
-			//	var dto = XmlLoader.LoadFromFile(s, out result);
-			//	MessageBox.Show(result + dto.channel.item.title.ToString());
-			//}
+			string[] files = new string[] {
+			"C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
+			"C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
+			"C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
+			"C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
+			"C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
+			"C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
+			"C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
+			};
+			foreach (string s in files)
+			{
+//				var dto = XmlLoader.LoadFromFile(s);
+				var testCase = TestCaseFromXmlLoader.Load(s);
+//				MessageBox.Show(dto.channel.item.title.ToString());
+			}
 		}
 	}
 }

@@ -4,6 +4,13 @@ namespace ScreenshotMaker.BLL
 	{
 		private readonly string _FileName = null;
 
+		public Screenshotable(string t)
+		{
+			Text = t;
+			Status = Status.None;
+			Result = Result.Unknown;
+		}
+
 		public Status Status { get; set; }
 		public Result Result { get; set; }
 
