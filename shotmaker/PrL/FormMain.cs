@@ -65,8 +65,11 @@ namespace ScreenshotMaker.PrL
 			{
 				//				var dto = XmlLoader.LoadFromFile(s);
 				//				MessageBox.Show(dto.channel.item.title.ToString());
-
 				var testCase = TestCaseFromXmlLoader.Load(s);
+				Console.WriteLine("");
+				Console.WriteLine(testCase.IdAndTitle);
+				foreach (Setup setup in testCase.Setups)
+					Console.WriteLine(setup.Text);
 				//MessageBox.Show(testCase.IdAndTitle);
 			}
 		}
