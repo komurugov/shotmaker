@@ -27,7 +27,7 @@ namespace ScreenshotMaker.BLL
 			testCase.Setups = _setupsFromDto(dto);
 			//testCase.Verifications = _verificationsFromDto();
 
-			return null;
+			return testCase;
 		}
 
 		//private static List<Verification> _verificationsFromDto()

@@ -63,9 +63,11 @@ namespace ScreenshotMaker.PrL
 			};
 			foreach (string s in files)
 			{
-//				var dto = XmlLoader.LoadFromFile(s);
+				//				var dto = XmlLoader.LoadFromFile(s);
+				//				MessageBox.Show(dto.channel.item.title.ToString());
+
 				var testCase = TestCaseFromXmlLoader.Load(s);
-//				MessageBox.Show(dto.channel.item.title.ToString());
+				//MessageBox.Show(testCase.IdAndTitle);
 			}
 		}
 	}
