@@ -15,13 +15,7 @@
                   </p>
                 </step>
                 <data>
-                  <ul class="alternate" type="square">
-                    <li>OLSS + DS Server 2.1</li>
-                    <li>CDS AIC 2.1 configured using simple server name.</li>
-                    <li>CDS Client 2.1 configured using fully qualified server name.</li>
-                    <li>Existing project.</li>
-                    <li>Configured instrument.</li>
-                  </ul>
+			Here must be text of the Verification's Data.
                 </data>
                 <result>
                   <p>
@@ -37,13 +31,7 @@
                   </p>
                 </step>
                 <data>
-                  <ul class="alternate" type="square">
-                    <li>OLSS + DS Server 2.1</li>
-                    <li>CDS AIC 2.1 configured using fully qualified server name.</li>
-                    <li>CDS Client 2.1 configured using simple server name.</li>
-                    <li>Existing project.</li>
-                    <li>Configured instrument.</li>
-                  </ul>
+			Here must be text of the Verification's Data.
                 </data>
                 <result>
                   <p>
@@ -59,13 +47,7 @@
                   </p>
                 </step>
                 <data>
-                  <ul class="alternate" type="square">
-                    <li>OLSS + DS Server 2.1</li>
-                    <li>CDS AIC 2.1 configured using server IP address.</li>
-                    <li>CDS Client 2.1 configured using simple server name.</li>
-                    <li>Existing project.</li>
-                    <li>Configured instrument.</li>
-                  </ul>
+			Here must be text of the Verification's Data.
                 </data>
                 <result>
                   <p>

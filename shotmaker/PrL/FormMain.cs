@@ -71,12 +71,12 @@ namespace ScreenshotMaker.PrL
 				Console.WriteLine("Setup:");
 				foreach (Setup setup in testCase.Setups)
 					Console.WriteLine(setup.Text);
-				foreach (Verification verification in testCase.Verifications)
-				{
-					Console.WriteLine("Verification Data:");
-					foreach (Data data in verification.Data)
-						Console.WriteLine(data.Text);
-				}
+				//foreach (Verification verification in testCase.Verifications)
+				//{
+				//	Console.WriteLine("Verification Data:");
+				//	foreach (Data data in verification.Data)
+				//		Console.WriteLine(data.Text);
+				//}
 				//MessageBox.Show(testCase.IdAndTitle);
 			}
 		}

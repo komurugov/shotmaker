@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -14,8 +15,13 @@ namespace ScreenshotMaker.DAL
 			
 			var serializer = new XmlSerializer(typeof(rss));
 			XmlReader xmlReader = XmlReader.Create(filePath);
+
+			string all = File.ReadAllText(filePath);
+			all = Regex.Replace(all, "<p>", @"<br/>");
+			all = Regex.Replace(all, "</p>", @"<br/>");
+			var reader = new StringReader(all);
 			
-			return serializer.Deserialize(xmlReader) as rss;
+			return serializer.Deserialize(reader) as rss;
 		}
 
 		public static void Validate(rss testCase)

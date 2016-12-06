@@ -26,7 +26,7 @@ namespace ScreenshotMaker.BLL
 
 			testCase.IdAndTitle = _idAndTitleFromDto(dto);
 			testCase.Setups = _setupsFromDto(dto);
-			testCase.Verifications = _verificationsFromDto(dto);
+//			testCase.Verifications = _verificationsFromDto(dto);
 
 			return testCase;
 		}
@@ -43,11 +43,11 @@ namespace ScreenshotMaker.BLL
 		private static Verification _verificationFromStep(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
-			result.Data = _dataFromDto(verificationItem.data);
+//			result.Data = _dataFromDto(verificationItem.data);
 			return result;
 		}
 
-		private static List<Data> _dataFromDto(rssChannelItemCustomfieldCustomfieldvaluesStepData data)
+		private static List<Data> _dataFromDto(string data)
 		{
 			var result = new List<Data>();
 			foreach (var t in _divideStringIntoLines(data.ToString()))
