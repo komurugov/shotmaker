@@ -115,12 +115,7 @@ namespace ScreenshotMaker.DAL
 		//		public rssChannelItemCustomfieldCustomfieldvaluesStepDataUL ul { get; set; }
 //		public string Text { get; set; }
 
-		private string _text;
-
-		public rssChannelItemCustomfieldCustomfieldvaluesStepData()
-		{
-			_text = null;
-		}
+		public string Text;
 
 		public XmlSchema GetSchema()
 		{
