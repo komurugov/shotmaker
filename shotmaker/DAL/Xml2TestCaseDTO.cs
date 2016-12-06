@@ -1,4 +1,7 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace ScreenshotMaker.DAL
 {
@@ -108,10 +111,26 @@ namespace ScreenshotMaker.DAL
 
 	/// <remarks />
 	[XmlType(AnonymousType = true)]
-	public class rssChannelItemCustomfieldCustomfieldvaluesStepData
+	public class rssChannelItemCustomfieldCustomfieldvaluesStepData : IXmlSerializable
 	{
 		/// <remarks />
-		public rssChannelItemCustomfieldCustomfieldvaluesStepDataUL ul { get; set; }
+//		public rssChannelItemCustomfieldCustomfieldvaluesStepDataUL ul { get; set; }
+		public string Text { get; set; }
+
+		public XmlSchema GetSchema()
+		{
+			return null;
+		}
+
+		public void ReadXml(XmlReader reader)
+		{
+			Text = reader.ReadString();
+		}
+
+		public void WriteXml(XmlWriter writer)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	/// <remarks />

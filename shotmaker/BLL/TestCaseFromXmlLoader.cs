@@ -26,7 +26,7 @@ namespace ScreenshotMaker.BLL
 
 			testCase.IdAndTitle = _idAndTitleFromDto(dto);
 			testCase.Setups = _setupsFromDto(dto);
-//			testCase.Verifications = _verificationsFromDto(dto);
+			testCase.Verifications = _verificationsFromDto(dto);
 
 			return testCase;
 		}
@@ -43,7 +43,7 @@ namespace ScreenshotMaker.BLL
 		private static Verification _verificationFromStep(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
-//			result.Data = _dataFromDto(verificationItem.data);
+			result.Data = _dataFromDto(verificationItem.data.Text);
 			return result;
 		}
 
