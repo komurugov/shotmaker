@@ -43,7 +43,7 @@ namespace ScreenshotMaker.BLL
 		private static Verification _verificationFromStep(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
-			result.Data = _dataFromDto(verificationItem.data.Text);
+//			result.Data = _dataFromDto(verificationItem.data.Text);
 			return result;
 		}
 
