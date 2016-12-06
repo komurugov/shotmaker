@@ -9,12 +9,6 @@ namespace ScreenshotMaker.BLL
 {
 	public static class TestCaseFromXmlLoader
 	{
-		private static readonly string[] _htmlTags =
-		{
-			@"<br/>",
-			@"<p>", @"</p>"
-		};
-
 		public static TestCase Load(string filePath)
 		{
 			if (!File.Exists(filePath))
@@ -43,7 +37,7 @@ namespace ScreenshotMaker.BLL
 		private static Verification _verificationFromStep(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
-//			result.Data = _dataFromDto(verificationItem.data.Text);
+			result.Data = _dataFromDto(verificationItem.data.Text);
 			return result;
 		}
 
@@ -62,8 +56,18 @@ namespace ScreenshotMaker.BLL
 			return s.Replace("] ", "-");
 		}
 
+		private static readonly string[] _htmlTags =
+		{
+			@"<br/>",
+			@"<br />",
+			@"<ul>", @"</ul>", @"<li>", @"</li>", @"<ul class=""alternate"" type=""square"">",
+			@"<p>", @"</p>"
+		};
+
 		private static List<string> _divideStringIntoLines(string s)
 		{
+			return new List<string > (s.Split(_htmlTags, StringSplitOptions.RemoveEmptyEntries));
+
 			var html = new HtmlDocument();
 			html.LoadHtml(s + @"<br/>");
 			var result = new List<string>();
@@ -79,7 +83,8 @@ namespace ScreenshotMaker.BLL
 					var node = nodes[i];
 					if (node.Name == "br")
 					{
-						result.Add("1" + node.PreviousSibling.InnerText.Trim());
+						if (node.PreviousSibling != null)
+							result.Add("1" + node.PreviousSibling.InnerText.Trim());
 						if (i == nodes.Count - 1)
 							result.Add("3" + node.InnerText.Trim());
 					}

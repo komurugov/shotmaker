@@ -50,6 +50,11 @@ namespace ScreenshotMaker.PrL
 			throw new NotImplementedException();
 		}
 
+		private void ConsoleWriteLine(string s)
+		{
+			richTextBox1.Text += s + "\n";
+		}
+
 		private void button14_Click(object sender, EventArgs e)
 		{
 			string[] files = new string[] {
@@ -66,18 +71,18 @@ namespace ScreenshotMaker.PrL
 				//				var dto = XmlLoader.LoadFromFile(s);
 				//				MessageBox.Show(dto.channel.item.title.ToString());
 				var testCase = TestCaseFromXmlLoader.Load(s);
-				Console.WriteLine("");
-				Console.WriteLine(testCase.IdAndTitle);
-				Console.WriteLine("Setup:");
+				ConsoleWriteLine("");
+				ConsoleWriteLine(testCase.IdAndTitle);
+				ConsoleWriteLine("Setup:");
 				foreach (Setup setup in testCase.Setups)
-					Console.WriteLine(setup.Text);
-				//foreach (Verification verification in testCase.Verifications)
-				//{
-				//	Console.WriteLine("Verification Data:");
-				//	foreach (Data data in verification.Data)
-				//		Console.WriteLine(data.Text);
-				//}
-				//MessageBox.Show(testCase.IdAndTitle);
+					ConsoleWriteLine(setup.Text);
+				foreach (Verification verification in testCase.Verifications)
+				{
+					ConsoleWriteLine("Verification Data:");
+					foreach (Data data in verification.Data)
+						ConsoleWriteLine(data.Text);
+				}
+//				MessageBox.Show(testCase.IdAndTitle);
 			}
 		}
 	}

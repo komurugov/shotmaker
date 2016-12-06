@@ -48,7 +48,7 @@
             treeNode9});
 			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
 			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
-			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode(resources.GetString("treeView2.Nodes"), new System.Windows.Forms.TreeNode[] {
+			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("", new System.Windows.Forms.TreeNode[] {
             treeNode11,
             treeNode12});
 			System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
@@ -77,6 +77,7 @@
 			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
+			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.SuspendLayout();
 			// 
 			// button13
@@ -214,7 +215,7 @@
 			treeNode12.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
 			treeNode12.Text = "Current user is \'user1\'";
 			treeNode13.Name = "Node16";
-			treeNode13.Text = resources.GetString("treeNode13.Text");
+			treeNode13.Text = "";
 			treeNode14.Name = "Node11";
 			treeNode14.Text = "Steps";
 			treeNode15.Name = "Node7";
@@ -252,11 +253,20 @@
 			this.label1.TabIndex = 37;
 			this.label1.Text = "Test Execution:";
 			// 
+			// richTextBox1
+			// 
+			this.richTextBox1.Location = new System.Drawing.Point(678, 42);
+			this.richTextBox1.Name = "richTextBox1";
+			this.richTextBox1.Size = new System.Drawing.Size(630, 458);
+			this.richTextBox1.TabIndex = 38;
+			this.richTextBox1.Text = "";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(674, 735);
+			this.ClientSize = new System.Drawing.Size(1350, 735);
+			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.button13);
@@ -292,6 +302,7 @@
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.RichTextBox richTextBox1;
 	}
 }
 

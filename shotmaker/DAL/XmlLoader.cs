@@ -17,8 +17,8 @@ namespace ScreenshotMaker.DAL
 			XmlReader xmlReader = XmlReader.Create(filePath);
 
 			string all = File.ReadAllText(filePath);
-			all = Regex.Replace(all, "<p>", @"<br/>");
-			all = Regex.Replace(all, "</p>", @"<br/>");
+			//all = Regex.Replace(all, "<p>", @"<br/>");
+			//all = Regex.Replace(all, "</p>", @"<br/>");
 			var reader = new StringReader(all);
 			
 			return serializer.Deserialize(reader) as rss;
