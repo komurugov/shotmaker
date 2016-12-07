@@ -111,23 +111,9 @@ namespace ScreenshotMaker.DAL
 	}
 
 	/// <remarks />
-	public class rssChannelItemCustomfieldCustomfieldvaluesStepStepP
-	{
-		/// <remarks />
-		[XmlElement("br")]
-		public object[] br { get; set; }
-
-		/// <remarks />
-		[XmlText]
-		public string[] Text { get; set; }
-	}
-
-	/// <remarks />
 	public class rssChannelItemCustomfieldCustomfieldvaluesStepData : IXmlSerializable
 	{
 		/// <remarks />
-		//		public rssChannelItemCustomfieldCustomfieldvaluesStepDataUL ul { get; set; }
-//		public string Text { get; set; }
 
 		public string Text;
 
@@ -145,23 +131,6 @@ namespace ScreenshotMaker.DAL
 		{
 			throw new NotImplementedException();
 		}
-	}
-
-	/// <remarks />
-	[XmlType(AnonymousType = true)]
-	public class rssChannelItemCustomfieldCustomfieldvaluesStepDataUL
-	{
-		/// <remarks />
-		[XmlElement("li")]
-		public string[] li { get; set; }
-
-		/// <remarks />
-		[XmlAttribute]
-		public string @class { get; set; }
-
-		/// <remarks />
-		[XmlAttribute]
-		public string type { get; set; }
 	}
 
 	/// <remarks />
@@ -184,18 +153,5 @@ namespace ScreenshotMaker.DAL
 		{
 			throw new NotImplementedException();
 		}
-	}
-
-	/// <remarks />
-	[XmlType(AnonymousType = true)]
-	public class rssChannelItemCustomfieldCustomfieldvaluesStepResultP
-	{
-		/// <remarks />
-		[XmlElement("br")]
-		public object[] br { get; set; }
-
-		/// <remarks />
-		[XmlText]
-		public string[] Text { get; set; }
 	}
 }
