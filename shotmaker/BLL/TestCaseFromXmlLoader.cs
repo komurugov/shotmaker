@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using HtmlAgilityPack;
 using ScreenshotMaker.DAL;
 
 namespace ScreenshotMaker.BLL
@@ -18,37 +17,37 @@ namespace ScreenshotMaker.BLL
 
 			var testCase = new TestCase();
 
-			testCase.IdAndTitle = _idAndTitleFromDto(dto);
-			testCase.Setups = _setupsFromDto(dto);
-			testCase.Verifications = _verificationsFromDto(dto);
+			testCase.IdAndTitle = IdAndTitleFromDto(dto);
+			testCase.Setups = SetupsFromDto(dto);
+			testCase.Verifications = VerificationsFromDto(dto);
 
 			return testCase;
 		}
 
-		private static List<Verification> _verificationsFromDto(rss dto)
+		private static List<Verification> VerificationsFromDto(rss dto)
 		{
 			var result = new List<Verification>();
 			var verificationItems = dto.channel.item.customfields.First(n => n.customfieldname == "Manual Test Steps").customfieldvalues.steps;
 			foreach (var verificationItem in verificationItems)
-				result.Add(_verificationFromStep(verificationItem));
+				result.Add(VerificationFromDto(verificationItem));
 			return result;
 		}
 
-		private static Verification _verificationFromStep(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
+		private static Verification VerificationFromDto(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
-			result.Data = _dataFromDto(verificationItem.data.Text);
-			result.Steps = _stepsFromDto(verificationItem);
+			result.Data = DataFromDto(verificationItem.data.Text);
+			result.Steps = StepsFromDto(verificationItem);
 			return result;
 		}
 
-		private static List<Step> _stepsFromDto(rssChannelItemCustomfieldCustomfieldvaluesStep step)
+		private static List<Step> StepsFromDto(rssChannelItemCustomfieldCustomfieldvaluesStep step)
 		{
 			var result = new List<Step>();
-			foreach (var t in _divideStringIntoLines(step.step.Text))
+			foreach (var t in DivideHtmlIntoLines(step.step.Text))
 				result.Add(new Step(t));
 			int n = 1;
-			foreach (var t in _divideStringIntoLines(step.result.Text))
+			foreach (var t in DivideHtmlIntoLines(step.result.Text))
 			{
 				int m;
 				if (t.IndexOf('.') > 0 && int.TryParse(t.Substring(0, t.IndexOf('.')), out m))
@@ -66,22 +65,22 @@ namespace ScreenshotMaker.BLL
 			return result;
 		}
 
-		private static List<Data> _dataFromDto(string data)
+		private static List<Data> DataFromDto(string data)
 		{
 			var result = new List<Data>();
-			foreach (var t in _divideStringIntoLines(data.ToString()))
+			foreach (var t in DivideHtmlIntoLines(data))
 				result.Add(new Data(t));
 			return result;
 		}
 
-		private static string _idAndTitleFromDto(rss dto)
+		private static string IdAndTitleFromDto(rss dto)
 		{
 			var s = dto.channel.item.title;
 			s = s.Replace("[", "");
 			return s.Replace("] ", "-");
 		}
 
-		private static readonly string[] _htmlTags =
+		private static readonly string[] HtmlTags =
 		{
 			@"<br/>",
 			@"<br />",
@@ -89,51 +88,25 @@ namespace ScreenshotMaker.BLL
 			@"<p>", @"</p>"
 		};
 
-		private static List<string> _divideStringIntoLines(string s)
+		private static List<string> DivideHtmlIntoLines(string s)
 		{
-			return new List<string > (s.Split(_htmlTags, StringSplitOptions.RemoveEmptyEntries));
-
-			var html = new HtmlDocument();
-			html.LoadHtml(s + @"<br/>");
-			var result = new List<string>();
-			//			foreach (string t in lines)
-			//			result.Add(new Setup(t));
-			var nodes = html.DocumentNode.SelectNodes("//*");
-			if (nodes == null)
-				result.Add("0" + s);
-			else
-				//				foreach (HtmlNode node in nodes)
-				for (int i = 0; i < nodes.Count; i++)
-				{
-					var node = nodes[i];
-					if (node.Name == "br")
-					{
-						if (node.PreviousSibling != null)
-							result.Add("1" + node.PreviousSibling.InnerText.Trim());
-						if (i == nodes.Count - 1)
-							result.Add("3" + node.InnerText.Trim());
-					}
-					else
-						result.Add("2" + node.InnerText);
-				}
-			return result;
+			return new List<string > (s.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries));
 		}
 
-		public static List<Setup> _setupsFromString(string s)
+		public static List<Setup> SetupsFromString(string s)
 		{
 			var result = new List<Setup>();
-			foreach (var t in _divideStringIntoLines(s))
+			foreach (var t in DivideHtmlIntoLines(s))
 				result.Add(new Setup(t));
 			return result;
 		}
 
 
-		private static List<Setup> _setupsFromDto(rss dto)
+		private static List<Setup> SetupsFromDto(rss dto)
 		{
 			var field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
 			string s = field.customfieldvalues.customfieldvalue;
-//			string[] lines = s.Split(_htmlTags, StringSplitOptions.RemoveEmptyEntries);
-			return _setupsFromString(s/* + @"&lt;br/&gt;"*/);
+			return SetupsFromString(s/* + @"&lt;br/&gt;"*/);
 		}
 	}
 }
