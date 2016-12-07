@@ -38,15 +38,31 @@ namespace ScreenshotMaker.BLL
 		{
 			var result = new Verification();
 			result.Data = _dataFromDto(verificationItem.data.Text);
-			result.Steps = _stepsFromDto(verificationItem.step.Text);
+			result.Steps = _stepsFromDto(verificationItem);
 			return result;
 		}
 
-		private static List<Step> _stepsFromDto(string text)
+		private static List<Step> _stepsFromDto(rssChannelItemCustomfieldCustomfieldvaluesStep step)
 		{
 			var result = new List<Step>();
-			foreach (var t in _divideStringIntoLines(text))
+			foreach (var t in _divideStringIntoLines(step.step.Text))
 				result.Add(new Step(t));
+			int n = 1;
+			foreach (var t in _divideStringIntoLines(step.result.Text))
+			{
+				int m;
+				if (t.IndexOf('.') > 0 && int.TryParse(t.Substring(0, t.IndexOf('.')), out m))
+				{
+					n = m;
+					if (n > 0 && n <= result.Count)
+						result[n - 1].Results.Add(new StepResult(t.Substring(t.IndexOf('.') + 1)));
+				}
+				else
+				{
+					if (n > 0 && n <= result.Count)
+						result[n - 1].Results.Add(new StepResult(t));
+				}
+			}
 			return result;
 		}
 

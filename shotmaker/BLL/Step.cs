@@ -7,6 +7,7 @@ namespace ScreenshotMaker.BLL
 		public Step(string t)
 		{
 			Text = t;
+			Results = new List<StepResult>();
 		}
 
 		public string Text { get; set; }
