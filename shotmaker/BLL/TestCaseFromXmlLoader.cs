@@ -38,6 +38,15 @@ namespace ScreenshotMaker.BLL
 		{
 			var result = new Verification();
 			result.Data = _dataFromDto(verificationItem.data.Text);
+			result.Steps = _stepsFromDto(verificationItem.step.Text);
+			return result;
+		}
+
+		private static List<Step> _stepsFromDto(string text)
+		{
+			var result = new List<Step>();
+			foreach (var t in _divideStringIntoLines(text))
+				result.Add(new Step(t));
 			return result;
 		}
 

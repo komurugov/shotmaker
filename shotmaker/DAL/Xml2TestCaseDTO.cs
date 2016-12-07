@@ -89,11 +89,25 @@ namespace ScreenshotMaker.DAL
 	}
 
 	/// <remarks />
-	[XmlType(AnonymousType = true)]
-	public class rssChannelItemCustomfieldCustomfieldvaluesStepStep
+	public class rssChannelItemCustomfieldCustomfieldvaluesStepStep : IXmlSerializable
 	{
 		/// <remarks />
-		public rssChannelItemCustomfieldCustomfieldvaluesStepStepP p { get; set; }
+		public string Text;
+
+		public XmlSchema GetSchema()
+		{
+			return null;
+		}
+
+		public void ReadXml(XmlReader reader)
+		{
+			Text = reader.ReadInnerXml();
+		}
+
+		public void WriteXml(XmlWriter writer)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	/// <remarks />

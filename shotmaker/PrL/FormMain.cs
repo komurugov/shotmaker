@@ -81,6 +81,9 @@ namespace ScreenshotMaker.PrL
 					ConsoleWriteLine("Verification Data:");
 					foreach (Data data in verification.Data)
 						ConsoleWriteLine(data.Text);
+					ConsoleWriteLine("Verification Steps:");
+					foreach (Step step in verification.Steps)
+						ConsoleWriteLine(step.Text);
 				}
 //				MessageBox.Show(testCase.IdAndTitle);
 			}
