@@ -46,23 +46,54 @@ namespace ScreenshotMaker.BLL
 			var result = new List<Step>();
 			foreach (var t in DivideHtmlIntoLines(step.step.Text))
 				result.Add(new Step(t));
-			int n = 1;
-			foreach (var t in DivideHtmlIntoLines(step.result.Text))
+			int n = 0;
+			foreach (string t in DivideHtmlIntoLines(step.result.Text))
 			{
 				int m;
-				if (t.IndexOf('.') > 0 && int.TryParse(t.Substring(0, t.IndexOf('.')), out m))
+				string s;
+				string r;
+				if (TryExtractStepNumber(t, out m, out s))
 				{
 					n = m;
-					if (n > 0 && n <= result.Count)
-						result[n - 1].Results.Add(new StepResult(t.Substring(t.IndexOf('.') + 1)));
+					r = s;
 				}
 				else
-				{
-					if (n > 0 && n <= result.Count)
-						result[n - 1].Results.Add(new StepResult(t));
-				}
+					r = t;
+				if (n > 0 && n <= result.Count)
+					result[n - 1].Results.Add(new StepResult(r));
+				else
+					throw new InvalidDataException("Nonexisting number of Step");
 			}
 			return result;
+		}
+
+		private static bool TryExtractStepNumber(string t, out int m, out string s)
+		{
+			s = t;
+			const string prefix = "Step ";
+			if (s.IndexOf(prefix) == 0)
+				s = s.Remove(0, prefix.Length);
+			string r;
+			if (!TryExtractNumberFromBegin(s.TrimStart(), out m, out r))
+				return false;
+			r = r.TrimStart();
+			if (r != "" && ".-:".Contains(r[0]))
+				r = r.Remove(0, 1);
+			r = r.TrimStart();
+			s = r;
+			return true;
+		}
+
+		private static bool TryExtractNumberFromBegin(string s, out int m, out string r)
+		{
+			r = s;
+			int n = 0;
+			while (n < s.Length && Char.IsDigit(s[n]))
+				n++;
+			if (!int.TryParse(s.Substring(0, n), out m))
+				return false;
+			r = s.Substring(n);
+			return true;
 		}
 
 		private static List<Data> DataFromDto(string data)
@@ -90,7 +121,7 @@ namespace ScreenshotMaker.BLL
 
 		private static List<string> DivideHtmlIntoLines(string s)
 		{
-			return new List<string > (s.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries));
+			return new List<string> (s.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries).Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart()));
 		}
 
 		public static List<Setup> SetupsFromString(string s)
