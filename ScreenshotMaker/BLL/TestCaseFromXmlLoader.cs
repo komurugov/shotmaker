@@ -15,8 +15,6 @@ namespace ScreenshotMaker.BLL
 
 			var dto = XmlLoader.LoadFromFile(filePath);
 
-
-
 			var testCase = new TestCase
 			{
 				IdAndTitle = GetIdAndTitle(dto),
@@ -55,72 +53,72 @@ namespace ScreenshotMaker.BLL
 		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step)
 		{
 			var result = new List<Step>();
-			foreach (var t in DivideHtmlIntoLines(step.step.Text))
-				result.Add(new Step(t));
-			int currentStepNumber = 0;
-			foreach (string t in DivideHtmlIntoLines(step.result.Text))
-			{
-				int number;
-				string extractedText;
-				string resultText;
-				if (TryExtractStepNumber(t, out number, out extractedText))
-				{
-					currentStepNumber = number;
-					resultText = extractedText;
-				}
-				else
-					resultText = t;
+			foreach (var stepString in DivideHtmlIntoLines(step.step.Text))
+				result.Add(new Step(stepString));
 
-				if (currentStepNumber > 0 && currentStepNumber <= result.Count)
-					result[currentStepNumber - 1].Results.Add(new StepResult(resultText));
+			int stepNumber = 0;
+			foreach (string resultString in DivideHtmlIntoLines(step.result.Text))
+			{
+				int numberFromResultString;
+				string textFromResultString;
+				if (TryExtractStepNumberAndText(resultString, out numberFromResultString, out textFromResultString))
+					stepNumber = numberFromResultString;
+				else
+					textFromResultString = resultString;
+
+				if (stepNumber > 0 && stepNumber <= result.Count)
+					result[stepNumber - 1].Results.Add(new StepResult(textFromResultString));
 				else
 					throw new InvalidDataException("Nonexisting number of Step");
 			}
 			return result;
 		}
 
-		private static bool TryExtractStepNumber(string t, out int stepNumber, out string extractedText)
+		private static bool TryExtractStepNumberAndText(string inputString, out int stepNumber, out string remainingText)
 		{
-			extractedText = t;
-			const string prefix = "Step ";
-			if (extractedText.IndexOf(prefix) == 0)
-				extractedText = extractedText.Remove(0, prefix.Length);
-			string r;
-			if (!TryExtractNumberFromBegin(extractedText.TrimStart(), out stepNumber, out r))
+			inputString = inputString.TrimStart();
+			const string stepPrefix = "Step";
+			if (inputString.IndexOf(stepPrefix) == 0)
+				inputString = inputString.Remove(0, stepPrefix.Length);
+
+			if (!TryExtractNumberAndText(inputString.TrimStart(), out stepNumber, out remainingText))
 				return false;
-			r = r.TrimStart();
-			if (r != "" && ".-:".Contains(r[0]))
-				r = r.Remove(0, 1);
-			r = r.TrimStart();
-			extractedText = r;
+
+			remainingText = remainingText.TrimStart();
+			if (remainingText != "" && ".-:".Contains(remainingText[0]))
+				remainingText = remainingText.Remove(0, 1).TrimStart();
 			return true;
 		}
 
-		private static bool TryExtractNumberFromBegin(string s, out int m, out string r)
+		private static bool TryExtractNumberAndText(string inputString, out int number, out string remainingText)
 		{
-			r = s;
-			int n = 0;
-			while (n < s.Length && Char.IsDigit(s[n]))
-				n++;
-			if (!int.TryParse(s.Substring(0, n), out m))
+			int firstNonDigitCharNumber = 0;
+			while (firstNonDigitCharNumber < inputString.Length && Char.IsDigit(inputString[firstNonDigitCharNumber]))
+				firstNonDigitCharNumber++;
+
+			if (!int.TryParse(inputString.Substring(0, firstNonDigitCharNumber), out number))
+			{
+				remainingText = "";
 				return false;
-			r = s.Substring(n);
+			}
+
+			remainingText = inputString.Substring(firstNonDigitCharNumber);
 			return true;
 		}
 
 		private static List<Data> GetData(string data)
 		{
 			var result = new List<Data>();
-			foreach (var t in DivideHtmlIntoLines(data))
-				result.Add(new Data(t));
+			foreach (var line in DivideHtmlIntoLines(data))
+				result.Add(new Data(line));
 			return result;
 		}
 
 		private static string GetIdAndTitle(rss dto)
 		{
-			var s = dto.channel.item.title;
-			s = s.Replace("[", "");
-			return s.Replace("] ", "-");
+			string result = dto.channel.item.title;
+			result = result.Replace("[", "");
+			return result.Replace("] ", "-");
 		}
 
 		private static readonly string[] HtmlTags =
@@ -131,18 +129,21 @@ namespace ScreenshotMaker.BLL
 			@"<p>", @"</p>"
 		};
 
-		private static List<string> DivideHtmlIntoLines(string s)
+		private static List<string> DivideHtmlIntoLines(string inputString)
 		{
-			return new List<string> (s.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries).Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart()));
+			return new List<string> (
+				inputString.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries).
+				Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart())
+				);
 		}
 
 		private static List<Setup> GetSetups(rss dto)
 		{
 			var field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
-			string s = field.customfieldvalues.customfieldvalue;
+			string fieldValue = field.customfieldvalues.customfieldvalue;
 			var result = new List<Setup>();
-			foreach (var t in DivideHtmlIntoLines(s))
-				result.Add(new Setup(t));
+			foreach (var line in DivideHtmlIntoLines(fieldValue))
+				result.Add(new Setup(line));
 			return result;
 		}
 	}
