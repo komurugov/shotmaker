@@ -15,8 +15,16 @@ namespace ScreenshotMaker.DAL
 			
 			var serializer = new XmlSerializer(typeof(rss));
 			XmlReader xmlReader = XmlReader.Create(filePath);
-			
-			return serializer.Deserialize(xmlReader) as rss;
+			rss result;
+			try
+			{
+				result = serializer.Deserialize(xmlReader) as rss;
+			}
+			catch
+			{
+				throw new InvalidDataException(string.Format("Can't parse file {0}", filePath));
+			}
+			return result;
 		}
 	}
 }

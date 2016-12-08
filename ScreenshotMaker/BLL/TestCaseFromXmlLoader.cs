@@ -11,7 +11,7 @@ namespace ScreenshotMaker.BLL
 		public static TestCase Load(string filePath)
 		{
 			if (!File.Exists(filePath))
-				throw new FileNotFoundException(string.Format("Can't find file {0}", filePath));
+					throw new FileNotFoundException(string.Format("Can't find file {0}", filePath));
 
 			var dto = XmlLoader.LoadFromFile(filePath);
 
@@ -28,14 +28,29 @@ namespace ScreenshotMaker.BLL
 		private static List<Verification> GetVerifications(rss dto)
 		{
 			var result = new List<Verification>();
-			
-			var verificationItems = dto
-				.channel
-				.item
-				.customfields
-				.First(n => n.customfieldname == "Manual Test Steps")
-				.customfieldvalues
-				.steps;
+
+			var customfields = dto
+				?.channel
+				?.item
+				?.customfields;
+			if (customfields == null)
+				return result;
+
+			rssChannelItemCustomfield customfield;
+			try
+			{
+				customfield = customfields.First(n => n.customfieldname == "Manual Test Steps");
+			}
+			catch (Exception)
+			{
+				return result;
+			}
+
+			var verificationItems = customfield
+				?.customfieldvalues
+				?.steps;
+			if (verificationItems == null)
+				return result;
 
 			foreach (var verificationItem in verificationItems)
 				result.Add(GetVerification(verificationItem));
@@ -53,11 +68,22 @@ namespace ScreenshotMaker.BLL
 		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step)
 		{
 			var result = new List<Step>();
-			foreach (var stepString in DivideHtmlIntoLines(step.step.Text))
+
+			string steps = step
+				?.step
+				?.Text;
+			if (steps == null)
+				return result;
+			foreach (var stepString in DivideHtmlIntoLines(steps))
 				result.Add(new Step(stepString));
 
+			string results = step
+				?.result
+				?.Text;
+			if (results == null)
+				return result;
 			int stepNumber = 0;
-			foreach (string resultString in DivideHtmlIntoLines(step.result.Text))
+			foreach (string resultString in DivideHtmlIntoLines(results))
 			{
 				int numberFromResultString;
 				string textFromResultString;
@@ -109,6 +135,8 @@ namespace ScreenshotMaker.BLL
 		private static List<Data> GetData(string data)
 		{
 			var result = new List<Data>();
+			if (data == null)
+				return result;
 			foreach (var line in DivideHtmlIntoLines(data))
 				result.Add(new Data(line));
 			return result;
@@ -116,7 +144,12 @@ namespace ScreenshotMaker.BLL
 
 		private static string GetIdAndTitle(rss dto)
 		{
-			string result = dto.channel.item.title;
+			string result = dto
+				?.channel
+				?.item
+				?.title;
+			if (result == null)
+				throw new InvalidDataException("Can't extract ID and Title");
 			result = result.Replace("[", "");
 			return result.Replace("] ", "-");
 		}
@@ -139,9 +172,27 @@ namespace ScreenshotMaker.BLL
 
 		private static List<Setup> GetSetups(rss dto)
 		{
-			var field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
-			string fieldValue = field.customfieldvalues.customfieldvalue;
 			var result = new List<Setup>();
+			var fields = dto
+				?.channel
+				?.item
+				?.customfields;
+			if (fields == null)
+				return result;
+			rssChannelItemCustomfield field;
+			try
+			{
+				field = fields.First(n => n.customfieldname == "Setup");
+			}
+			catch
+			{
+				return result;
+			}
+			string fieldValue = field
+				?.customfieldvalues
+				?.customfieldvalue;
+			if (fieldValue == null)
+				return result;
 			foreach (var line in DivideHtmlIntoLines(fieldValue))
 				result.Add(new Setup(line));
 			return result;

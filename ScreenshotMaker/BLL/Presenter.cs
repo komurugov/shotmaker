@@ -29,10 +29,10 @@ namespace ScreenshotMaker.BLL
 			}
 			catch (Exception exception)
 			{
-				View.ShowMessage(exception.ToString());
+				View.ShowMessage("Can't open file: " + exception.Message);
 				return;
 			}
-			View.ShowMessage("File is successfully loaded");
+			View.ShowMessage("File is successfully opened");
 		}
 	}
 }
