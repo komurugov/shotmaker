@@ -9,36 +9,12 @@ namespace ScreenshotMaker.BLL
 			Text = text;
 		}
 
-		public Action ActionPass {
-			get { return null; } 
-		}
-
-		public bool FailedEnabled
-		{
-			get { return false; }
-		}
-
-		public bool PassedEnabled
-		{
-			get { return false; }
-		}
-
 		public PresenterItemResult Result
 		{
 			get { return PresenterItemResult.Unknown; }
 		}
 
 		public bool Selectable
-		{
-			get { return false; }
-		}
-
-		public bool ShowEnabled
-		{
-			get { return false; }
-		}
-
-		public bool SkipEnabled
 		{
 			get { return false; }
 		}
@@ -50,20 +26,24 @@ namespace ScreenshotMaker.BLL
 
 		public string Text { get; set; }
 
-		public void ApplyFailed()
+		public Action ActionPassed
 		{
+			get { return null; }
 		}
 
-		public void ApplyPassed()
+		public Action ActionFailed
 		{
+			get { return null; }
 		}
 
-		public void ApplySkip()
+		public Action ActionSkip
 		{
+			get { return null; }
 		}
 
-		public void ApplyShow()
+		public Action ActionShow
 		{
+			get { return null; }
 		}
 	}
 }

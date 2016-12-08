@@ -9,16 +9,9 @@ namespace ScreenshotMaker.BLL
 		PresenterItemStatus Status { get; }
 		PresenterItemResult Result { get; }
 
-		Action ActionPass { get; }
-
-		//bool PassedEnabled { get; }
-		bool FailedEnabled { get; }
-		bool SkipEnabled { get; }
-		bool ShowEnabled { get; }
-
-		//void ApplyPassed();
-		void ApplyFailed();
-		void ApplySkip();
-		void ApplyShow();
+		Action ActionPassed { get; }
+		Action ActionFailed { get; }
+		Action ActionSkip { get; }
+		Action ActionShow { get; }
 	}
 }

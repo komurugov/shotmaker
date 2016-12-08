@@ -57,48 +57,33 @@ namespace ScreenshotMaker.BLL
 			}
 		}
 
-		public Action ActionPass {
-			get { return () =>  _modelItem.MakeScreenshot(BLL.Result.Failed);}
+		public Action ActionPassed
+		{
+			get { return () =>  _modelItem.MakeScreenshot(BLL.Result.Passed); }
 		}
 
-		public bool PassedEnabled
+		public Action ActionFailed
 		{
-			get { return true; }
+			get { return () => _modelItem.MakeScreenshot(BLL.Result.Failed); }
 		}
 
-		public bool FailedEnabled
+		public Action ActionSkip
 		{
-			get { return true; }
+			get { return () => _modelItem.Skip(); }
 		}
 
-		public bool SkipEnabled
+		public Action ActionShow
 		{
-			get { return true; }
-		}
-
-		public bool ShowEnabled
-		{
-			get { return _modelItem.HasScreenshot(); }
-		}
-
-		public void ApplyFailed()
-		{
-			_modelItem.MakeScreenshot(BLL.Result.Failed);
-		}
-
-		public void ApplyPassed()
-		{
-			_modelItem.MakeScreenshot(BLL.Result.Passed);
-		}
-
-		public void ApplySkip()
-		{
-			_modelItem.Skip();
-		}
-
-		public void ApplyShow()
-		{
-			_modelItem.Show();
+			get
+			{
+				//return _modelItem.HasScreenshot() 
+				//	? (() =>  _modelItem.Show()) 
+				//	: null;
+				if (_modelItem.HasScreenshot())
+					return () => _modelItem.Show();
+				else
+					return null;
+			}
 		}
 	}
 }
