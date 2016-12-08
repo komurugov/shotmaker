@@ -9,6 +9,8 @@ namespace ScreenshotMaker.BLL
 
 		public Tree<IPresenterItem> Items { get; }
 
+		private TestCase _testCase;
+
 		public void ChangeTestExecution()
 		{
 			throw new NotImplementedException();
@@ -21,12 +23,16 @@ namespace ScreenshotMaker.BLL
 
 		public void OpenFile()
 		{
-			throw new NotImplementedException();
-		}
-
-		public void LoadFile()
-		{
-			throw new NotImplementedException();
+			try
+			{
+				_testCase = TestCaseFromXmlLoader.Load(View.GetInputFileName());
+			}
+			catch (Exception exception)
+			{
+				View.ShowMessage(exception.ToString());
+				return;
+			}
+			View.ShowMessage("File is successfully loaded");
 		}
 	}
 }
