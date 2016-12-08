@@ -1,14 +1,12 @@
 namespace ScreenshotMaker.BLL
 {
-	public class Screenshotable : IScreenshotable
+	public class TestCaseItem : ITestCaseItem
 	{
-		private readonly string _FileName = null;
+		private readonly string _fileName = null;
 
-		public Screenshotable(string t)
+		public TestCaseItem(string text)
 		{
-			Text = t;
-			Status = Status.None;
-			Result = Result.Unknown;
+			Text = text;
 		}
 
 		public Status Status { get; set; }
@@ -33,7 +31,7 @@ namespace ScreenshotMaker.BLL
 
 		public bool HasScreenshot()
 		{
-			return Status == Status.Done && _FileName != null;
+			return Status == Status.Done && _fileName != null;
 		}
 	}
 }

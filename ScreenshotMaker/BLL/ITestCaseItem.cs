@@ -1,6 +1,6 @@
 namespace ScreenshotMaker.BLL
 {
-	public interface IScreenshotable
+	public interface ITestCaseItem
 	{
 		Status Status { get; set; }
 		Result Result { get; set; }

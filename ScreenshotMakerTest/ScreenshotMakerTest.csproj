@@ -50,11 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BLL\TestCaseFromXmlLoaderTests.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\shotmaker\ScreenshotMaker.csproj">
+    <ProjectReference Include="..\ScreenshotMaker\ScreenshotMaker.csproj">
       <Project>{847a6af4-15f3-4a12-a355-0e8d1c0b6f6e}</Project>
       <Name>ScreenshotMaker</Name>
     </ProjectReference>

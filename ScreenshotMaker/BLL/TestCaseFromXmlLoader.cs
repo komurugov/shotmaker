@@ -15,25 +15,36 @@ namespace ScreenshotMaker.BLL
 
 			var dto = XmlLoader.LoadFromFile(filePath);
 
-			var testCase = new TestCase();
 
-			testCase.IdAndTitle = IdAndTitleFromDto(dto);
-			testCase.Setups = SetupsFromDto(dto);
-			testCase.Verifications = VerificationsFromDto(dto);
+
+			var testCase = new TestCase
+			{
+				IdAndTitle = GetIdAndTitleFromDto(dto),
+				Setups = GetSetupsFromDto(dto),
+				Verifications = GetVerifications(dto)
+			};
 
 			return testCase;
 		}
 
-		private static List<Verification> VerificationsFromDto(rss dto)
+		private static List<Verification> GetVerifications(rss dto)
 		{
 			var result = new List<Verification>();
-			var verificationItems = dto.channel.item.customfields.First(n => n.customfieldname == "Manual Test Steps").customfieldvalues.steps;
+			
+			var verificationItems = dto
+				.channel
+				.item
+				.customfields
+				.First(n => n.customfieldname == "Manual Test Steps")
+				.customfieldvalues
+				.steps;
+
 			foreach (var verificationItem in verificationItems)
-				result.Add(VerificationFromDto(verificationItem));
+				result.Add(GetVerification(verificationItem));
 			return result;
 		}
 
-		private static Verification VerificationFromDto(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
+		private static Verification GetVerification(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
 			result.Data = DataFromDto(verificationItem.data.Text);
@@ -46,41 +57,42 @@ namespace ScreenshotMaker.BLL
 			var result = new List<Step>();
 			foreach (var t in DivideHtmlIntoLines(step.step.Text))
 				result.Add(new Step(t));
-			int n = 0;
+			int currentStepNumber = 0;
 			foreach (string t in DivideHtmlIntoLines(step.result.Text))
 			{
-				int m;
-				string s;
-				string r;
-				if (TryExtractStepNumber(t, out m, out s))
+				int number;
+				string extractedText;
+				string resultText;
+				if (TryExtractStepNumber(t, out number, out extractedText))
 				{
-					n = m;
-					r = s;
+					currentStepNumber = number;
+					resultText = extractedText;
 				}
 				else
-					r = t;
-				if (n > 0 && n <= result.Count)
-					result[n - 1].Results.Add(new StepResult(r));
+					resultText = t;
+
+				if (currentStepNumber > 0 && currentStepNumber <= result.Count)
+					result[currentStepNumber - 1].Results.Add(new StepResult(resultText));
 				else
 					throw new InvalidDataException("Nonexisting number of Step");
 			}
 			return result;
 		}
 
-		private static bool TryExtractStepNumber(string t, out int m, out string s)
+		private static bool TryExtractStepNumber(string t, out int stepNumber, out string extractedText)
 		{
-			s = t;
+			extractedText = t;
 			const string prefix = "Step ";
-			if (s.IndexOf(prefix) == 0)
-				s = s.Remove(0, prefix.Length);
+			if (extractedText.IndexOf(prefix) == 0)
+				extractedText = extractedText.Remove(0, prefix.Length);
 			string r;
-			if (!TryExtractNumberFromBegin(s.TrimStart(), out m, out r))
+			if (!TryExtractNumberFromBegin(extractedText.TrimStart(), out stepNumber, out r))
 				return false;
 			r = r.TrimStart();
 			if (r != "" && ".-:".Contains(r[0]))
 				r = r.Remove(0, 1);
 			r = r.TrimStart();
-			s = r;
+			extractedText = r;
 			return true;
 		}
 
@@ -104,7 +116,7 @@ namespace ScreenshotMaker.BLL
 			return result;
 		}
 
-		private static string IdAndTitleFromDto(rss dto)
+		private static string GetIdAndTitleFromDto(rss dto)
 		{
 			var s = dto.channel.item.title;
 			s = s.Replace("[", "");
@@ -133,7 +145,7 @@ namespace ScreenshotMaker.BLL
 		}
 
 
-		private static List<Setup> SetupsFromDto(rss dto)
+		private static List<Setup> GetSetupsFromDto(rss dto)
 		{
 			var field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
 			string s = field.customfieldvalues.customfieldvalue;

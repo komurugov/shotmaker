@@ -4,9 +4,9 @@ namespace ScreenshotMaker.BLL
 {
 	public class Step
 	{
-		public Step(string t)
+		public Step(string text)
 		{
-			Text = t;
+			Text = text;
 			Results = new List<StepResult>();
 		}
 

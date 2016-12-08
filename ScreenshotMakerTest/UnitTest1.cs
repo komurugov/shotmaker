@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScreenshotMaker.DAL;
+using System.IO;
 
 namespace MakerTest
 {
@@ -8,11 +9,10 @@ namespace MakerTest
 	public class UnitTest1
 	{
 		[TestMethod]
+		[ExpectedException(typeof(FileNotFoundException), "Can't find file super.xml")]
 		public void LoadDromInvalidPath()
 		{
-			var t = XmlLoader.LoadFromFile("super.xml");
-			
-			Assert.IsNull(t);
+			XmlLoader.LoadFromFile("super.xml");
 		}
 	}
 }

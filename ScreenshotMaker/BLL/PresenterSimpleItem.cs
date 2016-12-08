@@ -1,10 +1,16 @@
-﻿namespace ScreenshotMaker.BLL
+﻿using System;
+
+namespace ScreenshotMaker.BLL
 {
 	internal class PresenterSimpleItem : IPresenterItem
 	{
 		private PresenterSimpleItem(string text)
 		{
 			Text = text;
+		}
+
+		public Action ActionPass {
+			get { return null; } 
 		}
 
 		public bool FailedEnabled

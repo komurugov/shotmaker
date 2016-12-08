@@ -61,10 +61,10 @@ namespace ScreenshotMaker.PrL
 			}
 		}
 
-//		private void ConsoleWriteLine(string s)
-//		{
-//			richTextBox1.Text += s + "\n";
-//		}
+		//		private void ConsoleWriteLine(string s)
+		//		{
+		//			richTextBox1.Text += s + "\n";
+		//		}
 
 		//		private void button14_Click(object sender, EventArgs e)
 		//		{

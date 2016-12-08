@@ -1,10 +1,12 @@
-﻿namespace ScreenshotMaker.BLL
+﻿using System;
+
+namespace ScreenshotMaker.BLL
 {
 	internal class PresenterSelectableItem : IPresenterItem
 	{
-		private readonly IScreenshotable _modelItem;
+		private readonly ITestCaseItem _modelItem;
 
-		private PresenterSelectableItem(IScreenshotable item)
+		private PresenterSelectableItem(ITestCaseItem item)
 		{
 			_modelItem = item;
 		}
@@ -53,6 +55,10 @@
 						return PresenterItemResult.Unknown;
 				}
 			}
+		}
+
+		public Action ActionPass {
+			get { return () =>  _modelItem.MakeScreenshot(BLL.Result.Failed);}
 		}
 
 		public bool PassedEnabled
