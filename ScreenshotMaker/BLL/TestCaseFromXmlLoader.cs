@@ -19,8 +19,8 @@ namespace ScreenshotMaker.BLL
 
 			var testCase = new TestCase
 			{
-				IdAndTitle = GetIdAndTitleFromDto(dto),
-				Setups = GetSetupsFromDto(dto),
+				IdAndTitle = GetIdAndTitle(dto),
+				Setups = GetSetups(dto),
 				Verifications = GetVerifications(dto)
 			};
 
@@ -47,12 +47,12 @@ namespace ScreenshotMaker.BLL
 		private static Verification GetVerification(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
-			result.Data = DataFromDto(verificationItem.data.Text);
-			result.Steps = StepsFromDto(verificationItem);
+			result.Data = GetData(verificationItem.data.Text);
+			result.Steps = GetSteps(verificationItem);
 			return result;
 		}
 
-		private static List<Step> StepsFromDto(rssChannelItemCustomfieldCustomfieldvaluesStep step)
+		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step)
 		{
 			var result = new List<Step>();
 			foreach (var t in DivideHtmlIntoLines(step.step.Text))
@@ -108,7 +108,7 @@ namespace ScreenshotMaker.BLL
 			return true;
 		}
 
-		private static List<Data> DataFromDto(string data)
+		private static List<Data> GetData(string data)
 		{
 			var result = new List<Data>();
 			foreach (var t in DivideHtmlIntoLines(data))
@@ -116,7 +116,7 @@ namespace ScreenshotMaker.BLL
 			return result;
 		}
 
-		private static string GetIdAndTitleFromDto(rss dto)
+		private static string GetIdAndTitle(rss dto)
 		{
 			var s = dto.channel.item.title;
 			s = s.Replace("[", "");
@@ -136,20 +136,14 @@ namespace ScreenshotMaker.BLL
 			return new List<string> (s.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries).Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart()));
 		}
 
-		public static List<Setup> SetupsFromString(string s)
+		private static List<Setup> GetSetups(rss dto)
 		{
+			var field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
+			string s = field.customfieldvalues.customfieldvalue;
 			var result = new List<Setup>();
 			foreach (var t in DivideHtmlIntoLines(s))
 				result.Add(new Setup(t));
 			return result;
-		}
-
-
-		private static List<Setup> GetSetupsFromDto(rss dto)
-		{
-			var field = dto.channel.item.customfields.First(n => n.customfieldname == "Setup");
-			string s = field.customfieldvalues.customfieldvalue;
-			return SetupsFromString(s/* + @"&lt;br/&gt;"*/);
 		}
 	}
 }
