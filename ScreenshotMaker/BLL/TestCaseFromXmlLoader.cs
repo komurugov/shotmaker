@@ -65,7 +65,7 @@ namespace ScreenshotMaker.BLL
 			return result;
 		}
 
-        private static void ExtractSteps(string inputString, out List<Step> steps)
+        private static void ExtractSteps(string inputString, ref List<Step> steps)
         {
 			int stepNumber = 0;
 			string step = "";
@@ -83,13 +83,13 @@ namespace ScreenshotMaker.BLL
 						throw new InvalidDataException("Inconsequental number of Step");
 				}
 				else
-					text = stepString;
+					text = stepLine;
 				step += (step == "" ? "" : "\n") + text;
 			}
 			steps.Add(new Step(step));
         }
 
-		private static void ExtractResultsAndAttachToSteps(string inputString, out List<Step> steps)
+		private static void ExtractResultsAndAttachToSteps(string inputString, ref List<Step> steps)
 		{
 			int stepNumber = 0;
 			foreach (string resultString in DivideHtmlIntoLines(inputString))
@@ -116,15 +116,15 @@ namespace ScreenshotMaker.BLL
 				?.step
 				?.Text;
 			if (stringSteps == null)
-				return result;
-            ExtractSteps(stringSteps, out steps);
+				return steps;
+            ExtractSteps(stringSteps, ref steps);
 			
 			string results = step
 				?.result
 				?.Text;
 			if (results == null)
 				return steps;
-			ExtractResultsAndAttachToSteps(results, out steps);
+			ExtractResultsAndAttachToSteps(results, ref steps);
 			return steps;
 		}
 
