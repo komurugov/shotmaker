@@ -65,25 +65,16 @@ namespace ScreenshotMaker.BLL
 			return result;
 		}
 
-		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step)
+        private static void ExtractSteps(string inputString, out List<Step> steps)
+        {
+			foreach (var stepString in DivideHtmlIntoLines(inputStrings))
+				steps.Add(new Step(stepString));
+        }
+
+		private static void ExtractResultsAndAttachToSteps(string inputString, out List<Step> steps)
 		{
-			var result = new List<Step>();
-
-			string steps = step
-				?.step
-				?.Text;
-			if (steps == null)
-				return result;
-			foreach (var stepString in DivideHtmlIntoLines(steps))
-				result.Add(new Step(stepString));
-
-			string results = step
-				?.result
-				?.Text;
-			if (results == null)
-				return result;
 			int stepNumber = 0;
-			foreach (string resultString in DivideHtmlIntoLines(results))
+			foreach (string resultString in DivideHtmlIntoLines(inputString))
 			{
 				int numberFromResultString;
 				string textFromResultString;
@@ -92,12 +83,31 @@ namespace ScreenshotMaker.BLL
 				else
 					textFromResultString = resultString;
 
-				if (stepNumber > 0 && stepNumber <= result.Count)
-					result[stepNumber - 1].Results.Add(new StepResult(textFromResultString));
+				if (stepNumber > 0 && stepNumber <= steps.Count)
+					steps[stepNumber - 1].Results.Add(new StepResult(textFromResultString));
 				else
 					throw new InvalidDataException("Nonexisting number of Step");
 			}
-			return result;
+		}
+
+		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step)
+		{
+			var steps = new List<Step>();
+
+			string stringSteps = step
+				?.step
+				?.Text;
+			if (stringSteps == null)
+				return result;
+            ExtractSteps(stringSteps, out steps);
+			
+			string results = step
+				?.result
+				?.Text;
+			if (results == null)
+				return steps;
+			ExtractResultsAndAttachToSteps(results, out steps);
+			return steps;
 		}
 
 		private static bool TryExtractStepNumberAndText(string inputString, out int stepNumber, out string remainingText)
