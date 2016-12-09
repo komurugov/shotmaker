@@ -67,8 +67,26 @@ namespace ScreenshotMaker.BLL
 
         private static void ExtractSteps(string inputString, out List<Step> steps)
         {
-			foreach (var stepString in DivideHtmlIntoLines(inputStrings))
-				steps.Add(new Step(stepString));
+			int stepNumber = 0;
+			string step = "";
+			foreach (var stepLine in DivideHtmlIntoLines(inputString))
+			{
+				int number;
+				string text;
+				if (TryExtractStepNumberAndText(stepLine, out number, out text))
+				{
+					if (stepNumber != 0)
+						steps.Add(new Step(step));
+					if (number == stepNumber + 1)
+						stepNumber = number;
+					else
+						throw new InvalidDataException("Inconsequental number of Step");
+				}
+				else
+					text = stepString;
+				step += (step == "" ? "" : "\n") + text;
+			}
+			steps.Add(new Step(step));
         }
 
 		private static void ExtractResultsAndAttachToSteps(string inputString, out List<Step> steps)
