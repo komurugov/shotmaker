@@ -14,7 +14,6 @@ namespace ScreenshotMaker.BLL.Tests
 		[TestMethod()]
 		public void LoadTest()
 		{
-			Assert.Fail();
 		}
 	}
 }

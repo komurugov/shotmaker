@@ -14,14 +14,18 @@ namespace ScreenshotMaker.BLL
 					throw new FileNotFoundException(string.Format("Can't find file {0}", filePath));
 
 			var dto = XmlLoader.LoadFromFile(filePath);
+			var testCase = Dto2TestCase(dto);
+			return testCase;
+		}
 
+		public static TestCase Dto2TestCase(rss dto)
+		{
 			var testCase = new TestCase
 			{
 				IdAndTitle = GetIdAndTitle(dto),
 				Setups = GetSetups(dto),
 				Verifications = GetVerifications(dto)
 			};
-
 			return testCase;
 		}
 
