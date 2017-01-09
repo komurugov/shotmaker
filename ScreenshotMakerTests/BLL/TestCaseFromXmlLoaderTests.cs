@@ -43,7 +43,7 @@ namespace ScreenshotMaker.BLL.Tests
 										{
 											data = new rssChannelItemCustomfieldCustomfieldvaluesStepData
 											{
-												Text = "v1 data item 1 </br> v1 data item 2"
+												Text = "v1 data item 1 <br/> v1 data item 2"
 											},
 											step = new rssChannelItemCustomfieldCustomfieldvaluesStepStep
 											{
@@ -58,7 +58,7 @@ namespace ScreenshotMaker.BLL.Tests
 										{
 											data = new rssChannelItemCustomfieldCustomfieldvaluesStepData
 											{
-												Text = "v2 data item 1 </br> v2 data item 2"
+												Text = "v2 data item 1 <br/> v2 data item 2"
 											},
 											step = new rssChannelItemCustomfieldCustomfieldvaluesStepStep
 											{
@@ -82,7 +82,10 @@ namespace ScreenshotMaker.BLL.Tests
 			Assert.IsTrue(testCase.IdAndTitle == "ID-Title");
 			Assert.IsTrue(testCase.Setups[0].Text == "- setup item 1 ");
 			Assert.IsTrue(testCase.Setups[1].Text == "- setup item 2");
-//			Assert.IsTrue(testCase.Verifications[0].Data[0].Text == "v1 data item 1 ");
+			Assert.IsTrue(testCase.Verifications[0].Data[0].Text == "v1 data item 1 ");
+			//Assert.IsTrue(testCase.Verifications[0].Data[0].Status == Status.None);
+			//Assert.IsTrue(testCase.Verifications[0].Data[0].Result == Result.Unknown);
+			//Assert.IsTrue(testCase.Verifications[0].Steps[0].Text == " 1. v1 step 1 ");
 		}
 	}
 }

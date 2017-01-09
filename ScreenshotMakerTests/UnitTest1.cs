@@ -10,7 +10,7 @@ namespace MakerTest
 	{
 		[TestMethod]
 		[ExpectedException(typeof(FileNotFoundException), "Can't find file super.xml")]
-		public void LoadDromInvalidPath()
+		public void LoadFromInvalidPath()
 		{
 			XmlLoader.LoadFromFile("super.xml");
 		}

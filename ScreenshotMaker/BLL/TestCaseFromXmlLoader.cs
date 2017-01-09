@@ -169,7 +169,8 @@ namespace ScreenshotMaker.BLL
 			var result = new List<Data>();
 			if (data == null)
 				return result;
-			foreach (var line in DivideHtmlIntoLines(data))
+			var lines = DivideHtmlIntoLines(data);
+			foreach (var line in lines)
 				result.Add(new Data(line));
 			return result;
 		}
@@ -197,8 +198,9 @@ namespace ScreenshotMaker.BLL
 		private static List<string> DivideHtmlIntoLines(string inputString)
 		{
 			return new List<string> (
-				inputString.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries).
-				Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart())
+				inputString
+				.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries)
+				.Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart())
 				);
 		}
 
