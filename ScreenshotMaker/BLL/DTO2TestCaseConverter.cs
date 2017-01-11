@@ -63,14 +63,18 @@ namespace ScreenshotMaker.BLL
 		{
 			int stepNumber = 0;
 			string step = "";
-			foreach (var stepLine in DivideHtmlIntoLines(inputString))
+			var linesSet = DivideHtmlIntoLines(inputString);
+			foreach (var stepLine in linesSet)
 			{
 				int number;
 				string text;
 				if (TryExtractStepNumberAndText(stepLine, out number, out text))
 				{
 					if (stepNumber != 0)
+					{
 						steps.Add(new Step(step));
+						step = "";
+					}
 					if (number == stepNumber + 1)
 						stepNumber = number;
 					else
