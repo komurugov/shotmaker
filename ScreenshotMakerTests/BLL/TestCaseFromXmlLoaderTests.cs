@@ -77,15 +77,15 @@ namespace ScreenshotMaker.BLL.Tests
 				}
 			};
 
-			TestCase testCase = TestCaseFromXmlLoader.Dto2TestCase(dto);
+			TestCase testCase = Dto2TestCaseConverter.ConvertDto2TestCase(dto);
 
 			Assert.IsTrue(testCase.IdAndTitle == "ID-Title");
 			Assert.IsTrue(testCase.Setups[0].Text == "- setup item 1 ");
 			Assert.IsTrue(testCase.Setups[1].Text == "- setup item 2");
 			Assert.IsTrue(testCase.Verifications[0].Data[0].Text == "v1 data item 1 ");
-			//Assert.IsTrue(testCase.Verifications[0].Data[0].Status == Status.None);
-			//Assert.IsTrue(testCase.Verifications[0].Data[0].Result == Result.Unknown);
-			//Assert.IsTrue(testCase.Verifications[0].Steps[0].Text == " 1. v1 step 1 ");
+//			Assert.IsTrue(testCase.Verifications[0].Data[0].Status == Status.None);
+//			Assert.IsTrue(testCase.Verifications[0].Data[0].Result == Result.Unknown);
+//			Assert.IsTrue(testCase.Verifications[0].Steps[0].Text == " 1. v1 step 1 ");
 		}
 	}
 }
