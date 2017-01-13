@@ -185,7 +185,7 @@ namespace ScreenshotMaker.BLL
 		{
 			@"<br/>",
 			@"<br />",
-			@"<ul>", @"</ul>", @"<li>", @"</li>", @"<ul class=""alternate"" type=""square"">",
+			@"<ul>", @"</ul>", @"<li>", @"</li>", @"<ul class=""alternate"" type=""square"">", @"<ul type=""square"" class=""alternate"">",
 			@"<p>", @"</p>"
 		};
 
