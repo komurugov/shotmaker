@@ -35,9 +35,19 @@ namespace ScreenshotMaker.PrL
 			MessageBox.Show(message);
 		}
 
+		private TreeNode CreateSubtree(Tree<IPresenterItem> presenterItem)
+		{
+			var treeNode = new TreeNode();
+			treeNode.Tag = presenterItem;
+			foreach (Tree<IPresenterItem> presenterSubItem in presenterItem)
+				treeNode.Nodes.Add(CreateSubtree(presenterSubItem));
+			return treeNode;
+		}
+
 		public void RefreshTreeStructure()
 		{
-			throw new NotImplementedException();
+			treeView2.Nodes.Clear();
+			treeView2.Nodes.Add(CreateSubtree(_presenter.Items));
 		}
 
 		public void RefreshData()
@@ -45,18 +55,26 @@ namespace ScreenshotMaker.PrL
 			throw new NotImplementedException();
 		}
 
-		public string InputFileName { get; private set; }
+		private string _inputFileName;
 
 		public string GetInputFileName()
 		{
-			return InputFileName;
+			return _inputFileName;
 		}
+
+		private void SetInputFileName(string name)
+		{
+			_inputFileName = name;
+			textBox8.Text = name;
+			openFileDialog1.FileName = name;
+		}
+
 
 		private void button14_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog1.ShowDialog() == DialogResult.OK)
 			{
-				InputFileName = openFileDialog1.FileName;
+				SetInputFileName(openFileDialog1.FileName);
 				_presenter.OpenFile();
 			}
 		}
