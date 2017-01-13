@@ -99,10 +99,13 @@ namespace ScreenshotMaker.BLL
 				else
 					textFromResultString = resultString;
 
-				if (stepNumber > 0 && stepNumber <= steps.Count)
-					steps[stepNumber - 1].Results.Add(new StepResult(textFromResultString));
-				else
-					throw new InvalidDataException("Nonexisting number of Step");
+				if (textFromResultString != "")
+				{
+					if (stepNumber > 0 && stepNumber <= steps.Count)
+						steps[stepNumber - 1].Results.Add(new StepResult(textFromResultString));
+					else
+						throw new InvalidDataException("Nonexisting number of Step");
+				}
 			}
 		}
 
