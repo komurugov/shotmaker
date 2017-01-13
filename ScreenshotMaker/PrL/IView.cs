@@ -8,5 +8,8 @@
 		string GetTestExecutionName();
 		string GetOuputFolderPath();
 		void ShowMessage(string message);
+
+		void PrepareBeforeScreenshot();
+		void RestoreAfterScreenshot();
 	}
 }

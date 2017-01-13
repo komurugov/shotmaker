@@ -63,7 +63,25 @@ namespace ScreenshotMaker.PrL
 
 		private void button13_Click(object sender, EventArgs e)
 		{
-			new TestCaseItem("").MakeScreenshot(Result.Unknown);
+			//			new TestCaseItem("").MakeScreenshot(Result.Unknown);
+			new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
+		}
+
+		private double _normalOpacity = 100;
+
+		public void PrepareBeforeScreenshot()
+		{
+			//WindowState = FormWindowState.Minimized;
+
+			//Visible = false;
+
+			_normalOpacity = Opacity;
+			Opacity = 0;
+		}
+
+		public void RestoreAfterScreenshot()
+		{
+			Opacity = _normalOpacity;
 		}
 
 		//		private void ConsoleWriteLine(string s)
