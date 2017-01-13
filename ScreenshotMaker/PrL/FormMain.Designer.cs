@@ -28,41 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("SKIPPED: Installed OLSS and ECM 5.0 Server");
-			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("PASSED: Installed OLSS Client and AUU");
-			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Preconditions", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2});
-			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("PASSED: Internal Authentication");
-			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI");
-			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Data", new System.Windows.Forms.TreeNode[] {
-            treeNode4,
-            treeNode5});
-			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("PASSED: AUU Login page with \"User name\" and \"Password\" without \"Domain\"");
-			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("1. Navigate to AUU home page", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("FAILED: Password is encrypted");
-			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
-        "ehavior in case of long text.", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("AUU System Information page is open");
-			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Current user is \'user1\'");
-			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12});
-			System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Steps", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode10,
-            treeNode13});
-			System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Verification: 1", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode14});
-			System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ", new System.Windows.Forms.TreeNode[] {
-            treeNode3,
-            treeNode15});
-			System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Execution: OLSS-4589-TE-Sprint-4-Saratov", new System.Windows.Forms.TreeNode[] {
-            treeNode16});
 			this.button13 = new System.Windows.Forms.Button();
 			this.textBox7 = new System.Windows.Forms.TextBox();
 			this.button14 = new System.Windows.Forms.Button();
@@ -78,6 +43,8 @@
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+			this.label2 = new System.Windows.Forms.Label();
+			this.label4 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// button13
@@ -86,17 +53,16 @@
 			this.button13.Name = "button13";
 			this.button13.Size = new System.Drawing.Size(90, 23);
 			this.button13.TabIndex = 35;
-			this.button13.Text = "Output folder...";
+			this.button13.Text = "Choose...";
 			this.button13.UseVisualStyleBackColor = true;
 			this.button13.Click += new System.EventHandler(this.button13_Click);
 			// 
 			// textBox7
 			// 
-			this.textBox7.Location = new System.Drawing.Point(98, 103);
+			this.textBox7.Location = new System.Drawing.Point(182, 103);
 			this.textBox7.Name = "textBox7";
-			this.textBox7.Size = new System.Drawing.Size(384, 20);
+			this.textBox7.Size = new System.Drawing.Size(300, 20);
 			this.textBox7.TabIndex = 34;
-			this.textBox7.Text = "C:\\Test Reports\\FR2";
 			// 
 			// button14
 			// 
@@ -104,17 +70,16 @@
 			this.button14.Name = "button14";
 			this.button14.Size = new System.Drawing.Size(90, 23);
 			this.button14.TabIndex = 33;
-			this.button14.Text = "Test Case...";
+			this.button14.Text = "Choose...";
 			this.button14.UseVisualStyleBackColor = true;
 			this.button14.Click += new System.EventHandler(this.button14_Click);
 			// 
 			// textBox8
 			// 
-			this.textBox8.Location = new System.Drawing.Point(98, 77);
+			this.textBox8.Location = new System.Drawing.Point(182, 77);
 			this.textBox8.Name = "textBox8";
-			this.textBox8.Size = new System.Drawing.Size(384, 20);
+			this.textBox8.Size = new System.Drawing.Size(300, 20);
 			this.textBox8.TabIndex = 32;
-			this.textBox8.Text = "C:\\JIRA\\Test Cases\\FR2\\OLSS-4818.xml";
 			// 
 			// textBox9
 			// 
@@ -125,7 +90,6 @@
 			this.textBox9.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
 			this.textBox9.Size = new System.Drawing.Size(479, 75);
 			this.textBox9.TabIndex = 31;
-			this.textBox9.Text = resources.GetString("textBox9.Text");
 			// 
 			// label3
 			// 
@@ -135,7 +99,6 @@
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(479, 75);
 			this.label3.TabIndex = 30;
-			this.label3.Text = "AUU System Information page is open";
 			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// button15
@@ -179,54 +142,6 @@
 			this.treeView2.BackColor = System.Drawing.SystemColors.Control;
 			this.treeView2.Location = new System.Drawing.Point(98, 143);
 			this.treeView2.Name = "treeView2";
-			treeNode1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			treeNode1.Name = "Node4";
-			treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode1.Text = "SKIPPED: Installed OLSS and ECM 5.0 Server";
-			treeNode2.Name = "Node6";
-			treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode2.Text = "PASSED: Installed OLSS Client and AUU";
-			treeNode3.Name = "Node3";
-			treeNode3.Text = "Preconditions";
-			treeNode4.Name = "Node9";
-			treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode4.Text = "PASSED: Internal Authentication";
-			treeNode5.Name = "Node10";
-			treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode5.Text = "PASSED: OLSS user \'user1\' with privileges to login into AUU Web UI";
-			treeNode6.Name = "Node8";
-			treeNode6.Text = "Data";
-			treeNode7.Name = "Node13";
-			treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode7.Text = "PASSED: AUU Login page with \"User name\" and \"Password\" without \"Domain\"";
-			treeNode8.Name = "Node12";
-			treeNode8.Text = "1. Navigate to AUU home page";
-			treeNode9.Name = "Node15";
-			treeNode9.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode9.Text = "FAILED: Password is encrypted";
-			treeNode10.Name = "Node14";
-			treeNode10.Text = "2. Enter valid credentials of \'user1\' from Data. Here some flood to demonstrate b" +
-    "ehavior in case of long text.";
-			treeNode11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			treeNode11.Name = "Node17";
-			treeNode11.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode11.Text = "AUU System Information page is open";
-			treeNode12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			treeNode12.Name = "Node18";
-			treeNode12.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-			treeNode12.Text = "Current user is \'user1\'";
-			treeNode13.Name = "Node16";
-			treeNode13.Text = "";
-			treeNode14.Name = "Node11";
-			treeNode14.Text = "Steps";
-			treeNode15.Name = "Node7";
-			treeNode15.Text = "Verification: 1";
-			treeNode16.Name = "Node2";
-			treeNode16.Text = "Case: OLSS-4435-TC-AUU-Login-Positive-Scenarios-0001 ";
-			treeNode17.Name = "Node0";
-			treeNode17.Text = "Execution: OLSS-4589-TE-Sprint-4-Saratov";
-			this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode17});
 			this.treeView2.ShowLines = false;
 			this.treeView2.ShowPlusMinus = false;
 			this.treeView2.ShowRootLines = false;
@@ -243,7 +158,6 @@
 			this.textBox1.Name = "textBox1";
 			this.textBox1.Size = new System.Drawing.Size(300, 20);
 			this.textBox1.TabIndex = 36;
-			this.textBox1.Text = "C:\\JIRA\\Test Cases\\FR2\\OLSS-4818.xml";
 			// 
 			// label1
 			// 
@@ -262,11 +176,31 @@
 			this.richTextBox1.TabIndex = 38;
 			this.richTextBox1.Text = "";
 			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(98, 80);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(58, 13);
+			this.label2.TabIndex = 39;
+			this.label2.Text = "Test Case:";
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(98, 108);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(71, 13);
+			this.label4.TabIndex = 40;
+			this.label4.Text = "Output folder:";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1350, 735);
+			this.Controls.Add(this.label4);
+			this.Controls.Add(this.label2);
 			this.Controls.Add(this.richTextBox1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.textBox1);
@@ -304,6 +238,8 @@
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.RichTextBox richTextBox1;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label4;
 	}
 }
 
