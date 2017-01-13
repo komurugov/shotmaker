@@ -57,6 +57,7 @@
     <Compile Include="BLL\Dto2TestCaseConverter.cs" />
     <Compile Include="BLL\IPresenterItem.cs" />
     <Compile Include="BLL\ITestCaseItem.cs" />
+    <Compile Include="BLL\ScreenshotMaker.cs" />
     <Compile Include="BLL\TestCaseFromXmlLoader.cs" />
     <Compile Include="BLL\Logger.cs" />
     <Compile Include="BLL\Presenter.cs" />

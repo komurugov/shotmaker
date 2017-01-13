@@ -61,6 +61,11 @@ namespace ScreenshotMaker.PrL
 			}
 		}
 
+		private void button13_Click(object sender, EventArgs e)
+		{
+			new TestCaseItem("").MakeScreenshot(Result.Unknown);
+		}
+
 		//		private void ConsoleWriteLine(string s)
 		//		{
 		//			richTextBox1.Text += s + "\n";

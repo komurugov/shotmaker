@@ -1,3 +1,5 @@
+using System.Drawing;
+
 namespace ScreenshotMaker.BLL
 {
 	public class TestCaseItem : ITestCaseItem
@@ -16,6 +18,9 @@ namespace ScreenshotMaker.BLL
 
 		public bool MakeScreenshot(Result result)
 		{
+			Bitmap bitmap = ScreenshotMaker.GetScreenshot();
+			bitmap.Save("image.png", System.Drawing.Imaging.ImageFormat.Png);
+
 			return false;
 		}
 

@@ -88,6 +88,7 @@
 			this.button13.TabIndex = 35;
 			this.button13.Text = "Output folder...";
 			this.button13.UseVisualStyleBackColor = true;
+			this.button13.Click += new System.EventHandler(this.button13_Click);
 			// 
 			// textBox7
 			// 
