@@ -114,6 +114,7 @@
 			this.button15.TabIndex = 29;
 			this.button15.Text = "S&how";
 			this.button15.UseVisualStyleBackColor = true;
+			this.button15.Click += new System.EventHandler(this.button15_Click);
 			// 
 			// button16
 			// 
@@ -124,6 +125,7 @@
 			this.button16.TabIndex = 28;
 			this.button16.Text = "&Skip";
 			this.button16.UseVisualStyleBackColor = true;
+			this.button16.Click += new System.EventHandler(this.button16_Click);
 			// 
 			// button17
 			// 
@@ -134,6 +136,7 @@
 			this.button17.TabIndex = 27;
 			this.button17.Text = "&Failed";
 			this.button17.UseVisualStyleBackColor = true;
+			this.button17.Click += new System.EventHandler(this.button17_Click);
 			// 
 			// button18
 			// 
@@ -144,6 +147,7 @@
 			this.button18.TabIndex = 26;
 			this.button18.Text = "&Passed";
 			this.button18.UseVisualStyleBackColor = true;
+			this.button18.Click += new System.EventHandler(this.button18_Click);
 			// 
 			// treeView2
 			// 

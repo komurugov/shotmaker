@@ -160,6 +160,46 @@ namespace ScreenshotMaker.PrL
 				e.Cancel = true;
 		}
 
+		//private TreeNode FindNextSelectableTreeItem(TreeNode node)
+		//{
+		//	if (node.Nodes.Count > 0)
+		//		if (node.Nodes[0].)
+		//	if (node.NextNode == null)
+		//		if 
+		//}
+
+		//private void SelectNextSelectableTreeItem()
+		//{
+		//	treeView2.SelectedNode = 
+		//}
+
+		private void button18_Click(object sender, EventArgs e)
+		{
+			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionPassed != null)
+			{
+				_selectedPresenterItem.ActionPassed();
+//				SelectNextSelectableTreeItem();
+			}
+		}
+
+		private void button17_Click(object sender, EventArgs e)
+		{
+			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionFailed != null)
+				_selectedPresenterItem.ActionFailed();
+		}
+
+		private void button16_Click(object sender, EventArgs e)
+		{
+			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionSkip != null)
+				_selectedPresenterItem.ActionSkip();
+		}
+
+		private void button15_Click(object sender, EventArgs e)
+		{
+			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionShow != null)
+				_selectedPresenterItem.ActionShow();
+		}
+
 		//		private void ConsoleWriteLine(string s)
 		//		{
 		//			richTextBox1.Text += s + "\n";
