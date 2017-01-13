@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using ScreenshotMaker.BLL;
 using ScreenshotMaker.DAL;
+using System.Drawing;
 
 namespace ScreenshotMaker.PrL
 {
@@ -50,9 +51,27 @@ namespace ScreenshotMaker.PrL
 			treeView2.Nodes.Add(CreateSubtree(_presenter.Items));
 		}
 
+		private void RefreshTreeNodeRecursively(TreeNode node)
+		{
+			RefreshTreeNode(node);
+			foreach (TreeNode subNode in node.Nodes)
+				RefreshTreeNodeRecursively(subNode);
+		}
+
+		private void RefreshTreeNode(TreeNode node)
+		{
+			var presenterNode = Tag as Tree<IPresenterItem>;
+			if (presenterNode == null)
+				return;
+			IPresenterItem presenterItem = presenterNode.Value;
+			node.Text = presenterItem.Text;
+			node.NodeFont = new Font(node.NodeFont, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
+			node.ForeColor = presenterItem.Status == PresenterItemStatus.Done ? Color.Black : Color.Red;
+		}
+
 		public void RefreshData()
 		{
-			throw new NotImplementedException();
+			RefreshTreeNodeRecursively(treeView2.Nodes[0]);
 		}
 
 		private string _inputFileName;
