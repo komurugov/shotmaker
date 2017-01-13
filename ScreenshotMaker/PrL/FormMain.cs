@@ -23,12 +23,21 @@ namespace ScreenshotMaker.PrL
 
 		public string GetTestExecutionName()
 		{
-			throw new NotImplementedException();
+			return textBox1.Text;
 		}
+
+		private string _outputFolderPath;
 
 		public string GetOuputFolderPath()
 		{
-			throw new NotImplementedException();
+			return _outputFolderPath;
+		}
+
+		private void SetOutputFolderPath(string path)
+		{
+			textBox7.Text = path;
+			folderBrowserDialog1.SelectedPath = path;
+			_outputFolderPath = path;
 		}
 
 		public void ShowMessage(string message)
@@ -83,9 +92,9 @@ namespace ScreenshotMaker.PrL
 
 		private void SetInputFileName(string name)
 		{
-			_inputFileName = name;
 			textBox8.Text = name;
 			openFileDialog1.FileName = name;
+			_inputFileName = name;
 		}
 
 
@@ -100,8 +109,8 @@ namespace ScreenshotMaker.PrL
 
 		private void button13_Click(object sender, EventArgs e)
 		{
-			//			new TestCaseItem("").MakeScreenshot(Result.Unknown);
-			new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
+			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+				SetOutputFolderPath(folderBrowserDialog1.SelectedPath);
 		}
 
 		private double _normalOpacity = 100;
@@ -119,6 +128,13 @@ namespace ScreenshotMaker.PrL
 		public void RestoreAfterScreenshot()
 		{
 			Opacity = _normalOpacity;
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			//			new TestCaseItem("").MakeScreenshot(Result.Unknown);
+
+			new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
 		}
 
 		//		private void ConsoleWriteLine(string s)

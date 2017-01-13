@@ -45,6 +45,8 @@
 			this.richTextBox1 = new System.Windows.Forms.RichTextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
+			this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+			this.button1 = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// button13
@@ -61,6 +63,7 @@
 			// 
 			this.textBox7.Location = new System.Drawing.Point(182, 103);
 			this.textBox7.Name = "textBox7";
+			this.textBox7.ReadOnly = true;
 			this.textBox7.Size = new System.Drawing.Size(300, 20);
 			this.textBox7.TabIndex = 34;
 			// 
@@ -171,7 +174,7 @@
 			// 
 			// richTextBox1
 			// 
-			this.richTextBox1.Location = new System.Drawing.Point(678, 42);
+			this.richTextBox1.Location = new System.Drawing.Point(675, 143);
 			this.richTextBox1.Name = "richTextBox1";
 			this.richTextBox1.Size = new System.Drawing.Size(630, 458);
 			this.richTextBox1.TabIndex = 38;
@@ -195,11 +198,22 @@
 			this.label4.TabIndex = 40;
 			this.label4.Text = "Output folder:";
 			// 
+			// button1
+			// 
+			this.button1.Location = new System.Drawing.Point(952, 80);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(75, 23);
+			this.button1.TabIndex = 41;
+			this.button1.Text = "button1";
+			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1350, 735);
+			this.Controls.Add(this.button1);
 			this.Controls.Add(this.label4);
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.richTextBox1);
@@ -241,6 +255,8 @@
 		private System.Windows.Forms.RichTextBox richTextBox1;
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+		private System.Windows.Forms.Button button1;
 	}
 }
 
