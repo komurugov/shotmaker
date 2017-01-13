@@ -137,6 +137,29 @@ namespace ScreenshotMaker.PrL
 			new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
 		}
 
+		private IPresenterItem _selectedPresenterItem;
+
+		private void treeView2_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+		{
+			_selectedPresenterItem = e.Node.Tag as IPresenterItem;
+			if (_selectedPresenterItem == null)
+				return;
+			if (_selectedPresenterItem.Selectable)
+			{
+				button18.Enabled = _selectedPresenterItem.ActionPassed != null;
+				button17.Enabled = _selectedPresenterItem.ActionFailed != null;
+				button16.Enabled = _selectedPresenterItem.ActionSkip != null;
+				button15.Enabled = _selectedPresenterItem.ActionShow != null;
+
+				label3.Text = e.Node.Text;
+				label3.ForeColor = e.Node.ForeColor;
+
+				textBox9.Text = e.Node.Parent.Text;
+			}
+			else
+				e.Cancel = true;
+		}
+
 		//		private void ConsoleWriteLine(string s)
 		//		{
 		//			richTextBox1.Text += s + "\n";

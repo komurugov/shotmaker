@@ -107,6 +107,7 @@
 			// 
 			// button15
 			// 
+			this.button15.Enabled = false;
 			this.button15.Location = new System.Drawing.Point(502, 688);
 			this.button15.Name = "button15";
 			this.button15.Size = new System.Drawing.Size(75, 23);
@@ -116,6 +117,7 @@
 			// 
 			// button16
 			// 
+			this.button16.Enabled = false;
 			this.button16.Location = new System.Drawing.Point(263, 688);
 			this.button16.Name = "button16";
 			this.button16.Size = new System.Drawing.Size(75, 23);
@@ -125,6 +127,7 @@
 			// 
 			// button17
 			// 
+			this.button17.Enabled = false;
 			this.button17.Location = new System.Drawing.Point(182, 688);
 			this.button17.Name = "button17";
 			this.button17.Size = new System.Drawing.Size(75, 23);
@@ -134,6 +137,7 @@
 			// 
 			// button18
 			// 
+			this.button18.Enabled = false;
 			this.button18.Location = new System.Drawing.Point(101, 688);
 			this.button18.Name = "button18";
 			this.button18.Size = new System.Drawing.Size(75, 23);
@@ -151,6 +155,7 @@
 			this.treeView2.ShowRootLines = false;
 			this.treeView2.Size = new System.Drawing.Size(480, 340);
 			this.treeView2.TabIndex = 25;
+			this.treeView2.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeSelect);
 			// 
 			// openFileDialog1
 			// 
