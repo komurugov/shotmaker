@@ -191,7 +191,7 @@ namespace ScreenshotMaker.BLL.Tests
 											{
 												Text = "<p> 1. " + stringVerification0Step0Line0
 												+ "<br/>" + stringVerification0Step0Line1
-												+ " 2. " + stringVerification0Step1
+												+ "<br/> 2. " + stringVerification0Step1
 												+ "</p><p>3." + stringVerification0Step2 + "</p>"
 											},
 											result = new rssChannelItemCustomfieldCustomfieldvaluesStepResult
@@ -233,7 +233,7 @@ namespace ScreenshotMaker.BLL.Tests
 			Assert.IsTrue(testCase.Verifications[0].Steps[1].Results.Count == 1);
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Steps[1].Results[0], stringVerification0Step1Result0));
 			Assert.IsTrue(testCase.Verifications[0].Steps[2].Text == stringVerification0Step2);
-			Assert.IsTrue(testCase.Verifications[0].Steps[2].Results.Count == 3);
+			Assert.IsTrue(testCase.Verifications[0].Steps[2].Results.Count == 4);
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Steps[2].Results[0], stringVerification0Step2Result0));
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Steps[2].Results[1], stringVerification0Step2Result1));
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Steps[2].Results[2], stringVerification0Step2Result2));
@@ -244,7 +244,7 @@ namespace ScreenshotMaker.BLL.Tests
 		public void Dto2TestCaseTest()
 		{
 			Dto2TestCaseTest1();
-			//Dto2TestCaseTest2();
+			Dto2TestCaseTest2();
 		}
 	}
 }
