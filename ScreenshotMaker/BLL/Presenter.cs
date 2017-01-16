@@ -67,6 +67,32 @@ namespace ScreenshotMaker.BLL
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Verification " + verification.Number);
 			tree.Add(TreeFromListOfData(verification.Data));
+			tree.Add(TreeFromSteps(verification.Steps));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromSteps(List<Step> steps)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSimpleItem("Steps");
+			foreach (Step step in steps)
+				tree.Add(TreeFromStep(step));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromStep(Step step)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSimpleItem(step.Number + ". " + step.Text);
+			foreach (StepResult result in step.Results)
+				tree.Add(SelectableItemFromTestCaseItem(result));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> SelectableItemFromTestCaseItem(TestCaseItem testCaseItem)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSelectableItem(testCaseItem, View);
 			return tree;
 		}
 
@@ -75,14 +101,7 @@ namespace ScreenshotMaker.BLL
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Data");
 			foreach (Data data in listOfData)
-				tree.Add(TreeFromData(data));
-			return tree;
-		}
-
-		private Tree<IPresenterItem> TreeFromData(Data data)
-		{
-			var tree = new Tree<IPresenterItem>();
-			tree.Value = new PresenterSelectableItem(data, View);
+				tree.Add(SelectableItemFromTestCaseItem(data));
 			return tree;
 		}
 
@@ -91,14 +110,7 @@ namespace ScreenshotMaker.BLL
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Preconditions");
 			foreach (Setup setup in setups)
-				tree.Add(TreeFromSetup(setup));
-			return tree;
-		}
-
-		private Tree<IPresenterItem> TreeFromSetup(Setup setup)
-		{
-			var tree = new Tree<IPresenterItem>();
-			tree.Value = new PresenterSelectableItem(setup, View);
+				tree.Add(SelectableItemFromTestCaseItem(setup));
 			return tree;
 		}
 	}

@@ -73,7 +73,7 @@ namespace ScreenshotMaker.BLL
 				{
 					if (stepNumber != 0)
 					{
-						steps.Add(new Step(step));
+						steps.Add(new Step(step, stepNumber));
 						step = "";
 					}
 					if (number == stepNumber + 1)
@@ -85,7 +85,7 @@ namespace ScreenshotMaker.BLL
 					text = stepLine;
 				step += (step == "" ? "" : "\n") + text;
 			}
-			steps.Add(new Step(step));
+			steps.Add(new Step(step, stepNumber));
 		}
 
 		private static void ExtractResultsAndAttachToSteps(string inputString, ref List<Step> steps)
