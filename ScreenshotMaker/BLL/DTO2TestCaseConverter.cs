@@ -54,6 +54,7 @@ namespace ScreenshotMaker.BLL
 		private static Verification GetVerification(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
 		{
 			var result = new Verification();
+			result.Number = verificationItem.index;
 			result.Data = GetData(verificationItem.data.Text);
 			result.Steps = GetSteps(verificationItem);
 			return result;

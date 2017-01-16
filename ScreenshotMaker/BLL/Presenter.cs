@@ -56,6 +56,33 @@ namespace ScreenshotMaker.BLL
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Case: " + testCase.IdAndTitle);
 			tree.Add(TreeFromSetups(testCase.Setups));
+			foreach (Verification verification in testCase.Verifications)
+				tree.Add(TreeFromVerification(verification));
+			
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromVerification(Verification verification)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSimpleItem("Verification " + verification.Number);
+			tree.Add(TreeFromListOfData(verification.Data));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromListOfData(List<Data> listOfData)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSimpleItem("Data");
+			foreach (Data data in listOfData)
+				tree.Add(TreeFromData(data));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromData(Data data)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSelectableItem(data, View);
 			return tree;
 		}
 

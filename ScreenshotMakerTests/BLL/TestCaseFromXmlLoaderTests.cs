@@ -23,12 +23,14 @@ namespace ScreenshotMaker.BLL.Tests
 			const string stringTitle = "Title";
 			const string stringSetup0 = "- setup item 1 ";
 			const string stringSetup1 = "- setup item 2";
+			const int indexVerification0 = 1;
 			const string stringVerification0Data0 = "v1 data item 1 ";
 			const string stringVerification0Data1 = "v1 data item 2";
 			const string stringVerification0Step0 = "v1 step 1 ";
 			const string stringVerification0Step0Result0 = "result 1 for v1 step 1";
 			const string stringVerification0Step1 = "v1 step 2";
 			const string stringVerification0Step1Result0 = "result 1 for v1 step 2";
+			const int indexVerification1 = 3;
 			const string stringVerification1Data0 = "v2 data item 1 ";
 			const string stringVerification1Data1 = "v2 data item 2";
 			const string stringVerification1Step0 = "v2 step 1 ";
@@ -62,6 +64,7 @@ namespace ScreenshotMaker.BLL.Tests
 									{
 										new rssChannelItemCustomfieldCustomfieldvaluesStep
 										{
+											index = indexVerification0,
 											data = new rssChannelItemCustomfieldCustomfieldvaluesStepData
 											{
 												Text = stringVerification0Data0
@@ -80,6 +83,7 @@ namespace ScreenshotMaker.BLL.Tests
 										},
 										new rssChannelItemCustomfieldCustomfieldvaluesStep
 										{
+											index = indexVerification1,
 											data = new rssChannelItemCustomfieldCustomfieldvaluesStepData
 											{
 												Text = stringVerification1Data0
@@ -111,6 +115,7 @@ namespace ScreenshotMaker.BLL.Tests
 			Assert.IsTrue(testCase.Setups[0].Text == stringSetup0);
 			Assert.IsTrue(testCase.Setups[1].Text == stringSetup1);
 			Assert.IsTrue(testCase.Verifications.Count == 2);
+			Assert.IsTrue(testCase.Verifications[0].Number == indexVerification0);
 			Assert.IsTrue(testCase.Verifications[0].Data.Count == 2);
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Data[0], stringVerification0Data0));
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Data[1], stringVerification0Data1));
@@ -121,6 +126,7 @@ namespace ScreenshotMaker.BLL.Tests
 			Assert.IsTrue(testCase.Verifications[0].Steps[1].Text == stringVerification0Step1);
 			Assert.IsTrue(testCase.Verifications[0].Steps[1].Results.Count == 1);
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Steps[1].Results[0], stringVerification0Step1Result0));
+			Assert.IsTrue(testCase.Verifications[1].Number == indexVerification1);
 			Assert.IsTrue(testCase.Verifications[1].Data.Count == 2);
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[1].Data[0], stringVerification1Data0));
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[1].Data[1], stringVerification1Data1));
@@ -139,6 +145,7 @@ namespace ScreenshotMaker.BLL.Tests
 			const string stringTitle = "Title";
 			const string stringSetup0 = "&nbsp;- OLSS Workstation 2.2";
 			const string stringSetup1 = "";
+			const int indexVerification0 = 0;
 			const string stringVerification0Data0 = "v1 data item 1 ";
 			const string stringVerification0Data1 = "v1 data item 2";
 			const string stringVerification0Data2 = "v1 data item 3";
@@ -181,6 +188,7 @@ namespace ScreenshotMaker.BLL.Tests
 									{
 										new rssChannelItemCustomfieldCustomfieldvaluesStep
 										{
+											index = indexVerification0,
 											data = new rssChannelItemCustomfieldCustomfieldvaluesStepData
 											{
 												Text = "<p>" + stringVerification0Data0
@@ -220,6 +228,7 @@ namespace ScreenshotMaker.BLL.Tests
 			Assert.IsTrue(testCase.Setups.Count == 1);
 			Assert.IsTrue(testCase.Setups[0].Text == stringSetup0);
 			Assert.IsTrue(testCase.Verifications.Count == 1);
+			Assert.IsTrue(testCase.Verifications[0].Number == indexVerification0);
 			Assert.IsTrue(testCase.Verifications[0].Data.Count == 3);
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Data[0], stringVerification0Data0));
 			Assert.IsTrue(IsNewTestCaseItemCorrect(testCase.Verifications[0].Data[1], stringVerification0Data1));
