@@ -58,6 +58,7 @@ namespace ScreenshotMaker.PrL
 		{
 			treeView2.Nodes.Clear();
 			treeView2.Nodes.Add(CreateSubtree(_presenter.Items));
+			treeView2.ExpandAll();
 		}
 
 		private void RefreshTreeNodeRecursively(TreeNode node)

@@ -38,13 +38,23 @@ namespace ScreenshotMaker.BLL
 				return;
 			}
 
-			View.ShowMessage("File is successfully opened");
+//			View.ShowMessage("File is successfully opened");
+
+			_testCase.ExecutionIdAndTitle = View.GetTestExecutionName();
 
 			Items.Clear();
-			Items.Value = new PresenterSimpleItem("Execution: " + View.GetTestExecutionName());
+			Items.Value = new PresenterSimpleItem("Execution: " + _testCase.ExecutionIdAndTitle);
+			Items.Add(TreeFromCase(_testCase));
 
 			View.RefreshTreeStructure();
 			View.RefreshData();
+		}
+
+		private Tree<IPresenterItem> TreeFromCase(TestCase testCase)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSimpleItem("Case: " + testCase.IdAndTitle);
+			return tree;
 		}
 	}
 }
