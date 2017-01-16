@@ -69,13 +69,13 @@ namespace ScreenshotMaker.PrL
 
 		private void RefreshTreeNode(TreeNode node)
 		{
-			var presenterNode = Tag as Tree<IPresenterItem>;
+			var presenterNode = node.Tag as Tree<IPresenterItem>;
 			if (presenterNode == null)
 				return;
 			IPresenterItem presenterItem = presenterNode.Value;
 			node.Text = presenterItem.Text;
-			node.NodeFont = new Font(node.NodeFont, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
-			node.ForeColor = presenterItem.Status == PresenterItemStatus.Done ? Color.Black : Color.Red;
+			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
+			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done ? Color.Black : Color.Red;
 		}
 
 		public void RefreshData()
@@ -141,20 +141,25 @@ namespace ScreenshotMaker.PrL
 
 		private void treeView2_BeforeSelect(object sender, TreeViewCancelEventArgs e)
 		{
-			_selectedPresenterItem = e.Node.Tag as IPresenterItem;
-			if (_selectedPresenterItem == null)
+			var selectedPresenterItemTree = e.Node.Tag as Tree<IPresenterItem>;
+			if (selectedPresenterItemTree == null)
 				return;
-			if (_selectedPresenterItem.Selectable)
+			var selectedPresenterItem = selectedPresenterItemTree.Value;
+			if (selectedPresenterItem == null)
+				return;
+			if (selectedPresenterItem.Selectable)
 			{
-				button18.Enabled = _selectedPresenterItem.ActionPassed != null;
-				button17.Enabled = _selectedPresenterItem.ActionFailed != null;
-				button16.Enabled = _selectedPresenterItem.ActionSkip != null;
-				button15.Enabled = _selectedPresenterItem.ActionShow != null;
+				button18.Enabled = selectedPresenterItem.ActionPassed != null;
+				button17.Enabled = selectedPresenterItem.ActionFailed != null;
+				button16.Enabled = selectedPresenterItem.ActionSkip != null;
+				button15.Enabled = selectedPresenterItem.ActionShow != null;
 
 				label3.Text = e.Node.Text;
 				label3.ForeColor = e.Node.ForeColor;
 
 				textBox9.Text = e.Node.Parent == null ? "" : e.Node.Parent.Text;
+
+				_selectedPresenterItem = selectedPresenterItem;
 			}
 			else
 				e.Cancel = true;
@@ -162,8 +167,8 @@ namespace ScreenshotMaker.PrL
 
 		private bool IsNodeSelectable(TreeNode node)
 		{
-			var presenterItem = node.Tag as IPresenterItem;
-			return presenterItem != null && presenterItem.Selectable;
+			var presenterItemTree = node.Tag as Tree<IPresenterItem>;
+			return presenterItemTree != null && presenterItemTree.Value != null && presenterItemTree.Value.Selectable;
 		}
 		
 		private void SelectNextSelectableTreeItem()

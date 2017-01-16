@@ -5,6 +5,11 @@ namespace ScreenshotMaker.BLL
 {
 	internal class Presenter : IPresenter
 	{
+		public Presenter()
+		{
+			Items = new Tree<IPresenterItem>();
+		}
+
 		public IView View { private get; set; }
 
 		public Tree<IPresenterItem> Items { get; }
@@ -32,7 +37,14 @@ namespace ScreenshotMaker.BLL
 				View.ShowMessage("Can't open file: " + exception.Message);
 				return;
 			}
+
 			View.ShowMessage("File is successfully opened");
+
+			Items.Clear();
+			Items.Value = new PresenterSimpleItem("Execution: " + View.GetTestExecutionName());
+
+			View.RefreshTreeStructure();
+			View.RefreshData();
 		}
 	}
 }

@@ -4,7 +4,7 @@ namespace ScreenshotMaker.BLL
 {
 	internal class PresenterSimpleItem : IPresenterItem
 	{
-		private PresenterSimpleItem(string text)
+		public PresenterSimpleItem(string text)
 		{
 			Text = text;
 		}
