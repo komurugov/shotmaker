@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using ScreenshotMaker.PrL;
 
 namespace ScreenshotMaker.BLL
@@ -54,6 +55,23 @@ namespace ScreenshotMaker.BLL
 		{
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Case: " + testCase.IdAndTitle);
+			tree.Add(TreeFromSetups(testCase.Setups));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromSetups(List<Setup> setups)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSimpleItem("Preconditions");
+			foreach (Setup setup in setups)
+				tree.Add(TreeFromSetup(setup));
+			return tree;
+		}
+
+		private Tree<IPresenterItem> TreeFromSetup(Setup setup)
+		{
+			var tree = new Tree<IPresenterItem>();
+			tree.Value = new PresenterSelectableItem(setup, View);
 			return tree;
 		}
 	}

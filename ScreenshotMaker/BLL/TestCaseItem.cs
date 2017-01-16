@@ -21,12 +21,16 @@ namespace ScreenshotMaker.BLL
 			Bitmap bitmap = ScreenshotMaker.GetScreenshot();
 			bitmap.Save("image.png", System.Drawing.Imaging.ImageFormat.Png);
 
-			return false;
+			Status = Status.Done;
+			Result = result;
+			return true;
 		}
 
 		public bool Skip()
 		{
-			return false;
+			Status = Status.Skipped;
+			Result = Result.Unknown;
+			return true;
 		}
 
 		public bool Show()

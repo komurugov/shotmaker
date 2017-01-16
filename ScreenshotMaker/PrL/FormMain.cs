@@ -76,7 +76,7 @@ namespace ScreenshotMaker.PrL
 			IPresenterItem presenterItem = presenterNode.Value;
 			node.Text = presenterItem.Text;
 			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
-			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done ? Color.Black : Color.Red;
+			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done ? Color.Black : Color.FromArgb(192, 0, 0) /*dark red*/;
 		}
 
 		public void RefreshData()
@@ -183,6 +183,7 @@ namespace ScreenshotMaker.PrL
 				}
 				else
 					node = node.NextVisibleNode;
+			Refresh();
 		}
 
 		private void button18_Click(object sender, EventArgs e)
@@ -216,6 +217,11 @@ namespace ScreenshotMaker.PrL
 		{
 			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionShow != null)
 				_selectedPresenterItem.ActionShow();
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			richTextBox1.Text = treeView2.SelectedNode.Text;
 		}
 
 		//		private void ConsoleWriteLine(string s)

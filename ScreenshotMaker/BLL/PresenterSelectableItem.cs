@@ -7,7 +7,7 @@ namespace ScreenshotMaker.BLL
 		private readonly ITestCaseItem _modelItem;
 		private PrL.IView _view;
 
-		/*private*/ public PresenterSelectableItem(ITestCaseItem item, PrL.IView view)
+		public PresenterSelectableItem(ITestCaseItem item, PrL.IView view)
 		{
 			_modelItem = item;
 			_view = view;
@@ -15,7 +15,28 @@ namespace ScreenshotMaker.BLL
 
 		public string Text
 		{
-			get { return _modelItem.Text; }
+			get
+			{
+				string prefix = "";
+				switch (_modelItem.Status)
+				{
+					case BLL.Status.Done:
+						switch (_modelItem.Result)
+						{
+							case BLL.Result.Failed:
+								prefix = "FAILED: ";
+								break;
+							case BLL.Result.Passed:
+								prefix = "PASSED: ";
+								break;
+						}
+						break;
+					case BLL.Status.Skipped:
+						prefix = "SKIPPED: ";
+						break;
+				}
+				return prefix + _modelItem.Text;
+			}
 		}
 
 		public bool Selectable
@@ -30,7 +51,7 @@ namespace ScreenshotMaker.BLL
 				switch (_modelItem.Status)
 				{
 					case BLL.Status.None:
-						return PresenterItemStatus.Done;
+						return PresenterItemStatus.None;
 					case BLL.Status.Done:
 						return PresenterItemStatus.Done;
 					case BLL.Status.Skipped:
@@ -64,6 +85,7 @@ namespace ScreenshotMaker.BLL
 			_view.PrepareBeforeScreenshot();
 			_modelItem.MakeScreenshot(result);
 			_view.RestoreAfterScreenshot();
+			_view.RefreshData();
 		}
 
 		public Action ActionPassed
@@ -78,7 +100,7 @@ namespace ScreenshotMaker.BLL
 
 		public Action ActionSkip
 		{
-			get { return () => _modelItem.Skip(); }
+			get { return () => { _modelItem.Skip(); _view.RefreshData(); }; }
 		}
 
 		public Action ActionShow
