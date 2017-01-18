@@ -198,7 +198,10 @@ namespace ScreenshotMaker.BLL
 			return new List<string>(
 				inputString
 				.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries)
-				.Select(n => (n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n).TrimStart())
+				.Select(n => n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n)
+				.Select(n => n.TrimStart())
+				.Select(n => n.TrimEnd())
+				.Where(n => n != "")
 				);
 		}
 
