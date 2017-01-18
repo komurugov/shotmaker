@@ -44,7 +44,7 @@ namespace ScreenshotMaker.BLL
 			public int ThirdCoordinate { get; set; }
 		}
 
-		private bool TryGetItenAndSavingPathByCoordinates(ItemCoordinates coordinates, out TestCaseItem item, out string savingPath)
+		private bool TryGetItemAndSavingPathByCoordinates(ItemCoordinates coordinates, out TestCaseItem item, out string savingPath)
 		{
 			item = null;
 			savingPath = _outputDir + @"\"
@@ -103,7 +103,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return false;
 			return item.MakeScreenshot(result, savingPath);
 		}
@@ -112,7 +112,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return Status.None;
 			return item.Status;
 		}
@@ -121,7 +121,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return Result.Unknown;
 			return item.Result;
 		}
@@ -130,7 +130,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return "";
 			return item.Text;
 		}
@@ -139,7 +139,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return false;
 			return item.HasScreenshot();
 		}
@@ -148,7 +148,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return false;
 			return item.Skip();
 		}
@@ -157,7 +157,7 @@ namespace ScreenshotMaker.BLL
 		{
 			TestCaseItem item;
 			string savingPath;
-			if (!TryGetItenAndSavingPathByCoordinates(coordinates, out item, out savingPath))
+			if (!TryGetItemAndSavingPathByCoordinates(coordinates, out item, out savingPath))
 				return false;
 			return item.Show();
 		}
