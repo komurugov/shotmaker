@@ -153,10 +153,12 @@
 			// treeView2
 			// 
 			this.treeView2.BackColor = System.Drawing.SystemColors.Window;
+			this.treeView2.FullRowSelect = true;
 			this.treeView2.HideSelection = false;
 			this.treeView2.Location = new System.Drawing.Point(98, 143);
 			this.treeView2.Name = "treeView2";
 			this.treeView2.ShowLines = false;
+			this.treeView2.ShowNodeToolTips = true;
 			this.treeView2.ShowPlusMinus = false;
 			this.treeView2.ShowRootLines = false;
 			this.treeView2.Size = new System.Drawing.Size(480, 340);

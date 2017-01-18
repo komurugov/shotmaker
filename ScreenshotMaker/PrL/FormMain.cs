@@ -61,6 +61,7 @@ namespace ScreenshotMaker.PrL
 			treeView2.ExpandAll();
 
 			SelectNextSelectableTreeItem();
+			treeView2.TopNode = treeView2.Nodes[0];
 		}
 
 		private void RefreshTreeNodeRecursively(TreeNode node)
