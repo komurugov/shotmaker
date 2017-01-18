@@ -140,7 +140,7 @@ namespace ScreenshotMaker.PrL
 		{
 			//			new TestCaseItem("").MakeScreenshot(Result.Unknown);
 
-			new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
+			// new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
 		}
 
 		private IPresenterItem _selectedPresenterItem;

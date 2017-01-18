@@ -56,52 +56,52 @@ namespace ScreenshotMaker.BLL
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Case: " + testCase.IdAndTitle);
 			tree.Add(TreeFromSetups(testCase.Setups));
-			foreach (Verification verification in testCase.Verifications)
-				tree.Add(TreeFromVerification(verification));
+			for (int i = 0; i < testCase.Verifications.Count; i++)
+				tree.Add(TreeFromVerification(testCase.Verifications[i], i));
 			
 			return tree;
 		}
 
-		private Tree<IPresenterItem> TreeFromVerification(Verification verification)
+		private Tree<IPresenterItem> TreeFromVerification(Verification verification, int verificationNum)
 		{
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Verification " + verification.Number);
-			tree.Add(TreeFromListOfData(verification.Data));
-			tree.Add(TreeFromSteps(verification.Steps));
+			tree.Add(TreeFromListOfData(verification.Data, verificationNum));
+			tree.Add(TreeFromSteps(verification.Steps, verificationNum));
 			return tree;
 		}
 
-		private Tree<IPresenterItem> TreeFromSteps(List<Step> steps)
+		private Tree<IPresenterItem> TreeFromSteps(List<Step> steps, int verificationNum)
 		{
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Steps");
-			foreach (Step step in steps)
-				tree.Add(TreeFromStep(step));
+			for (int i = 0; i < steps.Count; i++)
+				tree.Add(TreeFromStep(steps[i], verificationNum, i));
 			return tree;
 		}
 
-		private Tree<IPresenterItem> TreeFromStep(Step step)
+		private Tree<IPresenterItem> TreeFromStep(Step step, int verificationNum, int stepNum)
 		{
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem(step.Number + ". " + step.Text);
-			foreach (StepResult result in step.Results)
-				tree.Add(SelectableItemFromTestCaseItem(result));
+			for (int i = 0; i < step.Results.Count; i++)
+				tree.Add(SelectableItemFromTestCaseItem(new TestCase.ItemCoordinates(TestCase.ItemTypes.StepResult, verificationNum, stepNum, i)));
 			return tree;
 		}
 
-		private Tree<IPresenterItem> SelectableItemFromTestCaseItem(TestCaseItem testCaseItem)
+		private Tree<IPresenterItem> SelectableItemFromTestCaseItem(TestCase.ItemCoordinates coordinates)
 		{
 			var tree = new Tree<IPresenterItem>();
-			tree.Value = new PresenterSelectableItem(testCaseItem, View);
+			tree.Value = new PresenterSelectableItem(_testCase, coordinates, View);
 			return tree;
 		}
 
-		private Tree<IPresenterItem> TreeFromListOfData(List<Data> listOfData)
+		private Tree<IPresenterItem> TreeFromListOfData(List<Data> listOfData, int verificationNum)
 		{
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Data");
-			foreach (Data data in listOfData)
-				tree.Add(SelectableItemFromTestCaseItem(data));
+			for (int i = 0; i < listOfData.Count; i++)
+				tree.Add(SelectableItemFromTestCaseItem(new TestCase.ItemCoordinates(TestCase.ItemTypes.Data, verificationNum, i)));
 			return tree;
 		}
 
@@ -109,8 +109,8 @@ namespace ScreenshotMaker.BLL
 		{
 			var tree = new Tree<IPresenterItem>();
 			tree.Value = new PresenterSimpleItem("Preconditions");
-			foreach (Setup setup in setups)
-				tree.Add(SelectableItemFromTestCaseItem(setup));
+			for (int i = 0; i < setups.Count; i++)
+				tree.Add(SelectableItemFromTestCaseItem(new TestCase.ItemCoordinates(TestCase.ItemTypes.Setup, i)));
 			return tree;
 		}
 	}

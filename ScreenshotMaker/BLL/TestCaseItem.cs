@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 
 namespace ScreenshotMaker.BLL
@@ -40,6 +41,15 @@ namespace ScreenshotMaker.BLL
 		public bool HasScreenshot()
 		{
 			return Status == Status.Done && _fileName != null;
+		}
+
+		internal bool MakeScreenshot(Result result, string savingPath)
+		{
+			ScreenshotMaker.TakeAndSaveScreenshot(savingPath);
+
+			Status = Status.Done;
+			Result = result;
+			return true;
 		}
 	}
 }

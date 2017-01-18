@@ -4,12 +4,14 @@ namespace ScreenshotMaker.BLL
 {
 	internal class PresenterSelectableItem : IPresenterItem
 	{
-		private readonly ITestCaseItem _modelItem;
 		private PrL.IView _view;
+		private TestCase.ItemCoordinates _testCaseCoordinates;
+		private TestCase _testCase;
 
-		public PresenterSelectableItem(ITestCaseItem item, PrL.IView view)
+		public PresenterSelectableItem(TestCase testCase, TestCase.ItemCoordinates coordinates, PrL.IView view)
 		{
-			_modelItem = item;
+			_testCase = testCase;
+			_testCaseCoordinates = coordinates;
 			_view = view;
 		}
 
@@ -18,10 +20,10 @@ namespace ScreenshotMaker.BLL
 			get
 			{
 				string prefix = "";
-				switch (_modelItem.Status)
+				switch (_testCase.GetStatus(_testCaseCoordinates))
 				{
 					case BLL.Status.Done:
-						switch (_modelItem.Result)
+						switch (_testCase.GetResult(_testCaseCoordinates))
 						{
 							case BLL.Result.Failed:
 								prefix = "FAILED: ";
@@ -35,7 +37,7 @@ namespace ScreenshotMaker.BLL
 						prefix = "SKIPPED: ";
 						break;
 				}
-				return prefix + _modelItem.Text;
+				return prefix + _testCase.GetText(_testCaseCoordinates);
 			}
 		}
 
@@ -48,7 +50,7 @@ namespace ScreenshotMaker.BLL
 		{
 			get
 			{
-				switch (_modelItem.Status)
+				switch (_testCase.GetStatus(_testCaseCoordinates))
 				{
 					case BLL.Status.None:
 						return PresenterItemStatus.None;
@@ -66,7 +68,7 @@ namespace ScreenshotMaker.BLL
 		{
 			get
 			{
-				switch (_modelItem.Result)
+				switch (_testCase.GetResult(_testCaseCoordinates))
 				{
 					case BLL.Result.Passed:
 						return PresenterItemResult.Passed;
@@ -83,7 +85,7 @@ namespace ScreenshotMaker.BLL
 		private void MakeScreenshot(Result result)
 		{
 			_view.PrepareBeforeScreenshot();
-			_modelItem.MakeScreenshot(result);
+			_testCase.MakeScreenshot(result, _testCaseCoordinates);
 			_view.RestoreAfterScreenshot();
 			_view.RefreshData();
 		}
@@ -100,18 +102,16 @@ namespace ScreenshotMaker.BLL
 
 		public Action ActionSkip
 		{
-			get { return () => { _modelItem.Skip(); _view.RefreshData(); }; }
+			get { return () => { _testCase.Skip(_testCaseCoordinates); _view.RefreshData(); }; }
 		}
 
 		public Action ActionShow
 		{
 			get
 			{
-				//return _modelItem.HasScreenshot() 
-				//	? (() =>  _modelItem.Show()) 
-				//	: null;
-				if (_modelItem.HasScreenshot())
-					return () => _modelItem.Show();
+
+				if (_testCase.HasScreenshot(_testCaseCoordinates))
+					return () => _testCase.Show(_testCaseCoordinates);
 				else
 					return null;
 			}
