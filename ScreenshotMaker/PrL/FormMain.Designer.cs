@@ -162,6 +162,7 @@
 			this.treeView2.Size = new System.Drawing.Size(480, 340);
 			this.treeView2.TabIndex = 25;
 			this.treeView2.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView2_BeforeSelect);
+			this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView2_AfterSelect);
 			// 
 			// openFileDialog1
 			// 

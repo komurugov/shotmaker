@@ -59,6 +59,8 @@ namespace ScreenshotMaker.PrL
 			treeView2.Nodes.Clear();
 			treeView2.Nodes.Add(CreateSubtree(_presenter.Items));
 			treeView2.ExpandAll();
+
+			SelectNextSelectableTreeItem();
 		}
 
 		private void RefreshTreeNodeRecursively(TreeNode node)
@@ -82,6 +84,8 @@ namespace ScreenshotMaker.PrL
 		public void RefreshData()
 		{
 			RefreshTreeNodeRecursively(treeView2.Nodes[0]);
+
+			OnChangeSelectedNode();
 		}
 
 		private string _inputFileName;
@@ -149,21 +153,22 @@ namespace ScreenshotMaker.PrL
 			if (selectedPresenterItem == null)
 				return;
 			if (selectedPresenterItem.Selectable)
-			{
-				button18.Enabled = selectedPresenterItem.ActionPassed != null;
-				button17.Enabled = selectedPresenterItem.ActionFailed != null;
-				button16.Enabled = selectedPresenterItem.ActionSkip != null;
-				button15.Enabled = selectedPresenterItem.ActionShow != null;
-
-				label3.Text = e.Node.Text;
-				label3.ForeColor = e.Node.ForeColor;
-
-				textBox9.Text = e.Node.Parent == null ? "" : e.Node.Parent.Text;
-
 				_selectedPresenterItem = selectedPresenterItem;
-			}
 			else
 				e.Cancel = true;
+		}
+
+		private void OnChangeSelectedNode()
+		{
+			button18.Enabled = _selectedPresenterItem.ActionPassed != null;
+			button17.Enabled = _selectedPresenterItem.ActionFailed != null;
+			button16.Enabled = _selectedPresenterItem.ActionSkip != null;
+			button15.Enabled = _selectedPresenterItem.ActionShow != null;
+
+			TreeNode selectedNode = treeView2.SelectedNode;
+			label3.Text = selectedNode.Text;
+			label3.ForeColor = selectedNode.ForeColor;
+			textBox9.Text = selectedNode.Parent == null ? "" : selectedNode.Parent.Text;
 		}
 
 		private bool IsNodeSelectable(TreeNode node)
@@ -174,7 +179,11 @@ namespace ScreenshotMaker.PrL
 		
 		private void SelectNextSelectableTreeItem()
 		{
-			TreeNode node = treeView2.SelectedNode.NextVisibleNode;
+			TreeNode node;
+			if (treeView2.SelectedNode == null)
+				node = treeView2.Nodes[0];
+			else
+				node = treeView2.SelectedNode.NextVisibleNode;
 			while (node != null)
 				if (IsNodeSelectable(node))
 				{
@@ -222,6 +231,11 @@ namespace ScreenshotMaker.PrL
 		private void button2_Click(object sender, EventArgs e)
 		{
 			richTextBox1.Text = treeView2.SelectedNode.Text;
+		}
+
+		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			OnChangeSelectedNode();
 		}
 
 		//		private void ConsoleWriteLine(string s)
