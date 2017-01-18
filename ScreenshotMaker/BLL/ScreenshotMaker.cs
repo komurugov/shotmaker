@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace ScreenshotMaker.BLL
 {
-	class ScreenshotMaker
+	static class ScreenshotMaker
 	{
-		public static Bitmap GetScreenshot()
+		private static Bitmap TakeScreenshot()
 		{
 			var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb);
 			Graphics graphics = Graphics.FromImage(bitmap);
@@ -22,6 +22,11 @@ namespace ScreenshotMaker.BLL
 				SystemInformation.VirtualScreen.Size,
 				CopyPixelOperation.SourceCopy);
 			return bitmap;
+		}
+
+		public static void TakeAndSaveScreenshot(string path)
+		{
+			TakeScreenshot().Save(path + ".png", ImageFormat.Png);
 		}
 	}
 }

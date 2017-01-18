@@ -18,8 +18,7 @@ namespace ScreenshotMaker.BLL
 
 		public bool MakeScreenshot(Result result)
 		{
-			Bitmap bitmap = ScreenshotMaker.GetScreenshot();
-			bitmap.Save("image.png", System.Drawing.Imaging.ImageFormat.Png);
+			ScreenshotMaker.TakeAndSaveScreenshot("image");
 
 			Status = Status.Done;
 			Result = result;
