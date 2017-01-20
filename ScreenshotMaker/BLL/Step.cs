@@ -1,8 +1,9 @@
+using System;
 using System.Collections.Generic;
 
 namespace ScreenshotMaker.BLL
 {
-	public class Step
+	public class Step : IGeneratePathAndFileNameForTestCaseItem
 	{
 		public Step(string text, int number)
 		{
@@ -13,5 +14,11 @@ namespace ScreenshotMaker.BLL
 		public int Number { get; set; }
 		public string Text { get; set; }
 		public List<StepResult> Results { get; set; }
+		public IGeneratePathAndFileNameForTestCaseItem Parent { get; }
+
+		public void GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem, out string path, out string fileName)
+		{
+			Parent.GeneratePathAndFileNameForTestCaseItem(testCaseItem, out path, out fileName);
+		}
 	}
 }

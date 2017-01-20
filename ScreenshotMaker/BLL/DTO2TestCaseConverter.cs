@@ -10,16 +10,14 @@ namespace ScreenshotMaker.BLL
 	{
 		public static TestCase ConvertDto2TestCase(rss dto)
 		{
-			var testCase = new TestCase
-			{
-				IdAndTitle = GetIdAndTitle(dto),
-				Setups = GetSetups(dto),
-				Verifications = GetVerifications(dto)
-			};
+			var testCase = new TestCase();
+			testCase.IdAndTitle = GetIdAndTitle(dto);
+			testCase.Setups = GetSetups(dto, testCase);
+			testCase.Verifications = GetVerifications(dto, testCase);
 			return testCase;
 		}
 
-		private static List<Verification> GetVerifications(rss dto)
+		private static List<Verification> GetVerifications(rss dto, TestCase testCase)
 		{
 			var result = new List<Verification>();
 
@@ -47,17 +45,17 @@ namespace ScreenshotMaker.BLL
 				return result;
 
 			foreach (var verificationItem in verificationItems)
-				result.Add(GetVerification(verificationItem));
+				result.Add(GetVerification(verificationItem, testCase));
 			return result;
 		}
 
-		private static Verification GetVerification(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem)
+		private static Verification GetVerification(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem, TestCase testCase)
 		{
-			var result = new Verification();
-			result.Number = verificationItem.index;
-			result.Data = GetData(verificationItem.data.Text);
-			result.Steps = GetSteps(verificationItem);
-			return result;
+			var verification = new Verification(testCase);
+			verification.Number = verificationItem.index;
+			verification.Data = GetData(verificationItem.data.Text, verification);
+			verification.Steps = GetSteps(verificationItem);
+			return verification;
 		}
 
 		private static void ExtractSteps(string inputString, ref List<Step> steps)
@@ -103,7 +101,7 @@ namespace ScreenshotMaker.BLL
 				if (textFromResultString != "")
 				{
 					if (stepNumber > 0 && stepNumber <= steps.Count)
-						steps[stepNumber - 1].Results.Add(new StepResult(textFromResultString));
+						steps[stepNumber - 1].Results.Add(new StepResult(textFromResultString, steps[stepNumber - 1]));
 					else
 						throw new InvalidDataException("Nonexisting number of Step");
 				}
@@ -162,14 +160,14 @@ namespace ScreenshotMaker.BLL
 			return true;
 		}
 
-		private static List<Data> GetData(string data)
+		private static List<Data> GetData(string data, Verification verification)
 		{
 			var result = new List<Data>();
 			if (data == null)
 				return result;
 			var lines = DivideHtmlIntoLines(data);
 			foreach (var line in lines)
-				result.Add(new Data(line));
+				result.Add(new Data(line, verification));
 			return result;
 		}
 
@@ -205,7 +203,7 @@ namespace ScreenshotMaker.BLL
 				);
 		}
 
-		private static List<Setup> GetSetups(rss dto)
+		private static List<Setup> GetSetups(rss dto, TestCase testCase)
 		{
 			var result = new List<Setup>();
 			var fields = dto
@@ -229,7 +227,7 @@ namespace ScreenshotMaker.BLL
 			if (fieldValue == null)
 				return result;
 			foreach (var line in DivideHtmlIntoLines(fieldValue))
-				result.Add(new Setup(line));
+				result.Add(new Setup(line, testCase));
 			return result;
 		}
 	}

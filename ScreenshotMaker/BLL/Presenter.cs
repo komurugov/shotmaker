@@ -42,6 +42,7 @@ namespace ScreenshotMaker.BLL
 //			View.ShowMessage("File is successfully opened");
 
 			_testCase.ExecutionIdAndTitle = View.GetTestExecutionName();
+			_testCase.SetOutputDir(View.GetOuputFolderPath());
 
 			Items.Clear();
 			Items.Value = new PresenterSimpleItem("Execution: " + _testCase.ExecutionIdAndTitle);
