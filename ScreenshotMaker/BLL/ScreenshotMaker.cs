@@ -46,7 +46,7 @@ namespace ScreenshotMaker.BLL
 			string validPath = GetPathWithoutInvalidChars(pathAndFileName.Path);
 			Directory.CreateDirectory(validPath);
 			string validFileName = GetFileNameWithoutInvalidChars(pathAndFileName.FileName);
-			TakeScreenshot().Save(validPath + validFileName + ".png", ImageFormat.Png);
+			TakeScreenshot().Save(Path.Combine(validPath, validFileName + ".png"), ImageFormat.Png);
 		}
 	}
 }
