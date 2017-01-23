@@ -54,11 +54,11 @@ namespace ScreenshotMaker.BLL
 			var verification = new Verification(testCase);
 			verification.Number = verificationItem.index;
 			verification.Data = GetData(verificationItem.data.Text, verification);
-			verification.Steps = GetSteps(verificationItem);
+			verification.Steps = GetSteps(verificationItem, verification);
 			return verification;
 		}
 
-		private static void ExtractSteps(string inputString, ref List<Step> steps)
+		private static void ExtractSteps(string inputString, ref List<Step> steps, Verification verification)
 		{
 			int stepNumber = 0;
 			string step = "";
@@ -71,7 +71,7 @@ namespace ScreenshotMaker.BLL
 				{
 					if (stepNumber != 0)
 					{
-						steps.Add(new Step(step, stepNumber));
+						steps.Add(new Step(step, stepNumber, verification));
 						step = "";
 					}
 					if (number == stepNumber + 1)
@@ -83,7 +83,7 @@ namespace ScreenshotMaker.BLL
 					text = stepLine;
 				step += (step == "" ? "" : "\n") + text;
 			}
-			steps.Add(new Step(step, stepNumber));
+			steps.Add(new Step(step, stepNumber, verification));
 		}
 
 		private static void ExtractResultsAndAttachToSteps(string inputString, ref List<Step> steps)
@@ -108,7 +108,7 @@ namespace ScreenshotMaker.BLL
 			}
 		}
 
-		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step)
+		private static List<Step> GetSteps(rssChannelItemCustomfieldCustomfieldvaluesStep step, Verification verification)
 		{
 			var steps = new List<Step>();
 
@@ -117,7 +117,7 @@ namespace ScreenshotMaker.BLL
 				?.Text;
 			if (stringSteps == null)
 				return steps;
-			ExtractSteps(stringSteps, ref steps);
+			ExtractSteps(stringSteps, ref steps, verification);
 
 			string results = step
 				?.result

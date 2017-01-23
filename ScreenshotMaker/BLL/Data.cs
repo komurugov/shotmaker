@@ -5,9 +5,5 @@ namespace ScreenshotMaker.BLL
 		public Data(string text, IGeneratePathAndFileNameForTestCaseItem parent) : base(text, parent)
 		{
 		}
-		public Verification GetVerification()
-		{
-			return Parent as Verification;
-		}
 	}
 }

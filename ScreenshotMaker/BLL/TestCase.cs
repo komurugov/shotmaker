@@ -36,13 +36,30 @@ namespace ScreenshotMaker.BLL
 			var data = testCaseItem as Data;
 			if (data != null)
 			{
-				Verification verification = data.GetVerification();
+				Verification verification = data.Parent as Verification;
 				int verificationNum = Verifications.IndexOf(verification);
 				int dataNum = verification.Data.IndexOf(data);
 				if (verificationNum < 0 || dataNum < 0)
 					throw new InvalidOperationException();
 				path += "Verification-" + (verificationNum + 1).ToString("D2") + @"\";
 				fileName = "Data-" + (dataNum + 1).ToString("D2") + "-" + data.Text;
+				return;
+			}
+
+			var stepResult = testCaseItem as StepResult;
+			if (stepResult != null)
+			{
+				Step step = stepResult.Parent as Step;
+				int stepResultNum = step.Results.IndexOf(stepResult);
+				int stepNum = step.Number;
+				Verification verification = step.Parent as Verification;
+				int verificationNum = Verifications.IndexOf(verification);
+				if (verificationNum < 0 || stepResultNum < 0)
+					throw new InvalidOperationException();
+				path += "Verification-" + (verificationNum + 1).ToString("D2") + @"\";
+				fileName = "Step " + (stepNum + 1).ToString() + "-" + 
+					(step.Results.Count > 1   ?   (stepResultNum + 1).ToString("D2") + "-"   :   "") + 
+					stepResult.Text;
 				return;
 			}
 

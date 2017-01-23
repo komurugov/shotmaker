@@ -5,11 +5,12 @@ namespace ScreenshotMaker.BLL
 {
 	public class Step : IGeneratePathAndFileNameForTestCaseItem
 	{
-		public Step(string text, int number)
+		public Step(string text, int number, IGeneratePathAndFileNameForTestCaseItem parent)
 		{
 			Text = text;
 			Results = new List<StepResult>();
 			Number = number;
+			Parent = parent;
 		}
 		public int Number { get; set; }
 		public string Text { get; set; }
