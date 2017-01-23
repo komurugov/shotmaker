@@ -41,11 +41,11 @@ namespace ScreenshotMaker.BLL
 			return fileName;
 		}
 
-		public static void TakeAndSaveScreenshot(string path, string fileName)
+		public static void TakeAndSaveScreenshot(PathAndFileName pathAndFileName)
 		{
-			string validPath = GetPathWithoutInvalidChars(path);
+			string validPath = GetPathWithoutInvalidChars(pathAndFileName.Path);
 			Directory.CreateDirectory(validPath);
-			string validFileName = GetFileNameWithoutInvalidChars(fileName);
+			string validFileName = GetFileNameWithoutInvalidChars(pathAndFileName.FileName);
 			TakeScreenshot().Save(validPath + validFileName + ".png", ImageFormat.Png);
 		}
 	}

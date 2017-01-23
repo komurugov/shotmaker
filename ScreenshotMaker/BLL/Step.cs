@@ -17,9 +17,9 @@ namespace ScreenshotMaker.BLL
 		public List<StepResult> Results { get; set; }
 		public IGeneratePathAndFileNameForTestCaseItem Parent { get; }
 
-		public void GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem, out string path, out string fileName)
+		public PathAndFileName GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem)
 		{
-			Parent.GeneratePathAndFileNameForTestCaseItem(testCaseItem, out path, out fileName);
+			return Parent.GeneratePathAndFileNameForTestCaseItem(testCaseItem);
 		}
 	}
 }

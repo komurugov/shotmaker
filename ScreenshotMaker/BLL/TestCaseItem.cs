@@ -19,12 +19,11 @@ namespace ScreenshotMaker.BLL
 
 		public IGeneratePathAndFileNameForTestCaseItem Parent { get; }
 
-		public bool MakeScreenshot(Result result)
+		public virtual bool MakeScreenshot(Result result)
 		{
 			string path;
 			string fileName;
-			Parent.GeneratePathAndFileNameForTestCaseItem(this, out path, out fileName);
-			ScreenshotMaker.TakeAndSaveScreenshot(path, fileName);
+			ScreenshotMaker.TakeAndSaveScreenshot(Parent.GeneratePathAndFileNameForTestCaseItem(this));
 
 			Status = Status.Done;
 			Result = result;
