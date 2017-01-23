@@ -38,12 +38,12 @@ namespace ScreenshotMaker.BLL
 			Verification verification = data.Parent as Verification;
 			if (verification == null)
 				throw new InvalidOperationException();
-			int verificationNum = Verifications.IndexOf(verification);
+			int verificationNum = verification.Number;
 			int dataNum = verification.Data.IndexOf(data);
-			if (verificationNum < 0 || dataNum < 0)
+			if (dataNum < 0)
 				throw new InvalidOperationException();
 			var result = new PathAndFileName();
-			result.Path = string.Format(@"Verification-{0}\", (verificationNum + 1).ToString("D2"));
+			result.Path = string.Format(@"Verification-{0}\", verificationNum.ToString("D2"));
 			result.FileName = string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text);
 			return result;
 		}
@@ -65,16 +65,16 @@ namespace ScreenshotMaker.BLL
 			if (step == null)
 				throw new InvalidOperationException();
 			int stepResultNum = step.Results.IndexOf(stepResult);
+			if (stepResultNum < 0)
+				throw new InvalidOperationException();
 			int stepNum = step.Number;
 			Verification verification = step.Parent as Verification;
-			int verificationNum = Verifications.IndexOf(verification);
-			if (verificationNum < 0 || stepResultNum < 0)
-				throw new InvalidOperationException();
+			int verificationNum = verification.Number;
 			var result = new PathAndFileName();
 			result.Path = string.Format(@"Verification-{0}\",
-				(verificationNum + 1).ToString("D2"));
+				verificationNum.ToString("D2"));
 			result.FileName = string.Format("Step {0}-{1}{2}",
-				(stepNum + 1).ToString(),
+				stepNum,
 				step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
 				stepResult.Text);
 			return result;
