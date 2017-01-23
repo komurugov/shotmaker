@@ -5,7 +5,6 @@ namespace ScreenshotMaker.BLL
 {
 	public class TestCase : IGeneratePathAndFileNameForTestCaseItem
 	{
-		private string _outputDir;
 		public string ExecutionIdAndTitle { get; set; }
 		public string IdAndTitle { get; set; }
 
@@ -18,7 +17,7 @@ namespace ScreenshotMaker.BLL
 
 		public PathAndFileName GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem)
 		{
-			string pathRoot = string.Format(@"{0}\{1}\{2}\", _outputDir, ExecutionIdAndTitle, IdAndTitle);
+			string pathRoot = string.Format(@"{0}\{1}\", ExecutionIdAndTitle, IdAndTitle);
 			PathAndFileName partOfPathAndFileName = GeneratePartOfPathAndFileNameForTestCaseItem(testCaseItem);
 			return new PathAndFileName(pathRoot + partOfPathAndFileName.Path, partOfPathAndFileName.FileName);
 		}
@@ -79,13 +78,6 @@ namespace ScreenshotMaker.BLL
 				step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
 				stepResult.Text);
 			return result;
-		}
-
-		public bool SetOutputDir(string dirName) // return true if there already is folder for current Test Case in [dirName]
-		{
-			_outputDir = dirName;
-			ClearSession();
-			return false;
 		}
 	}
 }

@@ -83,7 +83,7 @@ namespace ScreenshotMaker.BLL
 		private void MakeScreenshot(Result result)
 		{
 			_view.PrepareBeforeScreenshot();
-			_modelItem.MakeScreenshot(result);
+			_modelItem.MakeScreenshot(result, _view.GetOuputFolderPath());
 			_view.RestoreAfterScreenshot();
 			_view.RefreshData();
 		}

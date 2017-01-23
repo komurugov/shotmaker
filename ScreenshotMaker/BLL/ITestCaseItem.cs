@@ -8,7 +8,7 @@ namespace ScreenshotMaker.BLL
 		string Text { get; set; }
 
 		bool HasScreenshot();
-		bool MakeScreenshot(Result result);
+		bool MakeScreenshot(Result result, string rootFolder);
 		bool Skip();
 		bool Show();
 	}
