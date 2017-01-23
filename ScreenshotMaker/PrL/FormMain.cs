@@ -18,12 +18,12 @@ namespace ScreenshotMaker.PrL
 
 			_presenter = presenter;
 
-			treeView2.ExpandAll();
+			treeViewTestExecution.ExpandAll();
 		}
 
 		public string GetTestExecutionName()
 		{
-			return textBox1.Text;
+			return textBoxTestExecution.Text;
 		}
 
 		private string _outputFolderPath;
@@ -35,8 +35,8 @@ namespace ScreenshotMaker.PrL
 
 		private void SetOutputFolderPath(string path)
 		{
-			textBox7.Text = path;
-			folderBrowserDialog1.SelectedPath = path;
+			textBoxOutputFolder.Text = path;
+			folderBrowserDialog.SelectedPath = path;
 			_outputFolderPath = path;
 		}
 
@@ -56,12 +56,12 @@ namespace ScreenshotMaker.PrL
 
 		public void RefreshTreeStructure()
 		{
-			treeView2.Nodes.Clear();
-			treeView2.Nodes.Add(CreateSubtree(_presenter.Items));
-			treeView2.ExpandAll();
+			treeViewTestExecution.Nodes.Clear();
+			treeViewTestExecution.Nodes.Add(CreateSubtree(_presenter.Items));
+			treeViewTestExecution.ExpandAll();
 
 			SelectNextSelectableTreeItem();
-			treeView2.TopNode = treeView2.Nodes[0];
+			treeViewTestExecution.TopNode = treeViewTestExecution.Nodes[0];
 		}
 
 		private void RefreshTreeNodeRecursively(TreeNode node)
@@ -84,7 +84,7 @@ namespace ScreenshotMaker.PrL
 
 		public void RefreshData()
 		{
-			RefreshTreeNodeRecursively(treeView2.Nodes[0]);
+			RefreshTreeNodeRecursively(treeViewTestExecution.Nodes[0]);
 
 			OnChangeSelectedNode();
 		}
@@ -98,25 +98,25 @@ namespace ScreenshotMaker.PrL
 
 		private void SetInputFileName(string name)
 		{
-			textBox8.Text = name;
-			openFileDialog1.FileName = name;
+			textBoxTestCase.Text = name;
+			openFileDialog.FileName = name;
 			_inputFileName = name;
 		}
 
 
-		private void button14_Click(object sender, EventArgs e)
+		private void buttonChooseTestCase_Click(object sender, EventArgs e)
 		{
-			if (openFileDialog1.ShowDialog() == DialogResult.OK)
+			if (openFileDialog.ShowDialog() == DialogResult.OK)
 			{
-				SetInputFileName(openFileDialog1.FileName);
+				SetInputFileName(openFileDialog.FileName);
 				_presenter.OpenFile();
 			}
 		}
 
-		private void button13_Click(object sender, EventArgs e)
+		private void buttonChooseOutputFolder_Click(object sender, EventArgs e)
 		{
-			if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
-				SetOutputFolderPath(folderBrowserDialog1.SelectedPath);
+			if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+				SetOutputFolderPath(folderBrowserDialog.SelectedPath);
 		}
 
 		private double _normalOpacity = 100;
@@ -136,16 +136,9 @@ namespace ScreenshotMaker.PrL
 			Opacity = _normalOpacity;
 		}
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			//			new TestCaseItem("").MakeScreenshot(Result.Unknown);
-
-			new PresenterSelectableItem(new TestCaseItem(""), this).ActionPassed();
-		}
-
 		private IPresenterItem _selectedPresenterItem;
 
-		private void treeView2_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+		private void treeViewTestExecution_BeforeSelect(object sender, TreeViewCancelEventArgs e)
 		{
 			var selectedPresenterItemTree = e.Node.Tag as Tree<IPresenterItem>;
 			if (selectedPresenterItemTree == null)
@@ -161,15 +154,15 @@ namespace ScreenshotMaker.PrL
 
 		private void OnChangeSelectedNode()
 		{
-			button18.Enabled = _selectedPresenterItem.ActionPassed != null;
-			button17.Enabled = _selectedPresenterItem.ActionFailed != null;
-			button16.Enabled = _selectedPresenterItem.ActionSkip != null;
-			button15.Enabled = _selectedPresenterItem.ActionShow != null;
+			buttonTestExecutionSelectedItemPassed.Enabled = _selectedPresenterItem.ActionPassed != null;
+			buttonTestExecutionSelectedItemFailed.Enabled = _selectedPresenterItem.ActionFailed != null;
+			buttonTestExecutionSelectedItemSkip.Enabled = _selectedPresenterItem.ActionSkip != null;
+			buttonTestExecutionSelectedItemShow.Enabled = _selectedPresenterItem.ActionShow != null;
 
-			TreeNode selectedNode = treeView2.SelectedNode;
-			label3.Text = selectedNode.Text;
-			label3.ForeColor = selectedNode.ForeColor;
-			textBox9.Text = selectedNode.Parent == null ? "" : selectedNode.Parent.Text;
+			TreeNode selectedNode = treeViewTestExecution.SelectedNode;
+			labelTestExecutionSelectedItem.Text = selectedNode.Text;
+			labelTestExecutionSelectedItem.ForeColor = selectedNode.ForeColor;
+			textBoxTextExecutionSelectedItemParent.Text = selectedNode.Parent == null ? "" : selectedNode.Parent.Text;
 		}
 
 		private bool IsNodeSelectable(TreeNode node)
@@ -181,14 +174,14 @@ namespace ScreenshotMaker.PrL
 		private void SelectNextSelectableTreeItem()
 		{
 			TreeNode node;
-			if (treeView2.SelectedNode == null)
-				node = treeView2.Nodes[0];
+			if (treeViewTestExecution.SelectedNode == null)
+				node = treeViewTestExecution.Nodes[0];
 			else
-				node = treeView2.SelectedNode.NextVisibleNode;
+				node = treeViewTestExecution.SelectedNode.NextVisibleNode;
 			while (node != null)
 				if (IsNodeSelectable(node))
 				{
-					treeView2.SelectedNode = node;
+					treeViewTestExecution.SelectedNode = node;
 					return;
 				}
 				else
@@ -196,7 +189,7 @@ namespace ScreenshotMaker.PrL
 			Refresh();
 		}
 
-		private void button18_Click(object sender, EventArgs e)
+		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
 			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionPassed != null)
 			{
@@ -205,7 +198,7 @@ namespace ScreenshotMaker.PrL
 			}
 		}
 
-		private void button17_Click(object sender, EventArgs e)
+		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
 			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionFailed != null)
 			{
@@ -214,7 +207,7 @@ namespace ScreenshotMaker.PrL
 			}
 		}
 
-		private void button16_Click(object sender, EventArgs e)
+		private void buttonTestExecutionSelectedItemSkip_Click(object sender, EventArgs e)
 		{
 			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionSkip != null)
 			{
@@ -223,65 +216,20 @@ namespace ScreenshotMaker.PrL
 			}
 		}
 
-		private void button15_Click(object sender, EventArgs e)
+		private void buttonTestExecutionSelectedItemShow_Click(object sender, EventArgs e)
 		{
 			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionShow != null)
 				_selectedPresenterItem.ActionShow();
 		}
 
-		private void button2_Click(object sender, EventArgs e)
-		{
-			richTextBox1.Text = treeView2.SelectedNode.Text;
-		}
-
-		private void treeView2_AfterSelect(object sender, TreeViewEventArgs e)
+		private void treeViewTestExecution_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			OnChangeSelectedNode();
 		}
 
-		//		private void ConsoleWriteLine(string s)
-		//		{
-		//			richTextBox1.Text += s + "\n";
-		//		}
+		private void FormMain_Load(object sender, EventArgs e)
+		{
 
-		//		private void button14_Click(object sender, EventArgs e)
-		//		{
-		//			string[] files = new string[] {
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\OLSS-4818.xml",
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\test case.xml",
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\test1.xml",
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\test2.xml",
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\test3.xml",
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\test4.xml",
-		//			"C:\\proj\\shotmaker\\task\\examples of input\\test5.xml"
-		//			};
-		//			foreach (string s in files)
-		//			{
-		//				//				var dto = XmlLoader.LoadFromFile(s);
-		//				//				MessageBox.Show(dto.channel.item.title.ToString());
-		//				var testCase = TestCaseFromXmlLoader.Load(s);
-		//				ConsoleWriteLine("");
-		//				ConsoleWriteLine(testCase.IdAndTitle);
-		//				ConsoleWriteLine("Setup:");
-		//				foreach (Setup setup in testCase.Setups)
-		//					ConsoleWriteLine(setup.Text);
-		//				foreach (Verification verification in testCase.Verifications)
-		//				{
-		//					ConsoleWriteLine("Verification Data:");
-		//					foreach (Data data in verification.Data)
-		//						ConsoleWriteLine(data.Text);
-		//					ConsoleWriteLine("Verification Steps:");
-		//					foreach (Step step in verification.Steps)
-		//					{
-		//						ConsoleWriteLine("Step:");
-		//						ConsoleWriteLine(step.Text);
-		//						ConsoleWriteLine("Results:");
-		//						foreach (var result in step.Results)
-		//							ConsoleWriteLine(result.Text);
-		//					}
-		//				}
-		////				MessageBox.Show(testCase.IdAndTitle);
-		//			}
-		//		}
+		}
 	}
 }
