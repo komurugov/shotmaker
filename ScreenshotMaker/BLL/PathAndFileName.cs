@@ -8,7 +8,7 @@ namespace ScreenshotMaker.BLL
 {
 	public class PathAndFileName
 	{
-		public PathAndFileName(string path, string fileName)
+		public PathAndFileName(string path = "", string fileName = "")
 		{
 			Path = path;
 			FileName = fileName;

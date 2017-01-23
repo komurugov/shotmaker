@@ -23,7 +23,7 @@ namespace ScreenshotMaker.BLL
 			return new PathAndFileName(pathRoot + partOfPathAndFileName.Path, partOfPathAndFileName.FileName);
 		}
 
-		private PathAndFileName GeneratePartOfPathAndFileNameForTestCaseItem(ITestCaseItem item)
+		private PathAndFileName GeneratePartOfPathAndFileNameForTestCaseItem(TestCaseItem item)
 		{
 			if (item is Setup)
 				return GeneratePartOfPathAndFileNameForConcreteTestCaseItem(item as Setup);
@@ -43,8 +43,10 @@ namespace ScreenshotMaker.BLL
 			int dataNum = verification.Data.IndexOf(data);
 			if (verificationNum < 0 || dataNum < 0)
 				throw new InvalidOperationException();
-			return new PathAndFileName("Verification-" + (verificationNum + 1).ToString("D2") + @"\",
-				"Data-" + (dataNum + 1).ToString("D2") + "-" + data.Text);
+			var result = new PathAndFileName();
+			result.Path = string.Format(@"Verification-{0}\", (verificationNum + 1).ToString("D2"));
+			result.FileName = string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text);
+			return result;
 		}
 
 		private PathAndFileName GeneratePartOfPathAndFileNameForConcreteTestCaseItem(Setup setup)
@@ -52,8 +54,10 @@ namespace ScreenshotMaker.BLL
 			int setupNum = Setups.IndexOf(setup);
 			if (setupNum < 0)
 				throw new InvalidOperationException();
-			return new PathAndFileName(@"Setup\",
-				(setupNum + 1).ToString("D2") + "-" + setup.Text);
+			var result = new PathAndFileName();
+			result.Path = @"Setup\";
+			result.FileName = string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text);
+			return result;
 		}
 
 		private PathAndFileName GeneratePartOfPathAndFileNameForConcreteTestCaseItem(StepResult stepResult)
@@ -67,10 +71,14 @@ namespace ScreenshotMaker.BLL
 			int verificationNum = Verifications.IndexOf(verification);
 			if (verificationNum < 0 || stepResultNum < 0)
 				throw new InvalidOperationException();
-			return new PathAndFileName("Verification-" + (verificationNum + 1).ToString("D2") + @"\",
-				"Step " + (stepNum + 1).ToString() + "-" +
-				(step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "") +
+			var result = new PathAndFileName();
+			result.Path = string.Format(@"Verification-{0}\",
+				(verificationNum + 1).ToString("D2"));
+			result.FileName = string.Format("Step {0}-{1}{2}",
+				(stepNum + 1).ToString(),
+				step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
 				stepResult.Text);
+			return result;
 		}
 
 		public bool SetOutputDir(string dirName) // return true if there already is folder for current Test Case in [dirName]
