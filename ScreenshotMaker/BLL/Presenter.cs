@@ -39,8 +39,6 @@ namespace ScreenshotMaker.BLL
 				return;
 			}
 
-//			View.ShowMessage("File is successfully opened");
-
 			_testCase.ExecutionIdAndTitle = View.GetTestExecutionName();
 
 			Items.Clear();

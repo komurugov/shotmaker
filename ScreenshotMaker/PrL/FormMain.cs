@@ -49,8 +49,9 @@ namespace ScreenshotMaker.PrL
 		{
 			var treeNode = new TreeNode();
 			treeNode.Tag = presenterItem;
-			foreach (Tree<IPresenterItem> presenterSubItem in presenterItem)
-				treeNode.Nodes.Add(CreateSubtree(presenterSubItem));
+			if (presenterItem != null)
+				foreach (Tree<IPresenterItem> presenterSubItem in presenterItem)
+					treeNode.Nodes.Add(CreateSubtree(presenterSubItem));
 			return treeNode;
 		}
 
@@ -61,31 +62,32 @@ namespace ScreenshotMaker.PrL
 			treeViewTestExecution.ExpandAll();
 
 			SelectNextSelectableTreeItem();
-			treeViewTestExecution.TopNode = treeViewTestExecution.Nodes[0];
+			if (treeViewTestExecution.Nodes.Count > 0)
+				treeViewTestExecution.TopNode = treeViewTestExecution.Nodes[0];
 		}
 
 		private void RefreshTreeNodeRecursively(TreeNode node)
 		{
 			RefreshTreeNode(node);
-			foreach (TreeNode subNode in node.Nodes)
-				RefreshTreeNodeRecursively(subNode);
+			if (node != null)
+				foreach (TreeNode subNode in node.Nodes)
+					RefreshTreeNodeRecursively(subNode);
 		}
 
 		private void RefreshTreeNode(TreeNode node)
 		{
-			var presenterNode = node.Tag as Tree<IPresenterItem>;
-			if (presenterNode == null)
+			IPresenterItem presenterItem = (node?.Tag as Tree<IPresenterItem>)?.Value;
+			if (presenterItem == null)
 				return;
-			IPresenterItem presenterItem = presenterNode.Value;
 			node.Text = presenterItem.Text;
 			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
-			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done ? Color.Black : Color.FromArgb(192, 0, 0) /*dark red*/;
+			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done   ?   Color.Black   :   Color.FromArgb(192, 0, 0) /*dark red*/;
 		}
 
 		public void RefreshData()
 		{
-			RefreshTreeNodeRecursively(treeViewTestExecution.Nodes[0]);
-
+			if (treeViewTestExecution.Nodes.Count > 0)
+				RefreshTreeNodeRecursively(treeViewTestExecution.Nodes[0]);
 			OnChangeSelectedNode();
 		}
 
@@ -123,8 +125,8 @@ namespace ScreenshotMaker.PrL
 
 		public void PrepareBeforeScreenshot()
 		{
+			// This two ways works too slowly:
 			//WindowState = FormWindowState.Minimized;
-
 			//Visible = false;
 
 			_normalOpacity = Opacity;
@@ -140,10 +142,10 @@ namespace ScreenshotMaker.PrL
 
 		private void treeViewTestExecution_BeforeSelect(object sender, TreeViewCancelEventArgs e)
 		{
-			var selectedPresenterItemTree = e.Node.Tag as Tree<IPresenterItem>;
+			var selectedPresenterItemTree = ;
 			if (selectedPresenterItemTree == null)
 				return;
-			var selectedPresenterItem = selectedPresenterItemTree.Value;
+			var selectedPresenterItem = (e.Node.Tag as Tree<IPresenterItem>)?.Value;
 			if (selectedPresenterItem == null)
 				return;
 			if (selectedPresenterItem.Selectable)
@@ -154,15 +156,15 @@ namespace ScreenshotMaker.PrL
 
 		private void OnChangeSelectedNode()
 		{
-			buttonTestExecutionSelectedItemPassed.Enabled = _selectedPresenterItem.ActionPassed != null;
-			buttonTestExecutionSelectedItemFailed.Enabled = _selectedPresenterItem.ActionFailed != null;
-			buttonTestExecutionSelectedItemSkip.Enabled = _selectedPresenterItem.ActionSkip != null;
-			buttonTestExecutionSelectedItemShow.Enabled = _selectedPresenterItem.ActionShow != null;
+			buttonTestExecutionSelectedItemPassed.Enabled = _selectedPresenterItem?.ActionPassed != null;
+			buttonTestExecutionSelectedItemFailed.Enabled = _selectedPresenterItem?.ActionFailed != null;
+			buttonTestExecutionSelectedItemSkip.Enabled = _selectedPresenterItem?.ActionSkip != null;
+			buttonTestExecutionSelectedItemShow.Enabled = _selectedPresenterItem?.ActionShow != null;
 
 			TreeNode selectedNode = treeViewTestExecution.SelectedNode;
-			labelTestExecutionSelectedItem.Text = selectedNode.Text;
-			labelTestExecutionSelectedItem.ForeColor = selectedNode.ForeColor;
-			textBoxTextExecutionSelectedItemParent.Text = selectedNode.Parent == null ? "" : selectedNode.Parent.Text;
+			labelTestExecutionSelectedItem.Text = selectedNode == null   ?   ""   :   selectedNode.Text;
+			labelTestExecutionSelectedItem.ForeColor = selectedNode == null   ?   ForeColor   :   selectedNode.ForeColor;
+			textBoxTextExecutionSelectedItemParent.Text = selectedNode?.Parent == null   ?   ""   :   selectedNode.Parent.Text;
 		}
 
 		private bool IsNodeSelectable(TreeNode node)
@@ -170,7 +172,7 @@ namespace ScreenshotMaker.PrL
 			var presenterItemTree = node.Tag as Tree<IPresenterItem>;
 			return presenterItemTree != null && presenterItemTree.Value != null && presenterItemTree.Value.Selectable;
 		}
-		
+
 		private void SelectNextSelectableTreeItem()
 		{
 			TreeNode node;
