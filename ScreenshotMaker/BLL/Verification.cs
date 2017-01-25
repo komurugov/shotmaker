@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ScreenshotMaker.BLL
 {
-	public class Verification : IGeneratePathAndFileNameForTestCaseItem
+	public class Verification : IGenerateFileInfoForTestCaseItem
 	{
 		public Verification(TestCase testCase)
 		{
@@ -13,11 +13,11 @@ namespace ScreenshotMaker.BLL
 		public int Number { get; set; }
 		public List<Data> Data { get; set; }
 		public List<Step> Steps { get; set; }
-		public IGeneratePathAndFileNameForTestCaseItem Parent { get; }
+		public IGenerateFileInfoForTestCaseItem Parent { get; }
 
-		public PathAndFileName GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem)
+		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem)
 		{
-			return Parent.GeneratePathAndFileNameForTestCaseItem(testCaseItem);
+			return Parent.GenerateFileInfoForTestCaseItem(testCaseItem);
 		}
 	}
 }

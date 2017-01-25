@@ -1,7 +1,7 @@
 ﻿namespace ScreenshotMaker.BLL
 {
-	public interface IGeneratePathAndFileNameForTestCaseItem
+	public interface IGenerateFileInfoForTestCaseItem
 	{
-		PathAndFileName GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem);
+		FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem);
 	}
 }

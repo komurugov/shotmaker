@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ScreenshotMaker.BLL
 {
-	public class PathAndFileName
+	public class FileInfoDto
 	{
-		public PathAndFileName(string path = "", string fileName = "")
+		public FileInfoDto(string path = "", string fileName = "")
 		{
 			Path = path;
 			FileName = fileName;

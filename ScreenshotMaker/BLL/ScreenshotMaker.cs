@@ -41,7 +41,7 @@ namespace ScreenshotMaker.BLL
 			return fileName;
 		}
 
-		public static void TakeAndSaveScreenshot(PathAndFileName pathAndFileName)
+		public static void TakeAndSaveScreenshot(FileInfoDto pathAndFileName)
 		{
 			string validPath = GetPathWithoutInvalidChars(pathAndFileName.Path);
 			Directory.CreateDirectory(validPath);

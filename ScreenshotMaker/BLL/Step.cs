@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace ScreenshotMaker.BLL
 {
-	public class Step : IGeneratePathAndFileNameForTestCaseItem
+	public class Step : IGenerateFileInfoForTestCaseItem
 	{
-		public Step(string text, int number, IGeneratePathAndFileNameForTestCaseItem parent)
+		public Step(string text, int number, IGenerateFileInfoForTestCaseItem parent)
 		{
 			Text = text;
 			Results = new List<StepResult>();
@@ -15,11 +15,11 @@ namespace ScreenshotMaker.BLL
 		public int Number { get; set; }
 		public string Text { get; set; }
 		public List<StepResult> Results { get; set; }
-		public IGeneratePathAndFileNameForTestCaseItem Parent { get; }
+		public IGenerateFileInfoForTestCaseItem Parent { get; }
 
-		public PathAndFileName GeneratePathAndFileNameForTestCaseItem(TestCaseItem testCaseItem)
+		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem)
 		{
-			return Parent.GeneratePathAndFileNameForTestCaseItem(testCaseItem);
+			return Parent.GenerateFileInfoForTestCaseItem(testCaseItem);
 		}
 	}
 }
