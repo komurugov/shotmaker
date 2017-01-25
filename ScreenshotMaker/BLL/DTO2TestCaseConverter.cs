@@ -51,11 +51,24 @@ namespace ScreenshotMaker.BLL
 
 		private static Verification GetVerification(rssChannelItemCustomfieldCustomfieldvaluesStep verificationItem, TestCase testCase)
 		{
+			if (verificationItem == null)
+				return null;
 			var verification = new Verification(testCase);
 			verification.Number = verificationItem.index;
-			verification.Data = GetData(verificationItem.data.Text, verification);
+			verification.Data = GetData(verificationItem.data, verification);
 			verification.Steps = GetSteps(verificationItem, verification);
 			return verification;
+		}
+
+		private static List<Data> GetData(rssChannelItemCustomfieldCustomfieldvaluesStepData data, Verification verification)
+		{
+			var result = new List<Data>();
+			if (data == null)
+				return result;
+			var lines = DivideHtmlIntoLines(data.Text);
+			foreach (var line in lines)
+				result.Add(new Data(line, verification));
+			return result;
 		}
 
 		private static void ExtractSteps(string inputString, ref List<Step> steps, Verification verification)
@@ -77,7 +90,7 @@ namespace ScreenshotMaker.BLL
 					if (number == stepNumber + 1)
 						stepNumber = number;
 					else
-						throw new InvalidDataException("Inconsequental number of Step");
+						throw new InvalidDataException(string.Format("Cant't extract Steps (inconsequental number of Step: {0} after {1})", number, stepNumber));
 				}
 				else
 					text = stepLine;
@@ -88,6 +101,8 @@ namespace ScreenshotMaker.BLL
 
 		private static void ExtractResultsAndAttachToSteps(string inputString, ref List<Step> steps)
 		{
+			if (steps == null)
+				return;
 			int stepNumber = 0;
 			foreach (string resultString in DivideHtmlIntoLines(inputString))
 			{
@@ -103,7 +118,7 @@ namespace ScreenshotMaker.BLL
 					if (stepNumber > 0 && stepNumber <= steps.Count)
 						steps[stepNumber - 1].Results.Add(new StepResult(textFromResultString, steps[stepNumber - 1]));
 					else
-						throw new InvalidDataException("Nonexisting number of Step");
+						throw new InvalidDataException(string.Format("Cant't attach Result to Step (nonexisting number of Step: {0})", stepNumber));
 				}
 			}
 		}
@@ -130,6 +145,12 @@ namespace ScreenshotMaker.BLL
 
 		private static bool TryExtractStepNumberAndText(string inputString, out int stepNumber, out string remainingText)
 		{
+			if (inputString == null)
+			{
+				stepNumber = 0;
+				remainingText = "";
+				return false;
+			}
 			inputString = inputString.TrimStart();
 			const string stepPrefix = "Step";
 			if (inputString.IndexOf(stepPrefix) == 0)
@@ -137,10 +158,12 @@ namespace ScreenshotMaker.BLL
 
 			if (!TryExtractNumberAndText(inputString.TrimStart(), out stepNumber, out remainingText))
 				return false;
-
-			remainingText = remainingText.TrimStart();
-			if (remainingText != "" && ".-:".Contains(remainingText[0]))
-				remainingText = remainingText.Remove(0, 1).TrimStart();
+			if (remainingText != null)
+			{
+				remainingText = remainingText.TrimStart();
+				if (remainingText != "" && ".-:".Contains(remainingText[0]))
+					remainingText = remainingText.Remove(0, 1).TrimStart();
+			}
 			return true;
 		}
 
@@ -158,17 +181,6 @@ namespace ScreenshotMaker.BLL
 
 			remainingText = inputString.Substring(firstNonDigitCharNumber);
 			return true;
-		}
-
-		private static List<Data> GetData(string data, Verification verification)
-		{
-			var result = new List<Data>();
-			if (data == null)
-				return result;
-			var lines = DivideHtmlIntoLines(data);
-			foreach (var line in lines)
-				result.Add(new Data(line, verification));
-			return result;
 		}
 
 		private static string GetIdAndTitle(rss dto)
@@ -193,6 +205,8 @@ namespace ScreenshotMaker.BLL
 
 		private static List<string> DivideHtmlIntoLines(string inputString)
 		{
+			if (inputString == null)
+				return new List<string>();
 			return new List<string>(
 				inputString
 				.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries)

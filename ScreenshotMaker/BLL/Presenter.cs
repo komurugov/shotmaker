@@ -35,7 +35,7 @@ namespace ScreenshotMaker.BLL
 			}
 			catch (Exception exception)
 			{
-				View.ShowMessage("Can't open file: " + exception.Message);
+				View.ShowMessage(string.Format("Can't load TestCase: {0}", exception.Message));
 				return;
 			}
 

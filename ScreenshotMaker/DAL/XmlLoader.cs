@@ -14,15 +14,15 @@ namespace ScreenshotMaker.DAL
 				throw new FileNotFoundException(string.Format("Can't find file {0}", filePath));
 			
 			var serializer = new XmlSerializer(typeof(rss));
-			XmlReader xmlReader = XmlReader.Create(filePath);
 			rss result;
 			try
 			{
+				XmlReader xmlReader = XmlReader.Create(filePath);
 				result = serializer.Deserialize(xmlReader) as rss;
 			}
-			catch
+			catch (Exception exception)
 			{
-				throw new InvalidDataException(string.Format("Can't parse file {0}", filePath));
+				throw new InvalidDataException(string.Format("Can't parse file {0}: {1}", filePath, exception.Message));
 			}
 			return result;
 		}
