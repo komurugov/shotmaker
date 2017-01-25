@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,28 @@ namespace ScreenshotMaker.BLL
 			return bitmap;
 		}
 
-		public static void TakeAndSaveScreenshot(string path)
+		private static string GetPathWithoutInvalidChars(string path)
 		{
-			TakeScreenshot().Save(path + ".png", ImageFormat.Png);
+			var invalidChars = Path.GetInvalidPathChars();
+			foreach (char ch in invalidChars)
+				path = path.Replace(ch.ToString(), "");
+			return path;
+		}
+
+		private static string GetFileNameWithoutInvalidChars(string fileName)
+		{
+			var invalidChars = Path.GetInvalidFileNameChars();
+			foreach (char ch in invalidChars)
+				fileName = fileName.Replace(ch.ToString(), "");
+			return fileName;
+		}
+
+		public static void TakeAndSaveScreenshot(FileInfoDto pathAndFileName)
+		{
+			string validPath = GetPathWithoutInvalidChars(pathAndFileName.Path);
+			Directory.CreateDirectory(validPath);
+			string validFileName = GetFileNameWithoutInvalidChars(pathAndFileName.FileName);
+			TakeScreenshot().Save(Path.Combine(validPath, validFileName + ".png"), ImageFormat.Png);
 		}
 	}
 }

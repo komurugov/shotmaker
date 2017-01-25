@@ -6,9 +6,10 @@ namespace ScreenshotMaker.BLL
 	{
 		private readonly string _fileName = null;
 
-		public TestCaseItem(string text)
+		public TestCaseItem(string text, IGenerateFileInfoForTestCaseItem parent)
 		{
 			Text = text;
+			Parent = parent;
 		}
 
 		public Status Status { get; set; }
@@ -16,9 +17,13 @@ namespace ScreenshotMaker.BLL
 
 		public string Text { get; set; }
 
-		public bool MakeScreenshot(Result result)
+		public IGenerateFileInfoForTestCaseItem Parent { get; }
+
+		public virtual bool MakeScreenshot(Result result, string rootFolder)
 		{
-			ScreenshotMaker.TakeAndSaveScreenshot("image");
+			var pathAndFileName = Parent.GenerateFileInfoForTestCaseItem(this);
+			pathAndFileName.Path = rootFolder + @"\" + pathAndFileName.Path;
+			ScreenshotMaker.TakeAndSaveScreenshot(pathAndFileName);
 
 			Status = Status.Done;
 			Result = result;
