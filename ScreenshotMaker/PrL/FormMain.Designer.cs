@@ -243,7 +243,6 @@
 			this.MinimumSize = new System.Drawing.Size(356, 468);
 			this.Name = "FormMain";
 			this.Text = "QA Screenshot Maker";
-			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

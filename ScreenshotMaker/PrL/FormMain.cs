@@ -81,7 +81,9 @@ namespace ScreenshotMaker.PrL
 				return;
 			node.Text = presenterItem.Text;
 			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
-			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done   ?   Color.Black   :   Color.FromArgb(192, 0, 0) /*dark red*/;
+			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done
+				? Color.Black
+				: Color.DarkRed;//FromArgb(192, 0, 0) /*dark red*/;
 		}
 
 		public void RefreshData()
@@ -142,9 +144,6 @@ namespace ScreenshotMaker.PrL
 
 		private void treeViewTestExecution_BeforeSelect(object sender, TreeViewCancelEventArgs e)
 		{
-			var selectedPresenterItemTree = ;
-			if (selectedPresenterItemTree == null)
-				return;
 			var selectedPresenterItem = (e.Node.Tag as Tree<IPresenterItem>)?.Value;
 			if (selectedPresenterItem == null)
 				return;
@@ -162,22 +161,31 @@ namespace ScreenshotMaker.PrL
 			buttonTestExecutionSelectedItemShow.Enabled = _selectedPresenterItem?.ActionShow != null;
 
 			TreeNode selectedNode = treeViewTestExecution.SelectedNode;
-			labelTestExecutionSelectedItem.Text = selectedNode == null   ?   ""   :   selectedNode.Text;
-			labelTestExecutionSelectedItem.ForeColor = selectedNode == null   ?   ForeColor   :   selectedNode.ForeColor;
-			textBoxTextExecutionSelectedItemParent.Text = selectedNode?.Parent == null   ?   ""   :   selectedNode.Parent.Text;
+			labelTestExecutionSelectedItem.Text = selectedNode == null
+				? ""
+				: selectedNode.Text;
+			labelTestExecutionSelectedItem.ForeColor = selectedNode == null
+				? ForeColor
+				: selectedNode.ForeColor;
+			textBoxTextExecutionSelectedItemParent.Text = selectedNode?.Parent == null
+				? ""
+				: selectedNode.Parent.Text;
 		}
 
 		private bool IsNodeSelectable(TreeNode node)
 		{
-			var presenterItemTree = node.Tag as Tree<IPresenterItem>;
-			return presenterItemTree != null && presenterItemTree.Value != null && presenterItemTree.Value.Selectable;
+			var presenterItemTree = node?.Tag as Tree<IPresenterItem>;
+			return presenterItemTree?.Value != null && presenterItemTree.Value.Selectable;
 		}
 
 		private void SelectNextSelectableTreeItem()
 		{
-			TreeNode node;
+			TreeNode node = null;
 			if (treeViewTestExecution.SelectedNode == null)
-				node = treeViewTestExecution.Nodes[0];
+			{
+				if (treeViewTestExecution.Nodes.Count > 0)
+					node = treeViewTestExecution.Nodes[0];
+			}
 			else
 				node = treeViewTestExecution.SelectedNode.NextVisibleNode;
 			while (node != null)
@@ -193,7 +201,7 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionPassed != null)
+			if (_selectedPresenterItem?.ActionPassed != null)
 			{
 				_selectedPresenterItem.ActionPassed();
 				SelectNextSelectableTreeItem();
@@ -202,7 +210,7 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionFailed != null)
+			if (_selectedPresenterItem?.ActionFailed != null)
 			{
 				_selectedPresenterItem.ActionFailed();
 				SelectNextSelectableTreeItem();
@@ -211,7 +219,7 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemSkip_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionSkip != null)
+			if (_selectedPresenterItem?.ActionSkip != null)
 			{
 				_selectedPresenterItem.ActionSkip();
 				SelectNextSelectableTreeItem();
@@ -220,18 +228,13 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemShow_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem != null && _selectedPresenterItem.ActionShow != null)
+			if (_selectedPresenterItem?.ActionShow != null)
 				_selectedPresenterItem.ActionShow();
 		}
 
 		private void treeViewTestExecution_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			OnChangeSelectedNode();
-		}
-
-		private void FormMain_Load(object sender, EventArgs e)
-		{
-
 		}
 	}
 }
