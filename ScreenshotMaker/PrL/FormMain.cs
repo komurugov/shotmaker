@@ -140,25 +140,33 @@ namespace ScreenshotMaker.PrL
 			Opacity = _normalOpacity;
 		}
 
-		private IPresenterItem _selectedPresenterItem;
+		private IPresenterItem GetSelectedPresenterItem()
+		{
+			return GetPresenterItem(treeViewTestExecution.SelectedNode);
+		}
+
+		private IPresenterItem GetPresenterItem(TreeNode selectedNode)
+		{
+			var presenterItem = (selectedNode?.Tag as Tree<IPresenterItem>)?.Value;
+			if (presenterItem != null && presenterItem.Selectable)
+				return presenterItem;
+			return null;
+		}
 
 		private void treeViewTestExecution_BeforeSelect(object sender, TreeViewCancelEventArgs e)
 		{
-			var selectedPresenterItem = (e.Node.Tag as Tree<IPresenterItem>)?.Value;
+			var selectedPresenterItem = GetPresenterItem(e.Node);
 			if (selectedPresenterItem == null)
-				return;
-			if (selectedPresenterItem.Selectable)
-				_selectedPresenterItem = selectedPresenterItem;
-			else
 				e.Cancel = true;
 		}
 
 		private void OnChangeSelectedNode()
 		{
-			buttonTestExecutionSelectedItemPassed.Enabled = _selectedPresenterItem?.ActionPassed != null;
-			buttonTestExecutionSelectedItemFailed.Enabled = _selectedPresenterItem?.ActionFailed != null;
-			buttonTestExecutionSelectedItemSkip.Enabled = _selectedPresenterItem?.ActionSkip != null;
-			buttonTestExecutionSelectedItemShow.Enabled = _selectedPresenterItem?.ActionShow != null;
+			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
+			buttonTestExecutionSelectedItemPassed.Enabled = selectedPresenterItem?.ActionPassed != null;
+			buttonTestExecutionSelectedItemFailed.Enabled = selectedPresenterItem?.ActionFailed != null;
+			buttonTestExecutionSelectedItemSkip.Enabled = selectedPresenterItem?.ActionSkip != null;
+			buttonTestExecutionSelectedItemShow.Enabled = selectedPresenterItem?.ActionShow != null;
 
 			TreeNode selectedNode = treeViewTestExecution.SelectedNode;
 			labelTestExecutionSelectedItem.Text = selectedNode == null
@@ -201,35 +209,39 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem?.ActionPassed != null)
+			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
+			if (selectedPresenterItem?.ActionPassed != null)
 			{
-				_selectedPresenterItem.ActionPassed();
+				selectedPresenterItem.ActionPassed();
 				SelectNextSelectableTreeItem();
 			}
 		}
 
 		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem?.ActionFailed != null)
+			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
+			if (selectedPresenterItem?.ActionFailed != null)
 			{
-				_selectedPresenterItem.ActionFailed();
+				selectedPresenterItem.ActionFailed();
 				SelectNextSelectableTreeItem();
 			}
 		}
 
 		private void buttonTestExecutionSelectedItemSkip_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem?.ActionSkip != null)
+			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
+			if (selectedPresenterItem?.ActionSkip != null)
 			{
-				_selectedPresenterItem.ActionSkip();
+				selectedPresenterItem.ActionSkip();
 				SelectNextSelectableTreeItem();
 			}
 		}
 
 		private void buttonTestExecutionSelectedItemShow_Click(object sender, EventArgs e)
 		{
-			if (_selectedPresenterItem?.ActionShow != null)
-				_selectedPresenterItem.ActionShow();
+			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
+			if (selectedPresenterItem?.ActionShow != null)
+				selectedPresenterItem.ActionShow();
 		}
 
 		private void treeViewTestExecution_AfterSelect(object sender, TreeViewEventArgs e)
