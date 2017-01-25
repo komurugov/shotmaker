@@ -83,7 +83,7 @@ namespace ScreenshotMaker.PrL
 			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
 			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done
 				? Color.Black
-				: Color.DarkRed;//FromArgb(192, 0, 0) /*dark red*/;
+				: Color.IndianRed; // dark red color from sketch was FromArgb(192, 0, 0)
 		}
 
 		public void RefreshData()
