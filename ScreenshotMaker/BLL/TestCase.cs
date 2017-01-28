@@ -16,8 +16,17 @@ namespace ScreenshotMaker.BLL
 		{
 		}
 
+		private void ThrowExceptionIfPathPartIsEmpty(string pathPart, string pathPartName)
+		{
+			if (pathPart == null || pathPart == "")
+				throw new InvalidOperationException("Can't generate a path with an empty name of the " + pathPartName);
+		}
+
 		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem, string rootFolder)
 		{
+			ThrowExceptionIfPathPartIsEmpty(rootFolder, "root folder");
+			ThrowExceptionIfPathPartIsEmpty(ExecutionIdAndTitle, "Test Execution Id and Title");
+			ThrowExceptionIfPathPartIsEmpty(IdAndTitle, "Test Case Id and Title");
 			FileInfoDto partOfPathAndFileName = GenerateFileInfo(testCaseItem);
 			return new FileInfoDto(Path.Combine(rootFolder, ExecutionIdAndTitle, IdAndTitle, partOfPathAndFileName.Path), 
 				partOfPathAndFileName.FileName);
