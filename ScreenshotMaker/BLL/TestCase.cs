@@ -86,10 +86,24 @@ namespace ScreenshotMaker.BLL
 			var result = new FileInfoDto();
 			result.Path = string.Format(@"Verification-{0}\",
 				verificationNum.ToString("D2"));
-			result.FileName = string.Format("Step {0}-{1}{2}",
+			string postfix;
+			switch (stepResult.Result)
+			{
+				case Result.Failed:
+					postfix = "Failed";
+					break;
+				case Result.Passed:
+					postfix = "Passed";
+					break;
+				default:
+					postfix = "";
+					break;
+			}
+			result.FileName = string.Format("Step {0}-{1}{2}{3}",
 				stepNum,
 				step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
-				stepResult.Text);
+				stepResult.Text,
+				postfix == "" ? "" : "-" + postfix);
 			return result;
 		}
 	}

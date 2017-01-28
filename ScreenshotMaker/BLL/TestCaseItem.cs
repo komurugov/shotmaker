@@ -21,11 +21,10 @@ namespace ScreenshotMaker.BLL
 
 		public virtual bool MakeScreenshot(Result result, string rootFolder)
 		{
+			Result = result;
 			var pathAndFileName = Parent.GenerateFileInfoForTestCaseItem(this, rootFolder);
 			ScreenshotMaker.TakeAndSaveScreenshot(pathAndFileName);
-
 			Status = Status.Done;
-			Result = result;
 			return true;
 		}
 
