@@ -28,6 +28,19 @@ namespace ScreenshotMaker.BLL
 			return bitmap;
 		}
 
+		public static void AddExtensionAndSave(this Bitmap bitmap, string fileName, ImageFormat format)
+		{
+			string fullFileName = fileName + "." + format.ToString().ToLower();
+			try
+			{
+				bitmap.Save(fullFileName, format);
+			}
+			catch (Exception exception)
+			{
+				throw new InvalidOperationException(string.Format("Can't save the image by the path '{0}': {1}", fullFileName, exception.Message));
+			}
+		}
+
 		public static void TakeAndSaveScreenshot(FileInfoDto pathAndFileName)
 		{
 			try
@@ -39,15 +52,8 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException(string.Format("Can't create path '{0}': {1}", pathAndFileName.Path, exception.Message));
 			}
 			Bitmap bitmap = TakeScreenshot();
-			string fullFileName = Path.Combine(pathAndFileName.Path, pathAndFileName.FileName + ".png");
-			try
-			{
-				bitmap.Save(fullFileName, ImageFormat.Png);
-			}
-			catch (Exception exception)
-			{
-				throw new InvalidOperationException(string.Format("Can't save the image by the path '{0}': {1}", fullFileName, exception.Message));
-			}
+			string fullFileNameWithoutExtension = Path.Combine(pathAndFileName.Path, pathAndFileName.FileName);
+			bitmap.AddExtensionAndSave(fullFileNameWithoutExtension, ImageFormat.Png);
 		}
 	}
 }
