@@ -21,8 +21,7 @@ namespace ScreenshotMaker.BLL
 
 		public virtual bool MakeScreenshot(Result result, string rootFolder)
 		{
-			var pathAndFileName = Parent.GenerateFileInfoForTestCaseItem(this);
-			pathAndFileName.Path = rootFolder + @"\" + pathAndFileName.Path;
+			var pathAndFileName = Parent.GenerateFileInfoForTestCaseItem(this, rootFolder);
 			ScreenshotMaker.TakeAndSaveScreenshot(pathAndFileName);
 
 			Status = Status.Done;

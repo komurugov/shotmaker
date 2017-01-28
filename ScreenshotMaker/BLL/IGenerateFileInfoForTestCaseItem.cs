@@ -2,6 +2,6 @@
 {
 	public interface IGenerateFileInfoForTestCaseItem
 	{
-		FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem);
+		FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem, string rootFolder);
 	}
 }

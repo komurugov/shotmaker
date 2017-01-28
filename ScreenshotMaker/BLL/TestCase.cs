@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ScreenshotMaker.BLL
 {
@@ -15,11 +16,11 @@ namespace ScreenshotMaker.BLL
 		{
 		}
 
-		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem)
+		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem, string rootFolder)
 		{
-			string pathRoot = string.Format(@"{0}\{1}\", ExecutionIdAndTitle, IdAndTitle);
 			FileInfoDto partOfPathAndFileName = GenerateFileInfo(testCaseItem);
-			return new FileInfoDto(pathRoot + partOfPathAndFileName.Path, partOfPathAndFileName.FileName);
+			return new FileInfoDto(Path.Combine(rootFolder, ExecutionIdAndTitle, IdAndTitle, partOfPathAndFileName.Path), 
+				partOfPathAndFileName.FileName);
 		}
 
 		private FileInfoDto GenerateFileInfo(TestCaseItem item)
