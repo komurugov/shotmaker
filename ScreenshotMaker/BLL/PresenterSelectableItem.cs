@@ -80,36 +80,62 @@ namespace ScreenshotMaker.BLL
 			}
 		}
 
-		private void MakeScreenshot(Result result)
+		private bool MakeScreenshot(Result result)
 		{
+			string exceptionMessage = "";
 			_view.PrepareBeforeScreenshot();
-			_modelItem.MakeScreenshot(result, _view.GetOuputFolderPath());
+			try
+			{
+				_modelItem.MakeScreenshot(result, _view.GetOuputFolderPath());
+			}
+			catch (Exception exception)
+			{
+				exceptionMessage = "Can't make and save screenshot: " + exception.Message;
+			}
 			_view.RestoreAfterScreenshot();
 			_view.RefreshData();
+			if (exceptionMessage != "")
+			{
+				_view.ShowMessage(exceptionMessage);
+				return false;
+			}
+			return true;
 		}
 
-		public Action ActionPassed
+		public Func<bool> ActionPassed
 		{
 			get { return () =>  MakeScreenshot(BLL.Result.Passed); }
 		}
 
-		public Action ActionFailed
+		public Func<bool> ActionFailed
 		{
 			get { return () => MakeScreenshot(BLL.Result.Failed); }
 		}
 
-		public Action ActionSkip
+		private bool Skip()
 		{
-			get { return () => { _modelItem.Skip(); _view.RefreshData(); }; }
+			try
+			{
+				_modelItem.Skip();
+				_view.RefreshData();
+				return true;
+			}
+			catch (Exception exception)
+			{
+				_view.ShowMessage("Can't skip screenshot: " + exception.Message);
+				return false;
+			}
 		}
 
-		public Action ActionShow
+		public Func<bool> ActionSkip
+		{
+			get { return () => Skip(); }
+		}
+
+		public Func<bool> ActionShow
 		{
 			get
 			{
-				//return _modelItem.HasScreenshot() 
-				//	? (() =>  _modelItem.Show()) 
-				//	: null;
 				if (_modelItem.HasScreenshot())
 					return () => _modelItem.Show();
 				else

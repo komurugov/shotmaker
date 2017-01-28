@@ -211,30 +211,24 @@ namespace ScreenshotMaker.PrL
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionPassed != null)
-			{
-				selectedPresenterItem.ActionPassed();
-				SelectNextSelectableTreeItem();
-			}
+				if (selectedPresenterItem.ActionPassed())
+					SelectNextSelectableTreeItem();
 		}
 
 		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionFailed != null)
-			{
-				selectedPresenterItem.ActionFailed();
-				SelectNextSelectableTreeItem();
-			}
+				if (selectedPresenterItem.ActionFailed())
+					SelectNextSelectableTreeItem();
 		}
 
 		private void buttonTestExecutionSelectedItemSkip_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionSkip != null)
-			{
-				selectedPresenterItem.ActionSkip();
-				SelectNextSelectableTreeItem();
-			}
+				if (selectedPresenterItem.ActionSkip())
+					SelectNextSelectableTreeItem();
 		}
 
 		private void buttonTestExecutionSelectedItemShow_Click(object sender, EventArgs e)

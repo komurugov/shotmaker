@@ -26,22 +26,22 @@ namespace ScreenshotMaker.BLL
 
 		public string Text { get; set; }
 
-		public Action ActionPassed
+		public Func<bool> ActionPassed
 		{
 			get { return null; }
 		}
 
-		public Action ActionFailed
+		public Func<bool> ActionFailed
 		{
 			get { return null; }
 		}
 
-		public Action ActionSkip
+		public Func<bool> ActionSkip
 		{
 			get { return null; }
 		}
 
-		public Action ActionShow
+		public Func<bool> ActionShow
 		{
 			get { return null; }
 		}
