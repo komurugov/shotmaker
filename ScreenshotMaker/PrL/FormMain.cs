@@ -79,11 +79,33 @@ namespace ScreenshotMaker.PrL
 			IPresenterItem presenterItem = (node?.Tag as Tree<IPresenterItem>)?.Value;
 			if (presenterItem == null)
 				return;
-			node.Text = presenterItem.Text;
+			string prefix = "";
+			Color color = Color.Black;
+			if (presenterItem.Selectable)
+				switch (presenterItem.Status)
+				{
+					case PresenterItemStatus.None:
+						color = Color.IndianRed;    // dark red color from sketch was FromArgb(192, 0, 0)
+						break;
+					case PresenterItemStatus.Skipped:
+						color = Color.IndianRed;
+						prefix = "SKIPPED: ";
+						break;
+					case PresenterItemStatus.Done:
+						switch (presenterItem.Result)
+						{
+							case PresenterItemResult.Failed:
+								prefix = "FAILED: ";
+								break;
+							case PresenterItemResult.Passed:
+								prefix = "PASSED: ";
+								break;
+						}
+						break;
+				}
+			node.Text = prefix + presenterItem.Text;
 			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
-			node.ForeColor = !presenterItem.Selectable || presenterItem.Status == PresenterItemStatus.Done
-				? Color.Black
-				: Color.IndianRed; // dark red color from sketch was FromArgb(192, 0, 0)
+			node.ForeColor = color; 
 		}
 
 		public void RefreshData()

@@ -17,25 +17,7 @@ namespace ScreenshotMaker.BLL
 		{
 			get
 			{
-				string prefix = "";
-				switch (_modelItem.Status)
-				{
-					case BLL.Status.Done:
-						switch (_modelItem.Result)
-						{
-							case BLL.Result.Failed:
-								prefix = "FAILED: ";
-								break;
-							case BLL.Result.Passed:
-								prefix = "PASSED: ";
-								break;
-						}
-						break;
-					case BLL.Status.Skipped:
-						prefix = "SKIPPED: ";
-						break;
-				}
-				return prefix + _modelItem.Text;
+				return _modelItem.Text;
 			}
 		}
 
