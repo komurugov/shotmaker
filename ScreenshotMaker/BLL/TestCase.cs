@@ -28,8 +28,11 @@ namespace ScreenshotMaker.BLL
 			ThrowExceptionIfPathPartIsEmpty(ExecutionIdAndTitle, "Test Execution Id and Title");
 			ThrowExceptionIfPathPartIsEmpty(IdAndTitle, "Test Case Id and Title");
 			FileInfoDto partOfPathAndFileName = GenerateFileInfo(testCaseItem);
-			return new FileInfoDto(Path.Combine(rootFolder, ExecutionIdAndTitle, IdAndTitle, partOfPathAndFileName.Path), 
-				partOfPathAndFileName.FileName);
+			return new FileInfoDto(Path.Combine(PathCleaner.GetPathWithoutInvalidChars(rootFolder),
+				PathCleaner.GetPathWithoutInvalidChars(ExecutionIdAndTitle),
+				PathCleaner.GetPathWithoutInvalidChars(IdAndTitle),
+				PathCleaner.GetPathWithoutInvalidChars(partOfPathAndFileName.Path)), 
+				PathCleaner.GetFileNameWithoutInvalidChars(partOfPathAndFileName.FileName));
 		}
 
 		private FileInfoDto GenerateFileInfo(TestCaseItem item)

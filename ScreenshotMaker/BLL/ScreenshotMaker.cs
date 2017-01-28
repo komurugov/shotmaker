@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ScreenshotMaker.BLL
@@ -32,36 +28,18 @@ namespace ScreenshotMaker.BLL
 			return bitmap;
 		}
 
-		private static string GetPathWithoutInvalidChars(string path)
-		{
-			var invalidChars = Path.GetInvalidPathChars();
-			foreach (char ch in invalidChars)
-				path = path.Replace(ch.ToString(), "");
-			return path;
-		}
-
-		private static string GetFileNameWithoutInvalidChars(string fileName)
-		{
-			var invalidChars = Path.GetInvalidFileNameChars();
-			foreach (char ch in invalidChars)
-				fileName = fileName.Replace(ch.ToString(), "");
-			return fileName;
-		}
-
 		public static void TakeAndSaveScreenshot(FileInfoDto pathAndFileName)
 		{
-			string validPath = GetPathWithoutInvalidChars(pathAndFileName.Path);
 			try
 			{
-				Directory.CreateDirectory(validPath);
+				Directory.CreateDirectory(pathAndFileName.Path);
 			}
 			catch (Exception exception)
 			{
-				throw new InvalidOperationException(string.Format("Can't create path '{0}': {1}", validPath, exception.Message));
+				throw new InvalidOperationException(string.Format("Can't create path '{0}': {1}", pathAndFileName.Path, exception.Message));
 			}
-			string validFileName = GetFileNameWithoutInvalidChars(pathAndFileName.FileName);
 			Bitmap bitmap = TakeScreenshot();
-			string fullFileName = Path.Combine(validPath, validFileName + ".png");
+			string fullFileName = Path.Combine(pathAndFileName.Path, pathAndFileName.FileName + ".png");
 			try
 			{
 				bitmap.Save(fullFileName, ImageFormat.Png);
