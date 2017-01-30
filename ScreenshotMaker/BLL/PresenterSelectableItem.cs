@@ -64,7 +64,6 @@ namespace ScreenshotMaker.BLL
 
 		private bool MakeScreenshot(Result result)
 		{
-			string exceptionMessage = "";
 			_view.PrepareBeforeScreenshot();
 			try
 			{
@@ -72,15 +71,14 @@ namespace ScreenshotMaker.BLL
 			}
 			catch (Exception exception)
 			{
-				exceptionMessage = "Can't make and save screenshot: " + exception.Message;
-			}
-			_view.RestoreAfterScreenshot();
-			_view.RefreshData();
-			if (exceptionMessage != "")
-			{
-				_view.ShowMessage(exceptionMessage);
+				_view.ShowMessage("Can't make and save screenshot: " + exception.Message);
 				return false;
 			}
+			finally
+			{
+				_view.RestoreAfterScreenshot();
+			}
+			_view.RefreshData();
 			return true;
 		}
 
