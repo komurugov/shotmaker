@@ -41,6 +41,21 @@ namespace ScreenshotMaker.BLL
 			}
 		}
 
+		public static void AddExtensionAndSave(this Bitmap bitmap, string path, string name, ImageFormat format)
+		{
+			name += "." + format.ToString().ToLower();
+			try
+			{
+				
+				bitmap.Save(name, format);
+				Delimon.Win32.IO.File.Move(Environment.CurrentDirectory + @"\" + name, path + name);
+			}
+			catch (Exception exception)
+			{
+				throw new InvalidOperationException(string.Format("Can't save the image by the path '{0}': {1}", path + name, exception.Message));
+			}
+		}
+
 		public static void TakeAndSaveScreenshot(FileInfoDto pathAndFileName)
 		{
 			try
@@ -53,7 +68,7 @@ namespace ScreenshotMaker.BLL
 			}
 			Bitmap bitmap = TakeScreenshot();
 			string fullFileNameWithoutExtension = Path.Combine(pathAndFileName.Path, pathAndFileName.FileName);
-			bitmap.AddExtensionAndSave(fullFileNameWithoutExtension, ImageFormat.Png);
+			bitmap.AddExtensionAndSave(pathAndFileName.Path, pathAndFileName.FileName, ImageFormat.Png);
 		}
 	}
 }
