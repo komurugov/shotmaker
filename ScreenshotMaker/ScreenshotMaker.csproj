@@ -56,32 +56,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BLL\Data.cs" />
+    <Compile Include="BLL\Model\Data.cs" />
+    <Compile Include="BLL\Model\Dto2TestCaseConverter.cs" />
     <Compile Include="BLL\Win32Interop\Directory.cs" />
-    <Compile Include="BLL\Dto2TestCaseConverter.cs" />
     <Compile Include="BLL\Win32Interop\File.cs" />
-    <Compile Include="BLL\IGenerateFileInfoForTestCaseItem.cs" />
-    <Compile Include="BLL\IPresenterItem.cs" />
-    <Compile Include="BLL\ITestCaseItem.cs" />
+    <Compile Include="BLL\Model\IGenerateFileInfoForTestCaseItem.cs" />
+    <Compile Include="BLL\Presenter\IPresenterItem.cs" />
+    <Compile Include="BLL\Model\ITestCaseItem.cs" />
     <Compile Include="BLL\Win32Interop\Path.cs" />
-    <Compile Include="BLL\FileInfoDto.cs" />
+    <Compile Include="BLL\Model\FileInfoDto.cs" />
     <Compile Include="BLL\PathCleaner.cs" />
-    <Compile Include="BLL\ScreenshotMaker.cs" />
-    <Compile Include="BLL\TestCaseFromXmlLoader.cs" />
+    <Compile Include="BLL\Model\ScreenshotMaker.cs" />
+    <Compile Include="BLL\Model\TestCaseFromXmlLoader.cs" />
     <Compile Include="BLL\Logger.cs" />
-    <Compile Include="BLL\Presenter.cs" />
-    <Compile Include="BLL\PresenterItemResult.cs" />
-    <Compile Include="BLL\PresenterItemStatus.cs" />
-    <Compile Include="BLL\PresenterSelectableItem.cs" />
-    <Compile Include="BLL\PresenterSimpleItem.cs" />
-    <Compile Include="BLL\Result.cs" />
-    <Compile Include="BLL\TestCaseItem.cs" />
-    <Compile Include="BLL\Setup.cs" />
-    <Compile Include="BLL\Status.cs" />
-    <Compile Include="BLL\Step.cs" />
-    <Compile Include="BLL\StepResult.cs" />
-    <Compile Include="BLL\Tree.cs" />
-    <Compile Include="BLL\Verification.cs" />
+    <Compile Include="BLL\Presenter\Presenter.cs" />
+    <Compile Include="BLL\Presenter\PresenterItemResult.cs" />
+    <Compile Include="BLL\Presenter\PresenterItemStatus.cs" />
+    <Compile Include="BLL\Presenter\PresenterSelectableItem.cs" />
+    <Compile Include="BLL\Presenter\PresenterSimpleItem.cs" />
+    <Compile Include="BLL\Model\Result.cs" />
+    <Compile Include="BLL\Model\TestCaseItem.cs" />
+    <Compile Include="BLL\Model\Setup.cs" />
+    <Compile Include="BLL\Model\Status.cs" />
+    <Compile Include="BLL\Model\Step.cs" />
+    <Compile Include="BLL\Model\StepResult.cs" />
+    <Compile Include="BLL\Presenter\Tree.cs" />
+    <Compile Include="BLL\Model\Verification.cs" />
     <Compile Include="BLL\Win32Interop\Win32Interop.cs" />
     <Compile Include="DAL\XmlLoader.cs" />
     <Compile Include="PrL\FormMain.cs">
@@ -90,12 +90,12 @@
     <Compile Include="PrL\FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="BLL\IPresenter.cs" />
+    <Compile Include="BLL\Presenter\IPresenter.cs" />
     <Compile Include="PrL\IView.cs" />
     <Compile Include="PrL\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAL\Xml2TestCaseDTO.cs" />
-    <Compile Include="BLL\TestCase.cs" />
+    <Compile Include="BLL\Model\TestCase.cs" />
     <EmbeddedResource Include="PrL\FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
