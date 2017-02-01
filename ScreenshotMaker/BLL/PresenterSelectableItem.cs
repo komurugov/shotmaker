@@ -63,10 +63,10 @@ namespace ScreenshotMaker.BLL
 		}
 
 		private bool MakeScreenshot(Result result)
-		{
-			_view.PrepareBeforeScreenshot();
+		{			
 			try
 			{
+				_view.PrepareBeforeScreenshot();
 				_modelItem.MakeScreenshot(result, _view.GetOuputFolderPath());
 			}
 			catch (Exception exception)
