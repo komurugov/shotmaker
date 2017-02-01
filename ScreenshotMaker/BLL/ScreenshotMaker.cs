@@ -28,31 +28,27 @@ namespace ScreenshotMaker.BLL
 			return bitmap;
 		}
 
-		public static void AddExtensionAndSave(this Bitmap bitmap, string fileName, ImageFormat format)
+		public static void AddExtensionAndSave(this Bitmap bitmap, FileInfoDto fileInfo, ImageFormat format)
 		{
-			string fullFileName = fileName + "." + format.ToString().ToLower();
+			string fileName = fileInfo.FileName + "." + format.ToString().ToLower();
+			string destination = Path.Combine(fileInfo.Path, fileName);
 			try
 			{
-				bitmap.Save(fullFileName, format);
+				bitmap.Save(fileName, format);
 			}
 			catch (Exception exception)
 			{
-				throw new InvalidOperationException(string.Format("Can't save the image by the path '{0}': {1}", fullFileName, exception.Message));
+				throw new InvalidOperationException(string.Format("Can't save the temporary file in {0}: {1}", Environment.CurrentDirectory, exception.Message));
 			}
-		}
-
-		public static void AddExtensionAndSave(this Bitmap bitmap, string path, string name, ImageFormat format)
-		{
-			name += "." + format.ToString().ToLower();
 			try
-			{
-				
-				bitmap.Save(name, format);
-				Delimon.Win32.IO.File.Move(Environment.CurrentDirectory + @"\" + name, path + name);
+			{ 
+				Agilent.System.IO.File.Move(
+					Path.Combine(Environment.CurrentDirectory, fileName),
+					destination);
 			}
 			catch (Exception exception)
 			{
-				throw new InvalidOperationException(string.Format("Can't save the image by the path '{0}': {1}", path + name, exception.Message));
+				throw new InvalidOperationException(string.Format("Can't copy the temporary file to {0}: {1}", destination, exception.Message));
 			}
 		}
 
@@ -67,8 +63,7 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException(string.Format("Can't create path '{0}': {1}", pathAndFileName.Path, exception.Message));
 			}
 			Bitmap bitmap = TakeScreenshot();
-			string fullFileNameWithoutExtension = Path.Combine(pathAndFileName.Path, pathAndFileName.FileName);
-			bitmap.AddExtensionAndSave(pathAndFileName.Path, pathAndFileName.FileName, ImageFormat.Png);
+			bitmap.AddExtensionAndSave(pathAndFileName, ImageFormat.Png);
 		}
 	}
 }
