@@ -57,11 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\Data.cs" />
+    <Compile Include="BLL\Directory.cs" />
     <Compile Include="BLL\Dto2TestCaseConverter.cs" />
     <Compile Include="BLL\File.cs" />
     <Compile Include="BLL\IGenerateFileInfoForTestCaseItem.cs" />
     <Compile Include="BLL\IPresenterItem.cs" />
     <Compile Include="BLL\ITestCaseItem.cs" />
+    <Compile Include="BLL\Path.cs" />
     <Compile Include="BLL\PathAndFileName.cs" />
     <Compile Include="BLL\PathCleaner.cs" />
     <Compile Include="BLL\ScreenshotMaker.cs" />

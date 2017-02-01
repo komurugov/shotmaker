@@ -32,6 +32,7 @@ namespace ScreenshotMaker.BLL
 		{
 			string fileName = fileInfo.FileName + "." + format.ToString().ToLower();
 			string destination = Path.Combine(fileInfo.Path, fileName);
+
 			try
 			{
 				bitmap.Save(fileName, format);
@@ -56,7 +57,7 @@ namespace ScreenshotMaker.BLL
 		{
 			try
 			{
-				Directory.CreateDirectory(pathAndFileName.Path);
+				Agilent.System.IO.Directory.CreateDirectory(pathAndFileName.Path);
 			}
 			catch (Exception exception)
 			{
