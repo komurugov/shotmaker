@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace Agilent.System.IO
+namespace ScreenshotMaker.BLL.Win32Interop
 {
 	public static class Directory
 	{

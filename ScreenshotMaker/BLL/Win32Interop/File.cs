@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Agilent.System.IO
+namespace ScreenshotMaker.BLL.Win32Interop
 {
 	public static class File
 	{

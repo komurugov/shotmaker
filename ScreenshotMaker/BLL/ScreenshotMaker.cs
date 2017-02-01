@@ -43,7 +43,7 @@ namespace ScreenshotMaker.BLL
 			}
 			try
 			{ 
-				Agilent.System.IO.File.Move(
+				Win32Interop.File.Move(
 					Path.Combine(Environment.CurrentDirectory, fileName),
 					destination);
 			}
@@ -57,7 +57,7 @@ namespace ScreenshotMaker.BLL
 		{
 			try
 			{
-				Agilent.System.IO.Directory.CreateDirectory(pathAndFileName.Path);
+				Win32Interop.Directory.CreateDirectory(pathAndFileName.Path);
 			}
 			catch (Exception exception)
 			{

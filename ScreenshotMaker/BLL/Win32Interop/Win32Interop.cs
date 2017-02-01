@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Agilent.System.IO
+namespace ScreenshotMaker.BLL.Win32Interop
 {
 	public class Win32Interop
 	{
