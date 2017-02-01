@@ -13,7 +13,7 @@ namespace Agilent.System.IO
 			if (!Win32Interop.MoveFileEx(
 				Path.GetLongWin32(source),
 				Path.GetLongWin32(destination),
-				Win32Interop.MoveFileFlags.MOVEFILE_COPY_ALLOWED | Win32Interop.MoveFileFlags.MOVEFILE_REPLACE_EXISTING))
+				Win32Interop.MoveFileFlags.MOVEFILE_REPLACE_EXISTING))  // with Win32Interop.MoveFileFlags.MOVEFILE_COPY_ALLOWED not overwrites existing file
 				throw new InvalidOperationException(string.Format("Can't move {0} to {1}", source, destination));
 		}
 	}
