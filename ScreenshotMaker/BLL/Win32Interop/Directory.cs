@@ -14,7 +14,7 @@ namespace ScreenshotMaker.BLL.Win32Interop
 			int currentFolderLastCharNum = 2;
 			while (currentFolderLastCharNum + 1 < path.Length)
 			{
-				currentFolderLastCharNum = path.IndexOf('\\', currentFolderLastCharNum + 1);
+				currentFolderLastCharNum = path.IndexOf(System.IO.Path.DirectorySeparatorChar, currentFolderLastCharNum + 1);
 				if (currentFolderLastCharNum == -1)
 					break;
 				string currentFolder = path.Substring(0, currentFolderLastCharNum);

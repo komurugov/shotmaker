@@ -34,6 +34,9 @@ namespace ScreenshotMaker.BLL
 				PathCleaner.GetPathWithoutInvalidChars(IdAndTitle),
 				PathCleaner.GetPathWithoutInvalidChars(partOfPathAndFileName.Path));
 			string fileName = PathCleaner.GetFileNameWithoutInvalidChars(partOfPathAndFileName.FileName);
+			int maxFileNameLength = 100;
+			if (fileName.Length > maxFileNameLength)
+				fileName = fileName.Substring(0, maxFileNameLength);
 			return new FileInfoDto(path, fileName);
 		}
 
