@@ -11,19 +11,40 @@ namespace ScreenshotMaker.BLL
 		public ScreenshotFileInfoDto(string path = "", string fileName = "")
 		{
 			Path = path;
-			FileName = fileName;
-			_possiblyFileNames = new List<string>();
+			_possiblyFileNames = new List<string> { fileName };
+			_actualFileNameIndex = 0;
 		}
-		public string Path { get; set; }
-		public string FileName { get; set; }
 		private List<string> _possiblyFileNames;
-		public List<string> GetPossiblyFileNames()
+		private int _actualFileNameIndex = 0;
+		public string Path { get; set; }
+		public string FileName
 		{
-			return _possiblyFileNames.Concat(new List<string> { FileName }).ToList();
+			get
+			{
+				return _actualFileNameIndex < _possiblyFileNames.Count ? _possiblyFileNames[_actualFileNameIndex] : "";
+			}
+			set
+			{
+				_actualFileNameIndex = _possiblyFileNames.IndexOf(value);
+				if (_actualFileNameIndex < 0)
+				{
+					_possiblyFileNames.Add(value);
+					_actualFileNameIndex = _possiblyFileNames.Count - 1;
+				}
+			}
 		}
-		public void AddPossiblyFileName(string fileName)
+		public IReadOnlyCollection<string> GetPossiblyFileNames()
 		{
-			_possiblyFileNames.Add(fileName);
+			return _possiblyFileNames.AsReadOnly();
+		}
+		public void TransformFileNames(Func<string, string> transformation)
+		{
+			_possiblyFileNames = _possiblyFileNames.Select(transformation).ToList();
+		}
+		public void AddPossiblyFileName(string possiblyFileName)
+		{
+			if (!_possiblyFileNames.Contains(possiblyFileName))
+				_possiblyFileNames.Add(possiblyFileName);
 		}
 	}
 }

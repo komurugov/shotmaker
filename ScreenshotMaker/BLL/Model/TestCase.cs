@@ -27,18 +27,26 @@ namespace ScreenshotMaker.BLL
 			ThrowExceptionIfPathPartIsEmpty(itemInfoDto.RootFolder, "root folder");
 			ThrowExceptionIfPathPartIsEmpty(ExecutionIdAndTitle, "Test Execution Id and Title");
 			ThrowExceptionIfPathPartIsEmpty(IdAndTitle, "Test Case Id and Title");
-			ScreenshotFileInfoDto partOfPathAndFileName = GenerateFileInfo(itemInfoDto.Item);
-			string path = Path.Combine(
+			ScreenshotFileInfoDto screenshotFileInfoDto = GenerateFileInfo(itemInfoDto.Item);
+			screenshotFileInfoDto.Path = Path.Combine(
 				PathCleaner.GetPathWithoutInvalidChars(itemInfoDto.RootFolder),
 				PathCleaner.GetPathWithoutInvalidChars(ExecutionIdAndTitle),
 				PathCleaner.GetPathWithoutInvalidChars(IdAndTitle),
-				PathCleaner.GetPathWithoutInvalidChars(partOfPathAndFileName.Path));
-			string fileName = PathCleaner.GetFileNameWithoutInvalidChars(partOfPathAndFileName.FileName);
-			int maxFileNameLength = 100;
-			if (fileName.Length > maxFileNameLength)
-				fileName = fileName.Substring(0, maxFileNameLength);
-			fileName += "." + itemInfoDto.ImageFormat.ToString().ToLower();
-			return new ScreenshotFileInfoDto(path, fileName);
+				PathCleaner.GetPathWithoutInvalidChars(screenshotFileInfoDto.Path));
+
+			screenshotFileInfoDto.TransformFileNames(
+				s =>
+				{
+					string result = PathCleaner.GetFileNameWithoutInvalidChars(s);
+					int maxFileNameLength = 100;
+					if (result.Length > maxFileNameLength)
+						result = result.Substring(0, maxFileNameLength);
+					result += "." + itemInfoDto.ImageFormat.ToString().ToLower();
+					return result;
+				}
+				);
+
+			return screenshotFileInfoDto;
 		}
 
 		private ScreenshotFileInfoDto GenerateFileInfo(TestCaseItem item)
@@ -61,10 +69,10 @@ namespace ScreenshotMaker.BLL
 			int dataNum = verification.Data.IndexOf(data);
 			if (dataNum < 0)
 				throw new InvalidOperationException();
-			var result = new ScreenshotFileInfoDto();
-			result.Path = string.Format(@"Verification-{0}\", verificationNum.ToString("D2"));
-			result.FileName = string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text);
-			return result;
+			var dto = new ScreenshotFileInfoDto();
+			dto.Path = string.Format(@"Verification-{0}\", verificationNum.ToString("D2"));
+			dto.FileName = string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text);
+			return dto;
 		}
 
 		private ScreenshotFileInfoDto GenerateFileInfo(Setup setup)
@@ -72,10 +80,10 @@ namespace ScreenshotMaker.BLL
 			int setupNum = Setups.IndexOf(setup);
 			if (setupNum < 0)
 				throw new InvalidOperationException();
-			var result = new ScreenshotFileInfoDto();
-			result.Path = @"Setup\";
-			result.FileName = string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text);
-			return result;
+			var dto = new ScreenshotFileInfoDto();
+			dto.Path = @"Setup\";
+			dto.FileName = string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text);
+			return dto;
 		}
 
 		private ScreenshotFileInfoDto GenerateFileInfo(StepResult stepResult)
@@ -89,28 +97,38 @@ namespace ScreenshotMaker.BLL
 			int stepNum = step.Number;
 			Verification verification = step.Parent as Verification;
 			int verificationNum = verification.Number;
-			var result = new ScreenshotFileInfoDto();
-			result.Path = string.Format(@"Verification-{0}\",
+			var dto = new ScreenshotFileInfoDto();
+			dto.Path = string.Format(@"Verification-{0}\",
 				verificationNum.ToString("D2"));
-			string postfix;
-			switch (stepResult.Result)
+
+			foreach (Result possiblyResult in Enum.GetValues(typeof(Result)))
 			{
-				case Result.Failed:
-					postfix = "Failed";
-					break;
-				case Result.Passed:
-					postfix = "Passed";
-					break;
-				default:
-					postfix = "";
-					break;
+				string postfix;
+				switch (possiblyResult)
+				{
+					case Result.Failed:
+						postfix = "Failed";
+						break;
+					case Result.Passed:
+						postfix = "Passed";
+						break;
+					default:
+						postfix = "";
+						break;
+				}
+				string possiblyFileName = string.Format(
+					"Step {0}-{1}{2}{3}",
+					stepNum,
+					step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
+					stepResult.Text,
+					postfix == "" ? "" : "-" + postfix);
+				if (possiblyResult == stepResult.Result)
+					dto.FileName = possiblyFileName;
+				else
+					dto.AddPossiblyFileName(possiblyFileName);
 			}
-			result.FileName = string.Format("Step {0}-{1}{2}{3}",
-				stepNum,
-				step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
-				stepResult.Text,
-				postfix == "" ? "" : "-" + postfix);
-			return result;
+
+			return dto;
 		}
 	}
 }
