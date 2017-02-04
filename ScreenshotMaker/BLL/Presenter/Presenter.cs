@@ -19,12 +19,10 @@ namespace ScreenshotMaker.BLL
 
 		public void ChangeTestExecution()
 		{
-			throw new NotImplementedException();
 		}
 
 		public void ChangeOutputFolder()
 		{
-			throw new NotImplementedException();
 		}
 
 		public void OpenFile()

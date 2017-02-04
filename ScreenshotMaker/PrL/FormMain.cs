@@ -18,7 +18,23 @@ namespace ScreenshotMaker.PrL
 
 			_presenter = presenter;
 
-			treeViewTestExecution.ExpandAll();
+			SetControlsPropertiesForEditing();
+		}
+
+		private void SetControlsPropertiesForEditing()
+		{
+			panelWork.Enabled = false;
+			buttonEdit.Enabled = false;
+			panelEdit.Enabled = true;
+			buttonApply.Enabled = true;
+		}
+
+		private void SetControlsPropertiesForWorking()
+		{
+			panelEdit.Enabled = false;
+			buttonApply.Enabled = false;
+			panelWork.Enabled = true;
+			buttonEdit.Enabled = true;
 		}
 
 		public string GetTestExecutionName()
@@ -133,10 +149,7 @@ namespace ScreenshotMaker.PrL
 		private void buttonChooseTestCase_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
-			{
 				SetInputFileName(openFileDialog.FileName);
-				_presenter.OpenFile();
-			}
 		}
 
 		private void buttonChooseOutputFolder_Click(object sender, EventArgs e)
@@ -263,6 +276,17 @@ namespace ScreenshotMaker.PrL
 		private void treeViewTestExecution_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			OnChangeSelectedNode();
+		}
+
+		private void buttonApply_Click(object sender, EventArgs e)
+		{
+			_presenter.OpenFile();
+			SetControlsPropertiesForWorking();
+		}
+
+		private void buttonEdit_Click(object sender, EventArgs e)
+		{
+			SetControlsPropertiesForEditing();
 		}
 	}
 }
