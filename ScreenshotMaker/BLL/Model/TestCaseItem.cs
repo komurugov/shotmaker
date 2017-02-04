@@ -20,22 +20,26 @@ namespace ScreenshotMaker.BLL
 
 		public IGenerateFileInfoForTestCaseItem Parent { get; }
 
-		public virtual bool MakeScreenshot(Result result, string rootFolder)
+		private FileInfoDto GetFileInfoDtoAndDeleteExistingFiles(string rootFolder)
+		{
+			ScreenshotFileInfoDto screenshotFileInfoDto = Parent.GenerateFileInfoForTestCaseItem(
+				new TestCaseItemInfoDto { Item = this, RootFolder = rootFolder, ImageFormat = ScreenshotMaker.ImageFormat });
+			foreach (string possiblyFileName in screenshotFileInfoDto.GetPossiblyFileNames())
+				ScreenshotMaker.RemoveScreenshot(new FileInfoDto(screenshotFileInfoDto.Path, possiblyFileName));
+			return new FileInfoDto(screenshotFileInfoDto.Path, screenshotFileInfoDto.FileName);
+		}
+
+		public bool MakeScreenshot(Result result, string rootFolder)
 		{
 			Result = result;
-			var screenshotFileInfoDto = Parent.GenerateFileInfoForTestCaseItem(
-				new TestCaseItemInfoDto { Item = this, RootFolder = rootFolder, ImageFormat = ScreenshotMaker.ImageFormat});
-			ScreenshotMaker.TakeAndSaveScreenshot(new FileInfoDto(screenshotFileInfoDto.Path, screenshotFileInfoDto.FileName));
+			ScreenshotMaker.TakeAndSaveScreenshot(GetFileInfoDtoAndDeleteExistingFiles(rootFolder));
 			Status = Status.Done;
 			return true;
 		}
 
 		public bool Skip(string rootFolder)
 		{
-			ScreenshotFileInfoDto screenshotFileInfoDto = Parent.GenerateFileInfoForTestCaseItem(
-				new TestCaseItemInfoDto { Item = this, RootFolder = rootFolder, ImageFormat = ScreenshotMaker.ImageFormat });
-			foreach (string possiblyFileName in screenshotFileInfoDto.GetPossiblyFileNames())
-				ScreenshotMaker.RemoveScreenshot(new FileInfoDto(screenshotFileInfoDto.Path, possiblyFileName));
+			GetFileInfoDtoAndDeleteExistingFiles(rootFolder);
 			Status = Status.Skipped;
 			Result = Result.Unknown;
 			return true;
