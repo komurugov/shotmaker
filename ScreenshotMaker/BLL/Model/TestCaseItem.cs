@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace ScreenshotMaker.BLL
 {
@@ -22,14 +23,19 @@ namespace ScreenshotMaker.BLL
 		public virtual bool MakeScreenshot(Result result, string rootFolder)
 		{
 			Result = result;
-			var pathAndFileName = Parent.GenerateFileInfoForTestCaseItem(this, rootFolder);
-			ScreenshotMaker.TakeAndSaveScreenshot(pathAndFileName);
+			var screenshotFileInfoDto = Parent.GenerateFileInfoForTestCaseItem(
+				new TestCaseItemInfoDto { Item = this, RootFolder = rootFolder, ImageFormat = ScreenshotMaker.ImageFormat});
+			ScreenshotMaker.TakeAndSaveScreenshot(new FileInfoDto(screenshotFileInfoDto.Path, screenshotFileInfoDto.FileName));
 			Status = Status.Done;
 			return true;
 		}
 
-		public bool Skip()
+		public bool Skip(string rootFolder)
 		{
+			ScreenshotFileInfoDto screenshotFileInfoDto = Parent.GenerateFileInfoForTestCaseItem(
+				new TestCaseItemInfoDto { Item = this, RootFolder = rootFolder, ImageFormat = ScreenshotMaker.ImageFormat });
+			foreach (string possiblyFileName in screenshotFileInfoDto.GetPossiblyFileNames())
+				ScreenshotMaker.RemoveScreenshot(new FileInfoDto(screenshotFileInfoDto.Path, possiblyFileName));
 			Status = Status.Skipped;
 			Result = Result.Unknown;
 			return true;

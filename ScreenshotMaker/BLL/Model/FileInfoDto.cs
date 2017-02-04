@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScreenshotMaker.BLL
 {
-	public class FileInfoDto
+	class FileInfoDto
 	{
 		public FileInfoDto(string path = "", string fileName = "")
 		{

@@ -22,14 +22,14 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException("Can't generate a path with an empty name of the " + pathPartName);
 		}
 
-		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem, string rootFolder)
+		public ScreenshotFileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItemInfoDto itemInfoDto)
 		{
-			ThrowExceptionIfPathPartIsEmpty(rootFolder, "root folder");
+			ThrowExceptionIfPathPartIsEmpty(itemInfoDto.RootFolder, "root folder");
 			ThrowExceptionIfPathPartIsEmpty(ExecutionIdAndTitle, "Test Execution Id and Title");
 			ThrowExceptionIfPathPartIsEmpty(IdAndTitle, "Test Case Id and Title");
-			FileInfoDto partOfPathAndFileName = GenerateFileInfo(testCaseItem);
+			ScreenshotFileInfoDto partOfPathAndFileName = GenerateFileInfo(itemInfoDto.Item);
 			string path = Path.Combine(
-				PathCleaner.GetPathWithoutInvalidChars(rootFolder),
+				PathCleaner.GetPathWithoutInvalidChars(itemInfoDto.RootFolder),
 				PathCleaner.GetPathWithoutInvalidChars(ExecutionIdAndTitle),
 				PathCleaner.GetPathWithoutInvalidChars(IdAndTitle),
 				PathCleaner.GetPathWithoutInvalidChars(partOfPathAndFileName.Path));
@@ -37,10 +37,11 @@ namespace ScreenshotMaker.BLL
 			int maxFileNameLength = 100;
 			if (fileName.Length > maxFileNameLength)
 				fileName = fileName.Substring(0, maxFileNameLength);
-			return new FileInfoDto(path, fileName);
+			fileName += "." + itemInfoDto.ImageFormat.ToString().ToLower();
+			return new ScreenshotFileInfoDto(path, fileName);
 		}
 
-		private FileInfoDto GenerateFileInfo(TestCaseItem item)
+		private ScreenshotFileInfoDto GenerateFileInfo(TestCaseItem item)
 		{
 			if (item is Setup)
 				return GenerateFileInfo(item as Setup);
@@ -51,7 +52,7 @@ namespace ScreenshotMaker.BLL
 			throw new InvalidOperationException();
 		}
 
-		private FileInfoDto GenerateFileInfo(Data data)
+		private ScreenshotFileInfoDto GenerateFileInfo(Data data)
 		{
 			Verification verification = data.Parent as Verification;
 			if (verification == null)
@@ -60,24 +61,24 @@ namespace ScreenshotMaker.BLL
 			int dataNum = verification.Data.IndexOf(data);
 			if (dataNum < 0)
 				throw new InvalidOperationException();
-			var result = new FileInfoDto();
+			var result = new ScreenshotFileInfoDto();
 			result.Path = string.Format(@"Verification-{0}\", verificationNum.ToString("D2"));
 			result.FileName = string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text);
 			return result;
 		}
 
-		private FileInfoDto GenerateFileInfo(Setup setup)
+		private ScreenshotFileInfoDto GenerateFileInfo(Setup setup)
 		{
 			int setupNum = Setups.IndexOf(setup);
 			if (setupNum < 0)
 				throw new InvalidOperationException();
-			var result = new FileInfoDto();
+			var result = new ScreenshotFileInfoDto();
 			result.Path = @"Setup\";
 			result.FileName = string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text);
 			return result;
 		}
 
-		private FileInfoDto GenerateFileInfo(StepResult stepResult)
+		private ScreenshotFileInfoDto GenerateFileInfo(StepResult stepResult)
 		{
 			Step step = stepResult.Parent as Step;
 			if (step == null)
@@ -88,7 +89,7 @@ namespace ScreenshotMaker.BLL
 			int stepNum = step.Number;
 			Verification verification = step.Parent as Verification;
 			int verificationNum = verification.Number;
-			var result = new FileInfoDto();
+			var result = new ScreenshotFileInfoDto();
 			result.Path = string.Format(@"Verification-{0}\",
 				verificationNum.ToString("D2"));
 			string postfix;

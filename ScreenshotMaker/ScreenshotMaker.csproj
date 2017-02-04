@@ -58,13 +58,15 @@
   <ItemGroup>
     <Compile Include="BLL\Model\Data.cs" />
     <Compile Include="BLL\Model\Dto2TestCaseConverter.cs" />
+    <Compile Include="BLL\Model\FileInfoDto.cs" />
+    <Compile Include="BLL\Model\TestCaseItemInfoDto.cs" />
     <Compile Include="BLL\Win32Interop\Directory.cs" />
     <Compile Include="BLL\Win32Interop\File.cs" />
     <Compile Include="BLL\Model\IGenerateFileInfoForTestCaseItem.cs" />
     <Compile Include="BLL\Presenter\IPresenterItem.cs" />
     <Compile Include="BLL\Model\ITestCaseItem.cs" />
     <Compile Include="BLL\Win32Interop\Path.cs" />
-    <Compile Include="BLL\Model\FileInfoDto.cs" />
+    <Compile Include="BLL\Model\ScreenshotFileInfoDto.cs" />
     <Compile Include="BLL\PathCleaner.cs" />
     <Compile Include="BLL\Model\ScreenshotMaker.cs" />
     <Compile Include="BLL\Model\TestCaseFromXmlLoader.cs" />

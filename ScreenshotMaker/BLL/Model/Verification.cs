@@ -15,9 +15,9 @@ namespace ScreenshotMaker.BLL
 		public List<Step> Steps { get; set; }
 		public IGenerateFileInfoForTestCaseItem Parent { get; }
 
-		public FileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItem testCaseItem, string rootFolder)
+		public ScreenshotFileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItemInfoDto itemDto)
 		{
-			return Parent.GenerateFileInfoForTestCaseItem(testCaseItem, rootFolder);
+			return Parent.GenerateFileInfoForTestCaseItem(itemDto);
 		}
 	}
 }

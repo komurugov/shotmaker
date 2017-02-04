@@ -8,6 +8,8 @@ namespace ScreenshotMaker.BLL
 {
 	static class ScreenshotMaker
 	{
+		public static readonly ImageFormat ImageFormat = ImageFormat.Png;
+
 		private static Bitmap TakeScreenshot()
 		{
 			var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb);
@@ -28,14 +30,12 @@ namespace ScreenshotMaker.BLL
 			return bitmap;
 		}
 
-		public static void AddExtensionAndSave(this Bitmap bitmap, FileInfoDto fileInfo, ImageFormat format)
+		public static void Save(this Bitmap bitmap, FileInfoDto fileInfo)
 		{
-			string fileName = fileInfo.FileName + "." + format.ToString().ToLower();
-			string destination = Path.Combine(fileInfo.Path, fileName);
-
+			string destination = Path.Combine(fileInfo.Path, fileInfo.FileName);
 			try
 			{
-				bitmap.Save(fileName, format);
+				bitmap.Save(fileInfo.FileName, ImageFormat);
 			}
 			catch (Exception exception)
 			{
@@ -44,12 +44,25 @@ namespace ScreenshotMaker.BLL
 			try
 			{ 
 				Win32Interop.File.Move(
-					Path.Combine(Environment.CurrentDirectory, fileName),
+					Path.Combine(Environment.CurrentDirectory, fileInfo.FileName),
 					destination);
 			}
 			catch (Exception exception)
 			{
 				throw new InvalidOperationException(string.Format("Can't copy the temporary file to {0}: {1}", destination, exception.Message));
+			}
+		}
+
+		internal static void RemoveScreenshot(FileInfoDto fileInfoDto)
+		{
+			string fullFileName = Path.Combine(fileInfoDto.Path, fileInfoDto.FileName);
+			try
+			{
+				Win32Interop.File.Remove(fullFileName);
+			}
+			catch (Exception exception)
+			{
+				throw new InvalidOperationException(string.Format("Can't remove the file {0}: {1}", fullFileName, exception.Message));
 			}
 		}
 
@@ -64,7 +77,7 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException(string.Format("Can't create path '{0}': {1}", pathAndFileName.Path, exception.Message));
 			}
 			Bitmap bitmap = TakeScreenshot();
-			bitmap.AddExtensionAndSave(pathAndFileName, ImageFormat.Png);
+			bitmap.Save(pathAndFileName);
 		}
 	}
 }

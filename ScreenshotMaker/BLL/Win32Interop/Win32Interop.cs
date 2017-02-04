@@ -19,12 +19,20 @@ namespace ScreenshotMaker.BLL.Win32Interop
 			MOVEFILE_CREATE_HARDLINK = 16u,
 			MOVEFILE_FAIL_IF_NOT_TRACKABLE = 32u
 		}
+
 		public enum ErrorCodes : int
 		{
-			ERROR_ALREADY_EXISTS	= 183
+			ERROR_FILE_NOT_FOUND = 2,
+			ERROR_ALREADY_EXISTS = 183
 		}
+
 		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern bool MoveFileEx(string lpExistingFileName, string lpNewFileName, MoveFileFlags dwFlags);
+
+		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool DeleteFile([MarshalAs(UnmanagedType.LPTStr)] string lpFileName);
+
 		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
 		public static extern bool CreateDirectory(string lpPathName, IntPtr lpSecurityAttributes);
 	}

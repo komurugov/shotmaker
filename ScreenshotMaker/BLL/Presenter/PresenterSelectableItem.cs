@@ -96,7 +96,7 @@ namespace ScreenshotMaker.BLL
 		{
 			try
 			{
-				_modelItem.Skip();
+				_modelItem.Skip(_view.GetOuputFolderPath());
 				_view.RefreshData();
 				return true;
 			}
