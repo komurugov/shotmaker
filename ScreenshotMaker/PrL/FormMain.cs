@@ -288,5 +288,15 @@ namespace ScreenshotMaker.PrL
 		{
 			SetControlsPropertiesForEditing();
 		}
+
+		private void textBoxTestCase_TextChanged(object sender, EventArgs e)
+		{
+			SetInputFileName((sender as TextBox).Text);
+		}
+
+		private void textBoxOutputFolder_TextChanged(object sender, EventArgs e)
+		{
+			SetOutputFolderPath((sender as TextBox).Text);
+		}
 	}
 }

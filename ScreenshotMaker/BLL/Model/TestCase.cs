@@ -82,9 +82,9 @@ namespace ScreenshotMaker.BLL
 			int dataNum = verification.Data.IndexOf(data);
 			if (dataNum < 0)
 				throw new InvalidOperationException();
-			var dto = new ScreenshotFileInfoDto();
-			dto.Path = string.Format(@"Verification-{0}\", verificationNum.ToString("D2"));
-			dto.FileName = string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text);
+			var dto = new ScreenshotFileInfoDto(
+				string.Format(@"Verification-{0}\", verificationNum.ToString("D2")),
+				string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text));
 			return dto;
 		}
 
@@ -93,9 +93,9 @@ namespace ScreenshotMaker.BLL
 			int setupNum = Setups.IndexOf(setup);
 			if (setupNum < 0)
 				throw new InvalidOperationException();
-			var dto = new ScreenshotFileInfoDto();
-			dto.Path = @"Setup\";
-			dto.FileName = string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text);
+			var dto = new ScreenshotFileInfoDto(
+				@"Setup\",
+				string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text));
 			return dto;
 		}
 
@@ -110,9 +110,9 @@ namespace ScreenshotMaker.BLL
 			int stepNum = step.Number;
 			Verification verification = step.Parent as Verification;
 			int verificationNum = verification.Number;
-			var dto = new ScreenshotFileInfoDto();
-			dto.Path = string.Format(@"Verification-{0}\",
-				verificationNum.ToString("D2"));
+			var dto = new ScreenshotFileInfoDto(
+				string.Format(@"Verification-{0}\", verificationNum.ToString("D2")),
+				null);
 
 			foreach (Result possiblyResult in Enum.GetValues(typeof(Result)))
 			{

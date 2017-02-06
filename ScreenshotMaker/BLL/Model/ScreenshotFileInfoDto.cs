@@ -8,7 +8,7 @@ namespace ScreenshotMaker.BLL
 {
 	public class ScreenshotFileInfoDto
 	{
-		public ScreenshotFileInfoDto(string path = "", string fileName = "")
+		public ScreenshotFileInfoDto(string path, string fileName)
 		{
 			Path = path;
 			_possiblyFileNames = new List<string> { fileName };

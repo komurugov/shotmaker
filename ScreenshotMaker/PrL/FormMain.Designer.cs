@@ -58,7 +58,7 @@
 			// buttonChooseOutputFolder
 			// 
 			this.buttonChooseOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonChooseOutputFolder.Location = new System.Drawing.Point(540, 60);
+			this.buttonChooseOutputFolder.Location = new System.Drawing.Point(540, 62);
 			this.buttonChooseOutputFolder.Name = "buttonChooseOutputFolder";
 			this.buttonChooseOutputFolder.Size = new System.Drawing.Size(87, 23);
 			this.buttonChooseOutputFolder.TabIndex = 35;
@@ -72,9 +72,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxOutputFolder.Location = new System.Drawing.Point(96, 64);
 			this.textBoxOutputFolder.Name = "textBoxOutputFolder";
-			this.textBoxOutputFolder.ReadOnly = true;
 			this.textBoxOutputFolder.Size = new System.Drawing.Size(438, 20);
 			this.textBoxOutputFolder.TabIndex = 34;
+			this.textBoxOutputFolder.TextChanged += new System.EventHandler(this.textBoxOutputFolder_TextChanged);
 			// 
 			// buttonChooseTestCase
 			// 
@@ -93,9 +93,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxTestCase.Location = new System.Drawing.Point(96, 38);
 			this.textBoxTestCase.Name = "textBoxTestCase";
-			this.textBoxTestCase.ReadOnly = true;
 			this.textBoxTestCase.Size = new System.Drawing.Size(438, 20);
 			this.textBoxTestCase.TabIndex = 32;
+			this.textBoxTestCase.TextChanged += new System.EventHandler(this.textBoxTestCase_TextChanged);
 			// 
 			// textBoxTextExecutionSelectedItemParent
 			// 
