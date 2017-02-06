@@ -23,6 +23,7 @@ namespace ScreenshotMaker.BLL.Win32Interop
 		public enum ErrorCodes : int
 		{
 			ERROR_FILE_NOT_FOUND = 2,
+			ERROR_PATH_NOT_FOUND = 3,
 			ERROR_ALREADY_EXISTS = 183
 		}
 

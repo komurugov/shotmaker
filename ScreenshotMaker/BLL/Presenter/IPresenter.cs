@@ -8,7 +8,5 @@ namespace ScreenshotMaker.BLL
 
 		Tree<IPresenterItem> Items { get; }
 		bool OpenFile();
-		void ChangeTestExecution();
-		void ChangeOutputFolder();
 	}
 }

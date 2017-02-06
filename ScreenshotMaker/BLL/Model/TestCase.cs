@@ -9,6 +9,11 @@ namespace ScreenshotMaker.BLL
 		public string ExecutionIdAndTitle { get; set; }
 		public string IdAndTitle { get; set; }
 
+		public bool TargetFolderExists(string rootFolder)
+		{
+			return ScreenshotMaker.FolderExists(GetTargetFolderPath(rootFolder));
+		}
+
 		public List<Setup> Setups { get; set; }
 		public List<Verification> Verifications { get; set; }
 
@@ -22,16 +27,24 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException("Can't generate a path with an empty name of the " + pathPartName);
 		}
 
-		public ScreenshotFileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItemInfoDto itemInfoDto)
+		private string GetTargetFolderPath(string rootFolder)
 		{
-			ThrowExceptionIfPathPartIsEmpty(itemInfoDto.RootFolder, "root folder");
+			ThrowExceptionIfPathPartIsEmpty(rootFolder, "root folder");
 			ThrowExceptionIfPathPartIsEmpty(ExecutionIdAndTitle, "Test Execution Id and Title");
 			ThrowExceptionIfPathPartIsEmpty(IdAndTitle, "Test Case Id and Title");
+			string result = Path.Combine(
+				PathCleaner.GetPathWithoutInvalidChars(rootFolder),
+				PathCleaner.GetPathWithoutInvalidChars(ExecutionIdAndTitle),
+				PathCleaner.GetPathWithoutInvalidChars(IdAndTitle));
+			return result;
+		}
+
+		public ScreenshotFileInfoDto GenerateFileInfoForTestCaseItem(TestCaseItemInfoDto itemInfoDto)
+		{
+			string targetFolder = GetTargetFolderPath(itemInfoDto.RootFolder);
 			ScreenshotFileInfoDto screenshotFileInfoDto = GenerateFileInfo(itemInfoDto.Item);
 			screenshotFileInfoDto.Path = Path.Combine(
-				PathCleaner.GetPathWithoutInvalidChars(itemInfoDto.RootFolder),
-				PathCleaner.GetPathWithoutInvalidChars(ExecutionIdAndTitle),
-				PathCleaner.GetPathWithoutInvalidChars(IdAndTitle),
+				targetFolder,
 				PathCleaner.GetPathWithoutInvalidChars(screenshotFileInfoDto.Path));
 
 			screenshotFileInfoDto.TransformFileNames(

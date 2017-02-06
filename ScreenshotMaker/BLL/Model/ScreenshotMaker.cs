@@ -79,5 +79,10 @@ namespace ScreenshotMaker.BLL
 			Bitmap bitmap = TakeScreenshot();
 			bitmap.Save(pathAndFileName);
 		}
+
+		public static bool FolderExists(string path)
+		{
+			return Directory.Exists(path);
+		}
 	}
 }

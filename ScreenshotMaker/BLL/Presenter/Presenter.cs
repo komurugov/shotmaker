@@ -17,35 +17,49 @@ namespace ScreenshotMaker.BLL
 
 		private TestCase _testCase;
 
-		public void ChangeTestExecution()
-		{
-		}
-
-		public void ChangeOutputFolder()
-		{
-		}
-
 		public bool OpenFile()
 		{
+			TestCase testCase;
 			try
 			{
-				_testCase = TestCaseFromXmlLoader.Load(View.GetInputFileName());
+				testCase = TestCaseFromXmlLoader.Load(View.GetInputFileName());
 			}
 			catch (Exception exception)
 			{
-				View.ShowMessage(string.Format("Can't load TestCase: {0}", exception.Message));
+				ShowMessage(string.Format("Can't load TestCase: {0}", exception.Message));
 				return false;
 			}
 
-			_testCase.ExecutionIdAndTitle = View.GetTestExecutionName();
+			testCase.ExecutionIdAndTitle = View.GetTestExecutionName();
 
+			try
+			{
+				if (testCase.TargetFolderExists(GetOutputFolder()))
+					ShowMessage("Targer folder exists already and may contain old screenshots!");
+			}
+			catch (Exception exception)
+			{
+				ShowMessage(string.Format("Can't check target folder: {0}", exception.Message));
+				return false;
+			}
+
+			_testCase = testCase;
 			Items.Clear();
 			Items.Value = new PresenterSimpleItem("Execution: " + _testCase.ExecutionIdAndTitle);
-			Items.Add(TreeFromCase(_testCase));
-
+			Items.Add(TreeFromCase(testCase));
 			View.RefreshTreeStructure();
 			View.RefreshData();
 			return true;
+		}
+
+		private string GetOutputFolder()
+		{
+			return View.GetOuputFolderPath();
+		}
+
+		private void ShowMessage(string message)
+		{
+			View.ShowMessage(message);
 		}
 
 		private Tree<IPresenterItem> TreeFromCase(TestCase testCase)

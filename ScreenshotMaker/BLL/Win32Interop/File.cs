@@ -23,7 +23,8 @@ namespace ScreenshotMaker.BLL.Win32Interop
 			if (!Win32Interop.DeleteFile(path))
 			{
 				Win32Interop.ErrorCodes errorCode = (Win32Interop.ErrorCodes)Marshal.GetLastWin32Error();
-				if (errorCode != Win32Interop.ErrorCodes.ERROR_FILE_NOT_FOUND)
+				if (errorCode != Win32Interop.ErrorCodes.ERROR_PATH_NOT_FOUND
+					&& errorCode != Win32Interop.ErrorCodes.ERROR_FILE_NOT_FOUND)
 					throw new InvalidOperationException("Can't delete file " + path);
 			}
 		}
