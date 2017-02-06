@@ -20,6 +20,12 @@ namespace ScreenshotMaker.BLL.Win32Interop
 			MOVEFILE_FAIL_IF_NOT_TRACKABLE = 32u
 		}
 
+		[Flags]
+		public enum FileAttributesFlags : uint
+		{
+			FILE_ATTRIBUTE_DIRECTORY = 0x10
+		}
+
 		public enum ErrorCodes : int
 		{
 			ERROR_FILE_NOT_FOUND = 2,
@@ -30,11 +36,14 @@ namespace ScreenshotMaker.BLL.Win32Interop
 		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern bool MoveFileEx(string lpExistingFileName, string lpNewFileName, MoveFileFlags dwFlags);
 
-		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		[return: MarshalAs(UnmanagedType.Bool)]
 		public static extern bool DeleteFile([MarshalAs(UnmanagedType.LPTStr)] string lpFileName);
 
-		[DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern bool CreateDirectory(string lpPathName, IntPtr lpSecurityAttributes);
+
+		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+		public static extern FileAttributesFlags GetFileAttributes(string lpFileName);
 	}
 }

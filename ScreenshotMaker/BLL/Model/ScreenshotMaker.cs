@@ -82,7 +82,7 @@ namespace ScreenshotMaker.BLL
 
 		public static bool FolderExists(string path)
 		{
-			return Directory.Exists(path);
+			return Win32Interop.Directory.Exists(path);
 		}
 	}
 }
