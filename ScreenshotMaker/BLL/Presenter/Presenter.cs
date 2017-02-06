@@ -25,7 +25,7 @@ namespace ScreenshotMaker.BLL
 		{
 		}
 
-		public void OpenFile()
+		public bool OpenFile()
 		{
 			try
 			{
@@ -34,7 +34,7 @@ namespace ScreenshotMaker.BLL
 			catch (Exception exception)
 			{
 				View.ShowMessage(string.Format("Can't load TestCase: {0}", exception.Message));
-				return;
+				return false;
 			}
 
 			_testCase.ExecutionIdAndTitle = View.GetTestExecutionName();
@@ -45,6 +45,7 @@ namespace ScreenshotMaker.BLL
 
 			View.RefreshTreeStructure();
 			View.RefreshData();
+			return true;
 		}
 
 		private Tree<IPresenterItem> TreeFromCase(TestCase testCase)

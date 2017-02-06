@@ -7,7 +7,7 @@ namespace ScreenshotMaker.BLL
 		IView View { set; }
 
 		Tree<IPresenterItem> Items { get; }
-		void OpenFile();
+		bool OpenFile();
 		void ChangeTestExecution();
 		void ChangeOutputFolder();
 	}

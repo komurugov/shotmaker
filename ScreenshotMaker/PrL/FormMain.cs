@@ -280,8 +280,8 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonApply_Click(object sender, EventArgs e)
 		{
-			_presenter.OpenFile();
-			SetControlsPropertiesForWorking();
+			if (_presenter.OpenFile())
+				SetControlsPropertiesForWorking();
 		}
 
 		private void buttonEdit_Click(object sender, EventArgs e)

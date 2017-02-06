@@ -49,14 +49,16 @@
 			this.panelWork = new System.Windows.Forms.Panel();
 			this.buttonEdit = new System.Windows.Forms.Button();
 			this.buttonApply = new System.Windows.Forms.Button();
+			this.panelMetaEdit = new System.Windows.Forms.Panel();
 			this.panelEdit.SuspendLayout();
 			this.panelWork.SuspendLayout();
+			this.panelMetaEdit.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// buttonChooseOutputFolder
 			// 
 			this.buttonChooseOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonChooseOutputFolder.Location = new System.Drawing.Point(850, 74);
+			this.buttonChooseOutputFolder.Location = new System.Drawing.Point(540, 60);
 			this.buttonChooseOutputFolder.Name = "buttonChooseOutputFolder";
 			this.buttonChooseOutputFolder.Size = new System.Drawing.Size(87, 23);
 			this.buttonChooseOutputFolder.TabIndex = 35;
@@ -68,16 +70,16 @@
 			// 
 			this.textBoxOutputFolder.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxOutputFolder.Location = new System.Drawing.Point(99, 76);
+			this.textBoxOutputFolder.Location = new System.Drawing.Point(96, 64);
 			this.textBoxOutputFolder.Name = "textBoxOutputFolder";
 			this.textBoxOutputFolder.ReadOnly = true;
-			this.textBoxOutputFolder.Size = new System.Drawing.Size(745, 20);
+			this.textBoxOutputFolder.Size = new System.Drawing.Size(438, 20);
 			this.textBoxOutputFolder.TabIndex = 34;
 			// 
 			// buttonChooseTestCase
 			// 
 			this.buttonChooseTestCase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-			this.buttonChooseTestCase.Location = new System.Drawing.Point(850, 50);
+			this.buttonChooseTestCase.Location = new System.Drawing.Point(540, 36);
 			this.buttonChooseTestCase.Name = "buttonChooseTestCase";
 			this.buttonChooseTestCase.Size = new System.Drawing.Size(87, 23);
 			this.buttonChooseTestCase.TabIndex = 33;
@@ -89,10 +91,10 @@
 			// 
 			this.textBoxTestCase.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTestCase.Location = new System.Drawing.Point(99, 50);
+			this.textBoxTestCase.Location = new System.Drawing.Point(96, 38);
 			this.textBoxTestCase.Name = "textBoxTestCase";
 			this.textBoxTestCase.ReadOnly = true;
-			this.textBoxTestCase.Size = new System.Drawing.Size(745, 20);
+			this.textBoxTestCase.Size = new System.Drawing.Size(438, 20);
 			this.textBoxTestCase.TabIndex = 32;
 			// 
 			// textBoxTextExecutionSelectedItemParent
@@ -100,11 +102,11 @@
 			this.textBoxTextExecutionSelectedItemParent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxTextExecutionSelectedItemParent.BackColor = System.Drawing.SystemColors.Control;
-			this.textBoxTextExecutionSelectedItemParent.Location = new System.Drawing.Point(3, 444);
+			this.textBoxTextExecutionSelectedItemParent.Location = new System.Drawing.Point(5, 569);
 			this.textBoxTextExecutionSelectedItemParent.Multiline = true;
 			this.textBoxTextExecutionSelectedItemParent.Name = "textBoxTextExecutionSelectedItemParent";
 			this.textBoxTextExecutionSelectedItemParent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-			this.textBoxTextExecutionSelectedItemParent.Size = new System.Drawing.Size(1006, 75);
+			this.textBoxTextExecutionSelectedItemParent.Size = new System.Drawing.Size(646, 75);
 			this.textBoxTextExecutionSelectedItemParent.TabIndex = 31;
 			// 
 			// labelTestExecutionSelectedItem
@@ -113,9 +115,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelTestExecutionSelectedItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.labelTestExecutionSelectedItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.labelTestExecutionSelectedItem.Location = new System.Drawing.Point(3, 522);
+			this.labelTestExecutionSelectedItem.Location = new System.Drawing.Point(5, 647);
 			this.labelTestExecutionSelectedItem.Name = "labelTestExecutionSelectedItem";
-			this.labelTestExecutionSelectedItem.Size = new System.Drawing.Size(1006, 75);
+			this.labelTestExecutionSelectedItem.Size = new System.Drawing.Size(646, 75);
 			this.labelTestExecutionSelectedItem.TabIndex = 30;
 			this.labelTestExecutionSelectedItem.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
@@ -123,7 +125,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonTestExecutionSelectedItemShow.Enabled = false;
-			this.buttonTestExecutionSelectedItemShow.Location = new System.Drawing.Point(921, 610);
+			this.buttonTestExecutionSelectedItemShow.Location = new System.Drawing.Point(559, 736);
 			this.buttonTestExecutionSelectedItemShow.Name = "buttonTestExecutionSelectedItemShow";
 			this.buttonTestExecutionSelectedItemShow.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemShow.TabIndex = 29;
@@ -135,7 +137,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTestExecutionSelectedItemSkip.Enabled = false;
-			this.buttonTestExecutionSelectedItemSkip.Location = new System.Drawing.Point(170, 610);
+			this.buttonTestExecutionSelectedItemSkip.Location = new System.Drawing.Point(181, 736);
 			this.buttonTestExecutionSelectedItemSkip.Name = "buttonTestExecutionSelectedItemSkip";
 			this.buttonTestExecutionSelectedItemSkip.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemSkip.TabIndex = 28;
@@ -147,7 +149,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemFailed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTestExecutionSelectedItemFailed.Enabled = false;
-			this.buttonTestExecutionSelectedItemFailed.Location = new System.Drawing.Point(89, 610);
+			this.buttonTestExecutionSelectedItemFailed.Location = new System.Drawing.Point(100, 736);
 			this.buttonTestExecutionSelectedItemFailed.Name = "buttonTestExecutionSelectedItemFailed";
 			this.buttonTestExecutionSelectedItemFailed.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemFailed.TabIndex = 27;
@@ -159,7 +161,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemPassed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTestExecutionSelectedItemPassed.Enabled = false;
-			this.buttonTestExecutionSelectedItemPassed.Location = new System.Drawing.Point(8, 610);
+			this.buttonTestExecutionSelectedItemPassed.Location = new System.Drawing.Point(19, 736);
 			this.buttonTestExecutionSelectedItemPassed.Name = "buttonTestExecutionSelectedItemPassed";
 			this.buttonTestExecutionSelectedItemPassed.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemPassed.TabIndex = 26;
@@ -175,13 +177,13 @@
 			this.treeViewTestExecution.BackColor = System.Drawing.SystemColors.Window;
 			this.treeViewTestExecution.FullRowSelect = true;
 			this.treeViewTestExecution.HideSelection = false;
-			this.treeViewTestExecution.Location = new System.Drawing.Point(3, 3);
+			this.treeViewTestExecution.Location = new System.Drawing.Point(5, 3);
 			this.treeViewTestExecution.Name = "treeViewTestExecution";
 			this.treeViewTestExecution.ShowLines = false;
 			this.treeViewTestExecution.ShowNodeToolTips = true;
 			this.treeViewTestExecution.ShowPlusMinus = false;
 			this.treeViewTestExecution.ShowRootLines = false;
-			this.treeViewTestExecution.Size = new System.Drawing.Size(1105, 418);
+			this.treeViewTestExecution.Size = new System.Drawing.Size(646, 560);
 			this.treeViewTestExecution.TabIndex = 25;
 			this.treeViewTestExecution.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewTestExecution_BeforeSelect);
 			this.treeViewTestExecution.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTestExecution_AfterSelect);
@@ -194,15 +196,15 @@
 			// 
 			this.textBoxTestExecution.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBoxTestExecution.Location = new System.Drawing.Point(99, 24);
+			this.textBoxTestExecution.Location = new System.Drawing.Point(96, 12);
 			this.textBoxTestExecution.Name = "textBoxTestExecution";
-			this.textBoxTestExecution.Size = new System.Drawing.Size(838, 20);
+			this.textBoxTestExecution.Size = new System.Drawing.Size(531, 20);
 			this.textBoxTestExecution.TabIndex = 36;
 			// 
 			// labelTestExecution
 			// 
 			this.labelTestExecution.AutoSize = true;
-			this.labelTestExecution.Location = new System.Drawing.Point(12, 26);
+			this.labelTestExecution.Location = new System.Drawing.Point(9, 14);
 			this.labelTestExecution.Name = "labelTestExecution";
 			this.labelTestExecution.Size = new System.Drawing.Size(81, 13);
 			this.labelTestExecution.TabIndex = 37;
@@ -211,7 +213,7 @@
 			// labelTestCase
 			// 
 			this.labelTestCase.AutoSize = true;
-			this.labelTestCase.Location = new System.Drawing.Point(12, 52);
+			this.labelTestCase.Location = new System.Drawing.Point(9, 40);
 			this.labelTestCase.Name = "labelTestCase";
 			this.labelTestCase.Size = new System.Drawing.Size(58, 13);
 			this.labelTestCase.TabIndex = 39;
@@ -220,7 +222,7 @@
 			// labelOutputFolder
 			// 
 			this.labelOutputFolder.AutoSize = true;
-			this.labelOutputFolder.Location = new System.Drawing.Point(12, 79);
+			this.labelOutputFolder.Location = new System.Drawing.Point(9, 67);
 			this.labelOutputFolder.Name = "labelOutputFolder";
 			this.labelOutputFolder.Size = new System.Drawing.Size(71, 13);
 			this.labelOutputFolder.TabIndex = 40;
@@ -230,6 +232,7 @@
 			// 
 			this.panelEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelEdit.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.panelEdit.Controls.Add(this.buttonChooseOutputFolder);
 			this.panelEdit.Controls.Add(this.labelOutputFolder);
 			this.panelEdit.Controls.Add(this.labelTestCase);
@@ -238,15 +241,17 @@
 			this.panelEdit.Controls.Add(this.textBoxOutputFolder);
 			this.panelEdit.Controls.Add(this.buttonChooseTestCase);
 			this.panelEdit.Controls.Add(this.textBoxTestCase);
-			this.panelEdit.Location = new System.Drawing.Point(145, 5);
+			this.panelEdit.Location = new System.Drawing.Point(5, 9);
 			this.panelEdit.Name = "panelEdit";
-			this.panelEdit.Size = new System.Drawing.Size(1035, 100);
+			this.panelEdit.Size = new System.Drawing.Size(646, 100);
 			this.panelEdit.TabIndex = 41;
 			// 
 			// panelWork
 			// 
-			this.panelWork.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+			this.panelWork.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelWork.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.panelWork.Controls.Add(this.textBoxTextExecutionSelectedItemParent);
 			this.panelWork.Controls.Add(this.labelTestExecutionSelectedItem);
 			this.panelWork.Controls.Add(this.buttonTestExecutionSelectedItemShow);
@@ -255,15 +260,15 @@
 			this.panelWork.Controls.Add(this.buttonTestExecutionSelectedItemPassed);
 			this.panelWork.Controls.Add(this.treeViewTestExecution);
 			this.panelWork.Enabled = false;
-			this.panelWork.Location = new System.Drawing.Point(2, 111);
+			this.panelWork.Location = new System.Drawing.Point(11, 180);
 			this.panelWork.Name = "panelWork";
-			this.panelWork.Size = new System.Drawing.Size(1187, 646);
+			this.panelWork.Size = new System.Drawing.Size(661, 770);
 			this.panelWork.TabIndex = 42;
 			// 
 			// buttonEdit
 			// 
 			this.buttonEdit.Enabled = false;
-			this.buttonEdit.Location = new System.Drawing.Point(30, 26);
+			this.buttonEdit.Location = new System.Drawing.Point(19, 115);
 			this.buttonEdit.Name = "buttonEdit";
 			this.buttonEdit.Size = new System.Drawing.Size(75, 23);
 			this.buttonEdit.TabIndex = 32;
@@ -273,7 +278,7 @@
 			// 
 			// buttonApply
 			// 
-			this.buttonApply.Location = new System.Drawing.Point(30, 57);
+			this.buttonApply.Location = new System.Drawing.Point(100, 115);
 			this.buttonApply.Name = "buttonApply";
 			this.buttonApply.Size = new System.Drawing.Size(75, 23);
 			this.buttonApply.TabIndex = 43;
@@ -281,22 +286,34 @@
 			this.buttonApply.UseVisualStyleBackColor = true;
 			this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
 			// 
+			// panelMetaEdit
+			// 
+			this.panelMetaEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panelMetaEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.panelMetaEdit.Controls.Add(this.buttonApply);
+			this.panelMetaEdit.Controls.Add(this.panelEdit);
+			this.panelMetaEdit.Controls.Add(this.buttonEdit);
+			this.panelMetaEdit.Location = new System.Drawing.Point(11, 12);
+			this.panelMetaEdit.Name = "panelMetaEdit";
+			this.panelMetaEdit.Size = new System.Drawing.Size(661, 148);
+			this.panelMetaEdit.TabIndex = 44;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1192, 769);
-			this.Controls.Add(this.buttonApply);
-			this.Controls.Add(this.buttonEdit);
+			this.ClientSize = new System.Drawing.Size(684, 962);
+			this.Controls.Add(this.panelMetaEdit);
 			this.Controls.Add(this.panelWork);
-			this.Controls.Add(this.panelEdit);
-			this.MinimumSize = new System.Drawing.Size(356, 468);
+			this.MinimumSize = new System.Drawing.Size(420, 600);
 			this.Name = "FormMain";
 			this.Text = "QA Screenshot Maker";
 			this.panelEdit.ResumeLayout(false);
 			this.panelEdit.PerformLayout();
 			this.panelWork.ResumeLayout(false);
 			this.panelWork.PerformLayout();
+			this.panelMetaEdit.ResumeLayout(false);
 			this.ResumeLayout(false);
 
         }
@@ -323,6 +340,7 @@
 		private System.Windows.Forms.Panel panelWork;
 		private System.Windows.Forms.Button buttonEdit;
 		private System.Windows.Forms.Button buttonApply;
+		private System.Windows.Forms.Panel panelMetaEdit;
 	}
 }
 
