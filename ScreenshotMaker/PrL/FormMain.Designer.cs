@@ -185,6 +185,7 @@
 			this.treeViewTestExecution.ShowRootLines = false;
 			this.treeViewTestExecution.Size = new System.Drawing.Size(646, 472);
 			this.treeViewTestExecution.TabIndex = 25;
+			this.treeViewTestExecution.BeforeCollapse += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewTestExecution_BeforeCollapse);
 			this.treeViewTestExecution.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewTestExecution_BeforeSelect);
 			this.treeViewTestExecution.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTestExecution_AfterSelect);
 			// 

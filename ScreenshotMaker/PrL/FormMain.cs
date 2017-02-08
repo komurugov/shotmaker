@@ -298,5 +298,10 @@ namespace ScreenshotMaker.PrL
 		{
 			SetOutputFolderPath((sender as TextBox).Text);
 		}
+
+		private void treeViewTestExecution_BeforeCollapse(object sender, TreeViewCancelEventArgs e)
+		{
+			e.Cancel = true;
+		}
 	}
 }
