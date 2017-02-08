@@ -32,17 +32,6 @@ namespace ScreenshotMaker.BLL.Win32Interop
 				string currentFolder = path.Substring(0, currentFolderLastCharNum);
 				if (!System.IO.Directory.Exists(currentFolder))
 				{
-
-					//var lpSecurityAttributes = new Win32Interop.SECURITY_ATTRIBUTES();
-					//DirectorySecurity security = new DirectorySecurity();
-					//lpSecurityAttributes.nLength = Marshal.SizeOf(lpSecurityAttributes);
-					//byte[] src = security.GetSecurityDescriptorBinaryForm();
-					//IntPtr dest = Marshal.AllocHGlobal(src.Length);
-					//Marshal.Copy(src, 0, dest, src.Length);
-					//lpSecurityAttributes.lpSecurityDescriptor = dest;
-
-					//					bool result = Win32Interop.CreateDirectory(Path.GetLongWin32(currentFolder), /*IntPtr.Zero*/lpSecurityAttributes);
-
 					string win32Path = Path.GetLongWin32(currentFolder);
 					bool result = Win32Interop.CreateDirectory(win32Path, IntPtr.Zero);
 					if (!result)

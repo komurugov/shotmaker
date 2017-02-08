@@ -102,7 +102,7 @@
 			this.textBoxTextExecutionSelectedItemParent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.textBoxTextExecutionSelectedItemParent.BackColor = System.Drawing.SystemColors.Control;
-			this.textBoxTextExecutionSelectedItemParent.Location = new System.Drawing.Point(5, 569);
+			this.textBoxTextExecutionSelectedItemParent.Location = new System.Drawing.Point(5, 481);
 			this.textBoxTextExecutionSelectedItemParent.Multiline = true;
 			this.textBoxTextExecutionSelectedItemParent.Name = "textBoxTextExecutionSelectedItemParent";
 			this.textBoxTextExecutionSelectedItemParent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -115,7 +115,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
 			this.labelTestExecutionSelectedItem.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
 			this.labelTestExecutionSelectedItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-			this.labelTestExecutionSelectedItem.Location = new System.Drawing.Point(5, 647);
+			this.labelTestExecutionSelectedItem.Location = new System.Drawing.Point(5, 559);
 			this.labelTestExecutionSelectedItem.Name = "labelTestExecutionSelectedItem";
 			this.labelTestExecutionSelectedItem.Size = new System.Drawing.Size(646, 75);
 			this.labelTestExecutionSelectedItem.TabIndex = 30;
@@ -125,7 +125,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.buttonTestExecutionSelectedItemShow.Enabled = false;
-			this.buttonTestExecutionSelectedItemShow.Location = new System.Drawing.Point(559, 736);
+			this.buttonTestExecutionSelectedItemShow.Location = new System.Drawing.Point(559, 648);
 			this.buttonTestExecutionSelectedItemShow.Name = "buttonTestExecutionSelectedItemShow";
 			this.buttonTestExecutionSelectedItemShow.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemShow.TabIndex = 29;
@@ -137,7 +137,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTestExecutionSelectedItemSkip.Enabled = false;
-			this.buttonTestExecutionSelectedItemSkip.Location = new System.Drawing.Point(181, 736);
+			this.buttonTestExecutionSelectedItemSkip.Location = new System.Drawing.Point(181, 648);
 			this.buttonTestExecutionSelectedItemSkip.Name = "buttonTestExecutionSelectedItemSkip";
 			this.buttonTestExecutionSelectedItemSkip.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemSkip.TabIndex = 28;
@@ -149,7 +149,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemFailed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTestExecutionSelectedItemFailed.Enabled = false;
-			this.buttonTestExecutionSelectedItemFailed.Location = new System.Drawing.Point(100, 736);
+			this.buttonTestExecutionSelectedItemFailed.Location = new System.Drawing.Point(100, 648);
 			this.buttonTestExecutionSelectedItemFailed.Name = "buttonTestExecutionSelectedItemFailed";
 			this.buttonTestExecutionSelectedItemFailed.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemFailed.TabIndex = 27;
@@ -161,7 +161,7 @@
 			// 
 			this.buttonTestExecutionSelectedItemPassed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.buttonTestExecutionSelectedItemPassed.Enabled = false;
-			this.buttonTestExecutionSelectedItemPassed.Location = new System.Drawing.Point(19, 736);
+			this.buttonTestExecutionSelectedItemPassed.Location = new System.Drawing.Point(19, 648);
 			this.buttonTestExecutionSelectedItemPassed.Name = "buttonTestExecutionSelectedItemPassed";
 			this.buttonTestExecutionSelectedItemPassed.Size = new System.Drawing.Size(75, 23);
 			this.buttonTestExecutionSelectedItemPassed.TabIndex = 26;
@@ -183,14 +183,16 @@
 			this.treeViewTestExecution.ShowNodeToolTips = true;
 			this.treeViewTestExecution.ShowPlusMinus = false;
 			this.treeViewTestExecution.ShowRootLines = false;
-			this.treeViewTestExecution.Size = new System.Drawing.Size(646, 560);
+			this.treeViewTestExecution.Size = new System.Drawing.Size(646, 472);
 			this.treeViewTestExecution.TabIndex = 25;
 			this.treeViewTestExecution.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeViewTestExecution_BeforeSelect);
 			this.treeViewTestExecution.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewTestExecution_AfterSelect);
 			// 
 			// openFileDialog
 			// 
-			this.openFileDialog.FileName = "openFileDialog";
+			this.openFileDialog.DefaultExt = "xml";
+			this.openFileDialog.Filter = "Xml files|*.xml|All files|*.*";
+			this.openFileDialog.SupportMultiDottedExtensions = true;
 			// 
 			// textBoxTestExecution
 			// 
@@ -262,7 +264,7 @@
 			this.panelWork.Enabled = false;
 			this.panelWork.Location = new System.Drawing.Point(11, 180);
 			this.panelWork.Name = "panelWork";
-			this.panelWork.Size = new System.Drawing.Size(661, 770);
+			this.panelWork.Size = new System.Drawing.Size(661, 682);
 			this.panelWork.TabIndex = 42;
 			// 
 			// buttonEdit
@@ -303,7 +305,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(684, 962);
+			this.ClientSize = new System.Drawing.Size(684, 874);
 			this.Controls.Add(this.panelMetaEdit);
 			this.Controls.Add(this.panelWork);
 			this.MinimumSize = new System.Drawing.Size(420, 600);
