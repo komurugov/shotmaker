@@ -65,7 +65,7 @@ namespace ScreenshotMaker.BLL
 			var result = new List<Data>();
 			if (data == null)
 				return result;
-			var lines = DivideHtmlIntoLines(data.Text);
+			var lines = DivideHtmlIntoLinesByTags(data.Text, HtmlTags);
 			foreach (var line in lines)
 				result.Add(new Data(line, verification));
 			return result;
@@ -75,7 +75,7 @@ namespace ScreenshotMaker.BLL
 		{
 			int stepNumber = 0;
 			string step = "";
-			var linesSet = DivideHtmlIntoLines(inputString);
+			var linesSet = DivideHtmlIntoLinesByTags(inputString, HtmlTags);
 			foreach (var stepLine in linesSet)
 			{
 				int number;
@@ -104,7 +104,7 @@ namespace ScreenshotMaker.BLL
 			if (steps == null)
 				return;
 			int stepNumber = 0;
-			foreach (string resultString in DivideHtmlIntoLines(inputString))
+			foreach (string resultString in DivideHtmlIntoLinesByTags(inputString, HtmlTags))
 			{
 				int numberFromResultString;
 				string textFromResultString;
@@ -197,24 +197,55 @@ namespace ScreenshotMaker.BLL
 
 		private static readonly string[] HtmlTags =
 		{
-			@"<br/>",
-			@"<br />",
-			@"<ul>", @"</ul>", @"<li>", @"</li>", @"<ul class=""alternate"" type=""square"">", @"<ul type=""square"" class=""alternate"">",
-			@"<p>", @"</p>"
+			@"br",
+			@"ul", @"/ul", @"li", @"/li",
+			@"p", @"/p"
 		};
 
-		private static List<string> DivideHtmlIntoLines(string inputString)
+		private static bool StartsWith(this string s, string[] set)
 		{
+			foreach (string i in set)
+				if (s.StartsWith(i))
+					return true;
+			return false;
+		}
+
+		private static void AddLineWithChecking(this List<string> list, string line)
+		{
+			if (line == null)
+				return;
+			const string endln = @"\n";
+			if (line.StartsWith(endln))
+				line = line.Remove(0, endln.Length);
+			line = line.TrimStart().TrimEnd();
+			if (line != "")
+				list.Add(line);
+		}
+
+		private static List<string> DivideHtmlIntoLinesByTags(string inputString, string[] tags)
+		{
+			var result = new List<string>();
 			if (inputString == null)
-				return new List<string>();
-			return new List<string>(
-				inputString
-				.Split(HtmlTags, StringSplitOptions.RemoveEmptyEntries)
-				.Select(n => n.IndexOf(@"\n") == 0 ? n.Remove(0, 2) : n)
-				.Select(n => n.TrimStart())
-				.Select(n => n.TrimEnd())
-				.Where(n => n != "")
-				);
+				return result;
+			int startPos = 0;
+			while (true)
+			{
+				int openBracketPos = inputString.IndexOf("<", startPos);
+				if (openBracketPos < 0)
+				{
+					if (startPos < inputString.Length)
+						result.AddLineWithChecking(inputString.Substring(startPos));
+					return result;
+				}
+				if (inputString.Substring(openBracketPos + 1).StartsWith(tags))
+				{
+					result.AddLineWithChecking(inputString.Substring(startPos, openBracketPos - startPos));
+					int closeBracketPos = inputString.IndexOf(">", openBracketPos);
+					if (closeBracketPos < 0)
+						return result;
+					startPos = closeBracketPos + 1;
+				}
+			}
 		}
 
 		private static List<Setup> GetSetups(rss dto, TestCase testCase)
@@ -240,7 +271,7 @@ namespace ScreenshotMaker.BLL
 				?.customfieldvalue;
 			if (fieldValue == null)
 				return result;
-			foreach (var line in DivideHtmlIntoLines(fieldValue))
+			foreach (var line in DivideHtmlIntoLinesByTags(fieldValue, HtmlTags))
 				result.Add(new Setup(line, testCase));
 			return result;
 		}
