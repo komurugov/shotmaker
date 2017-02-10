@@ -51,9 +51,6 @@ namespace ScreenshotMaker.BLL
 				s =>
 				{
 					string result = PathCleaner.GetFileNameWithoutInvalidChars(s);
-					int maxFileNameLength = 100;
-					if (result.Length > maxFileNameLength)
-						result = result.Substring(0, maxFileNameLength);
 					result += "." + itemInfoDto.ImageFormat.ToString().ToLower();
 					return result;
 				}
@@ -73,6 +70,12 @@ namespace ScreenshotMaker.BLL
 			throw new InvalidOperationException();
 		}
 
+		private static string CutForFileName(string input)
+		{
+			const int maxLength = 100;
+			return input.Length > maxLength ? input.Substring(0, maxLength) : input;
+		}
+
 		private ScreenshotFileInfoDto GenerateFileInfo(Data data)
 		{
 			Verification verification = data.Parent as Verification;
@@ -84,7 +87,7 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException();
 			var dto = new ScreenshotFileInfoDto(
 				string.Format(@"Verification-{0}\", verificationNum.ToString("D2")),
-				string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text));
+				CutForFileName(string.Format("Data-{0}-{1}", (dataNum + 1).ToString("D2"), data.Text)));
 			return dto;
 		}
 
@@ -95,7 +98,7 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException();
 			var dto = new ScreenshotFileInfoDto(
 				@"Setup\",
-				string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text));
+				CutForFileName(string.Format("{0}-{1}", (setupNum + 1).ToString("D2"), setup.Text)));
 			return dto;
 		}
 
@@ -129,12 +132,12 @@ namespace ScreenshotMaker.BLL
 						postfix = "";
 						break;
 				}
-				string possiblyFileName = string.Format(
-					"Step {0}-{1}{2}{3}",
+				string possiblyFileName = CutForFileName(string.Format(
+					"Step {0}-{1}{2}",
 					stepNum,
 					step.Results.Count > 1 ? (stepResultNum + 1).ToString("D2") + "-" : "",
-					stepResult.Text,
-					postfix == "" ? "" : "-" + postfix);
+					stepResult.Text)) +
+					(postfix == "" ? "" : "-" + postfix);
 				if (possiblyResult == stepResult.Result)
 					dto.FileName = possiblyFileName;
 				else
