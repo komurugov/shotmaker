@@ -202,7 +202,7 @@
 			this.textBoxTestExecution.Location = new System.Drawing.Point(96, 12);
 			this.textBoxTestExecution.Name = "textBoxTestExecution";
 			this.textBoxTestExecution.Size = new System.Drawing.Size(531, 20);
-			this.textBoxTestExecution.TabIndex = 36;
+			this.textBoxTestExecution.TabIndex = 0;
 			// 
 			// labelTestExecution
 			// 
