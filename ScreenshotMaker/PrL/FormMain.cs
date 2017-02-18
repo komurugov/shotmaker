@@ -27,6 +27,7 @@ namespace ScreenshotMaker.PrL
 			buttonEdit.Enabled = false;
 			panelEdit.Enabled = true;
 			buttonApply.Enabled = true;
+            textBoxTestCase.Focus();
 		}
 
 		private void SetControlsPropertiesForWorking()
@@ -35,6 +36,7 @@ namespace ScreenshotMaker.PrL
 			buttonApply.Enabled = false;
 			panelWork.Enabled = true;
 			buttonEdit.Enabled = true;
+            treeViewTestExecution.Focus();
 		}
 
 		public string GetTestExecutionName()
@@ -221,28 +223,49 @@ namespace ScreenshotMaker.PrL
 			return presenterItemTree?.Value != null && presenterItemTree.Value.Selectable;
 		}
 
-		private void SelectNextSelectableTreeItem()
-		{
-			TreeNode node = null;
-			if (treeViewTestExecution.SelectedNode == null)
-			{
-				if (treeViewTestExecution.Nodes.Count > 0)
-					node = treeViewTestExecution.Nodes[0];
-			}
-			else
-				node = treeViewTestExecution.SelectedNode.NextVisibleNode;
-			while (node != null)
-				if (IsNodeSelectable(node))
-				{
-					treeViewTestExecution.SelectedNode = node;
-					return;
-				}
-				else
-					node = node.NextVisibleNode;
-			Refresh();
-		}
+        private void SelectNextSelectableTreeItem()
+        {
+            TreeNode node = null;
+            if (treeViewTestExecution.SelectedNode == null)
+            {
+                if (treeViewTestExecution.Nodes.Count > 0)
+                    node = treeViewTestExecution.Nodes[0];
+            }
+            else
+                node = treeViewTestExecution.SelectedNode.NextVisibleNode;
+            while (node != null)
+                if (IsNodeSelectable(node))
+                {
+                    treeViewTestExecution.SelectedNode = node;
+                    return;
+                }
+                else
+                    node = node.NextVisibleNode;
+            Refresh();
+        }
 
-		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
+        private void SelectPreviousSelectableTreeItem()
+        {
+            TreeNode node = null;
+            if (treeViewTestExecution.SelectedNode == null)
+            {
+                if (treeViewTestExecution.Nodes.Count > 0)
+                    node = treeViewTestExecution.Nodes[treeViewTestExecution.Nodes.Count - 1];
+            }
+            else
+                node = treeViewTestExecution.SelectedNode.PrevVisibleNode;
+            while (node != null)
+                if (IsNodeSelectable(node))
+                {
+                    treeViewTestExecution.SelectedNode = node;
+                    return;
+                }
+                else
+                    node = node.PrevVisibleNode;
+            Refresh();
+        }
+
+        private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionPassed != null)
@@ -278,10 +301,15 @@ namespace ScreenshotMaker.PrL
 			OnChangeSelectedNode();
 		}
 
-		private void buttonApply_Click(object sender, EventArgs e)
+        private void Apply()
+        {
+            if (_presenter.OpenFile())
+                SetControlsPropertiesForWorking();
+        }
+
+        private void buttonApply_Click(object sender, EventArgs e)
 		{
-			if (_presenter.OpenFile())
-				SetControlsPropertiesForWorking();
+            Apply();
 		}
 
 		private void buttonEdit_Click(object sender, EventArgs e)
@@ -303,5 +331,29 @@ namespace ScreenshotMaker.PrL
 		{
 			e.Cancel = true;
 		}
-	}
+
+        private void editTextBoxesOnKeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                Apply();
+                e.Handled = true;
+            }
+        }
+
+        private void treeViewTestExecution_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Down:
+                    SelectNextSelectableTreeItem();
+                    e.Handled = true;
+                    break;
+                case Keys.Up:
+                    SelectPreviousSelectableTreeItem();
+                    e.Handled = true;
+                    break;
+            }
+        }
+    }
 }
