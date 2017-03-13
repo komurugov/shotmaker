@@ -29,7 +29,7 @@ namespace ScreenshotMaker.BLL
 			return new FileInfoDto(screenshotFileInfoDto.Path, screenshotFileInfoDto.FileName);
 		}
 
-		public bool MakeScreenshot(Result result, string rootFolder)
+		public bool MakeScreenshot(Result result, string rootFolder, bool entireScreen)
 		{
 			Result = result;
 			ScreenshotMaker.TakeAndSaveScreenshot(GetFileInfoDtoAndDeleteExistingFiles(rootFolder));

@@ -265,11 +265,16 @@ namespace ScreenshotMaker.PrL
             Refresh();
         }
 
+        private bool DoesEntireScreenMustBeTaken()
+        {
+            return radioButtonScreenshotAreaScreen.Checked;
+        }
+
         private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionPassed != null)
-				if (selectedPresenterItem.ActionPassed())
+				if (selectedPresenterItem.ActionPassed(DoesEntireScreenMustBeTaken()))
 					SelectNextSelectableTreeItem();
 		}
 
