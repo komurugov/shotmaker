@@ -264,16 +264,25 @@ namespace ScreenshotMaker.PrL
                     node = node.PrevVisibleNode;
             Refresh();
         }
-
+        private bool IsEntireScreenNeededToBeCaptured()
+        {
+            return radioButtonScreenshotAreaScreen.Checked;
+        }
+        private void MakeScreenshot(Func<bool> action)
+        {
+            if (action == null)
+                return;
+            if (selectedPresenterItem.ActionPassed())
+                SelectNextSelectableTreeItem();
+        }
         private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
-			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
-			if (selectedPresenterItem?.ActionPassed != null)
-				if (selectedPresenterItem.ActionPassed())
-					SelectNextSelectableTreeItem();
-		}
-
-		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
+            if (IsEntireScreenNeededToBeCaptured())
+                MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed);
+            else
+                
+        }
+        private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionFailed != null)
