@@ -47,16 +47,17 @@
             this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.panelEdit = new System.Windows.Forms.Panel();
             this.panelWork = new System.Windows.Forms.Panel();
+            this.groupBoxMakeScreenshot = new System.Windows.Forms.GroupBox();
+            this.radioButtonScreenshotAreaScreen = new System.Windows.Forms.RadioButton();
+            this.radioButtonScreenshotAreaWindow = new System.Windows.Forms.RadioButton();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
             this.panelMetaEdit = new System.Windows.Forms.Panel();
-            this.groupBoxMakeScreenshot = new System.Windows.Forms.GroupBox();
-            this.radioButtonScreenshotAreaWindow = new System.Windows.Forms.RadioButton();
-            this.radioButtonScreenshotAreaScreen = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             this.panelEdit.SuspendLayout();
             this.panelWork.SuspendLayout();
-            this.panelMetaEdit.SuspendLayout();
             this.groupBoxMakeScreenshot.SuspendLayout();
+            this.panelMetaEdit.SuspendLayout();
             this.SuspendLayout();
             // 
             // buttonChooseOutputFolder
@@ -275,6 +276,40 @@
             this.panelWork.Size = new System.Drawing.Size(661, 541);
             this.panelWork.TabIndex = 42;
             // 
+            // groupBoxMakeScreenshot
+            // 
+            this.groupBoxMakeScreenshot.Controls.Add(this.radioButtonScreenshotAreaScreen);
+            this.groupBoxMakeScreenshot.Controls.Add(this.radioButtonScreenshotAreaWindow);
+            this.groupBoxMakeScreenshot.Controls.Add(this.buttonTestExecutionSelectedItemPassed);
+            this.groupBoxMakeScreenshot.Controls.Add(this.buttonTestExecutionSelectedItemFailed);
+            this.groupBoxMakeScreenshot.Location = new System.Drawing.Point(16, 496);
+            this.groupBoxMakeScreenshot.Name = "groupBoxMakeScreenshot";
+            this.groupBoxMakeScreenshot.Size = new System.Drawing.Size(318, 40);
+            this.groupBoxMakeScreenshot.TabIndex = 32;
+            this.groupBoxMakeScreenshot.TabStop = false;
+            // 
+            // radioButtonScreenshotAreaScreen
+            // 
+            this.radioButtonScreenshotAreaScreen.AutoSize = true;
+            this.radioButtonScreenshotAreaScreen.Location = new System.Drawing.Point(77, 14);
+            this.radioButtonScreenshotAreaScreen.Name = "radioButtonScreenshotAreaScreen";
+            this.radioButtonScreenshotAreaScreen.Size = new System.Drawing.Size(59, 17);
+            this.radioButtonScreenshotAreaScreen.TabIndex = 34;
+            this.radioButtonScreenshotAreaScreen.Text = "&Screen";
+            this.radioButtonScreenshotAreaScreen.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonScreenshotAreaWindow
+            // 
+            this.radioButtonScreenshotAreaWindow.AutoSize = true;
+            this.radioButtonScreenshotAreaWindow.Checked = true;
+            this.radioButtonScreenshotAreaWindow.Location = new System.Drawing.Point(7, 14);
+            this.radioButtonScreenshotAreaWindow.Name = "radioButtonScreenshotAreaWindow";
+            this.radioButtonScreenshotAreaWindow.Size = new System.Drawing.Size(64, 17);
+            this.radioButtonScreenshotAreaWindow.TabIndex = 33;
+            this.radioButtonScreenshotAreaWindow.TabStop = true;
+            this.radioButtonScreenshotAreaWindow.Text = "&Window";
+            this.radioButtonScreenshotAreaWindow.UseVisualStyleBackColor = true;
+            // 
             // buttonEdit
             // 
             this.buttonEdit.Enabled = false;
@@ -301,6 +336,7 @@
             this.panelMetaEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMetaEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelMetaEdit.Controls.Add(this.button1);
             this.panelMetaEdit.Controls.Add(this.buttonApply);
             this.panelMetaEdit.Controls.Add(this.panelEdit);
             this.panelMetaEdit.Controls.Add(this.buttonEdit);
@@ -309,39 +345,15 @@
             this.panelMetaEdit.Size = new System.Drawing.Size(661, 148);
             this.panelMetaEdit.TabIndex = 44;
             // 
-            // groupBoxMakeScreenshot
+            // button1
             // 
-            this.groupBoxMakeScreenshot.Controls.Add(this.radioButtonScreenshotAreaScreen);
-            this.groupBoxMakeScreenshot.Controls.Add(this.radioButtonScreenshotAreaWindow);
-            this.groupBoxMakeScreenshot.Controls.Add(this.buttonTestExecutionSelectedItemPassed);
-            this.groupBoxMakeScreenshot.Controls.Add(this.buttonTestExecutionSelectedItemFailed);
-            this.groupBoxMakeScreenshot.Location = new System.Drawing.Point(16, 496);
-            this.groupBoxMakeScreenshot.Name = "groupBoxMakeScreenshot";
-            this.groupBoxMakeScreenshot.Size = new System.Drawing.Size(318, 40);
-            this.groupBoxMakeScreenshot.TabIndex = 32;
-            this.groupBoxMakeScreenshot.TabStop = false;
-            // 
-            // radioButtonScreenshotAreaWindow
-            // 
-            this.radioButtonScreenshotAreaWindow.AutoSize = true;
-            this.radioButtonScreenshotAreaWindow.Checked = true;
-            this.radioButtonScreenshotAreaWindow.Location = new System.Drawing.Point(7, 14);
-            this.radioButtonScreenshotAreaWindow.Name = "radioButtonScreenshotAreaWindow";
-            this.radioButtonScreenshotAreaWindow.Size = new System.Drawing.Size(64, 17);
-            this.radioButtonScreenshotAreaWindow.TabIndex = 33;
-            this.radioButtonScreenshotAreaWindow.TabStop = true;
-            this.radioButtonScreenshotAreaWindow.Text = "&Window";
-            this.radioButtonScreenshotAreaWindow.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonScreenshotAreaScreen
-            // 
-            this.radioButtonScreenshotAreaScreen.AutoSize = true;
-            this.radioButtonScreenshotAreaScreen.Location = new System.Drawing.Point(77, 14);
-            this.radioButtonScreenshotAreaScreen.Name = "radioButtonScreenshotAreaScreen";
-            this.radioButtonScreenshotAreaScreen.Size = new System.Drawing.Size(59, 17);
-            this.radioButtonScreenshotAreaScreen.TabIndex = 34;
-            this.radioButtonScreenshotAreaScreen.Text = "&Screen";
-            this.radioButtonScreenshotAreaScreen.UseVisualStyleBackColor = true;
+            this.button1.Location = new System.Drawing.Point(290, 120);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 44;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormMain
             // 
@@ -357,9 +369,9 @@
             this.panelEdit.PerformLayout();
             this.panelWork.ResumeLayout(false);
             this.panelWork.PerformLayout();
-            this.panelMetaEdit.ResumeLayout(false);
             this.groupBoxMakeScreenshot.ResumeLayout(false);
             this.groupBoxMakeScreenshot.PerformLayout();
+            this.panelMetaEdit.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -390,6 +402,7 @@
         private System.Windows.Forms.GroupBox groupBoxMakeScreenshot;
         private System.Windows.Forms.RadioButton radioButtonScreenshotAreaScreen;
         private System.Windows.Forms.RadioButton radioButtonScreenshotAreaWindow;
+        private System.Windows.Forms.Button button1;
     }
 }
 
