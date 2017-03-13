@@ -336,7 +336,7 @@ namespace ScreenshotMaker.PrL
             {
                 return CallNextHookEx(hHook, nCode, wParam, lParam);
             }
-            else
+            else if (wParam.ToInt64() == 0x201 || wParam.ToInt64() == 0x204)
             {
                 //Create a string variable that shows the current mouse coordinates.
                 String strCaption = "x = " +
@@ -348,8 +348,10 @@ namespace ScreenshotMaker.PrL
 
                 //Set the caption of the form.
                 tempForm.Text = strCaption;
-                return CallNextHookEx(hHook, nCode, wParam, lParam);
+                return 1;
             }
+            else
+                return CallNextHookEx(hHook, nCode, wParam, lParam);
         }
 
         private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
