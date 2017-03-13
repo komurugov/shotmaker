@@ -343,8 +343,8 @@ namespace ScreenshotMaker.PrL
                 MyMouseHookStruct.pt.x.ToString("d") +
                 "  y = " +
                 MyMouseHookStruct.pt.y.ToString("d");
-                //You must get the active form because it is a static function.
-                Form tempForm = Form.ActiveForm;
+
+                var tempForm = Program.MainForm;
 
                 //Set the caption of the form.
                 tempForm.Text = strCaption;

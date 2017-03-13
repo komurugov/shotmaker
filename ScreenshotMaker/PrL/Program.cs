@@ -6,16 +6,18 @@ namespace ScreenshotMaker.PrL
 {
 	internal static class Program
 	{
-		/// <summary>
-		///     The main entry point for the application.
-		/// </summary>
-		[STAThread]
+        public static FormMain MainForm;
+        /// <summary>
+        ///     The main entry point for the application.
+        /// </summary>
+        [STAThread]
 		private static void Main()
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			var presenter = new Presenter();
-			Application.Run(new FormMain(presenter));
+            MainForm = new FormMain(presenter);
+            Application.Run(MainForm);
 		}
 	}
 }
