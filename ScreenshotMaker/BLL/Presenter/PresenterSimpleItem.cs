@@ -26,7 +26,7 @@ namespace ScreenshotMaker.BLL
 
 		public string Text { get; set; }
 
-		public Func<bool> ActionPassed
+		public Func<IntPtr, bool> ActionPassed
 		{
 			get { return null; }
 		}

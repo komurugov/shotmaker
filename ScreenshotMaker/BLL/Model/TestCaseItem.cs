@@ -1,3 +1,4 @@
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -29,10 +30,10 @@ namespace ScreenshotMaker.BLL
 			return new FileInfoDto(screenshotFileInfoDto.Path, screenshotFileInfoDto.FileName);
 		}
 
-		public bool MakeScreenshot(Result result, string rootFolder)
+		public bool MakeScreenshot(IntPtr window, Result result, string rootFolder)
 		{
 			Result = result;
-			ScreenshotMaker.TakeAndSaveScreenshot(GetFileInfoDtoAndDeleteExistingFiles(rootFolder));
+			ScreenshotMaker.TakeAndSaveScreenshot(window, GetFileInfoDtoAndDeleteExistingFiles(rootFolder));
 			Status = Status.Done;
 			return true;
 		}

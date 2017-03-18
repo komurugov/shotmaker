@@ -9,7 +9,7 @@ namespace ScreenshotMaker.BLL
 		PresenterItemStatus Status { get; }
 		PresenterItemResult Result { get; }
 
-		Func<bool> ActionPassed { get; }
+		Func<IntPtr, bool> ActionPassed { get; }
 		Func<bool> ActionFailed { get; }
 		Func<bool> ActionSkip { get; }
 		Func<bool> ActionShow { get; }

@@ -20,6 +20,10 @@ namespace ScreenshotMaker.PrL
 			_presenter = presenter;
 
 			SetControlsPropertiesForEditing();
+
+            textBoxTestExecution.Text = "318";
+            textBoxTestCase.Text = @"D:\my\proj\shotmaker\task\test case.xml";
+            textBoxOutputFolder.Text = @"D:\my\_temp";
 		}
 
 		private void SetControlsPropertiesForEditing()
@@ -269,11 +273,11 @@ namespace ScreenshotMaker.PrL
         {
             return radioButtonScreenshotAreaScreen.Checked;
         }
-        private void MakeScreenshot(Func<bool> action)
+        private void MakeScreenshot(Func<IntPtr, bool> action)
         {
             if (action == null)
                 return;
-            if (action())
+            if (action(GetDesktopWindow()))
                 SelectNextSelectableTreeItem();
         }
 
@@ -326,6 +330,12 @@ namespace ScreenshotMaker.PrL
          CallingConvention = CallingConvention.StdCall)]
         public static extern int CallNextHookEx(int idHook, int nCode,
         IntPtr wParam, IntPtr lParam);
+        [DllImport("user32.dll")]
+        static extern IntPtr WindowFromPoint(System.Drawing.Point p);
+
+        [DllImport("user32.dll", SetLastError = false)]
+        static extern IntPtr GetDesktopWindow();
+
 
         public static int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {

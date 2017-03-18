@@ -62,12 +62,12 @@ namespace ScreenshotMaker.BLL
 			}
 		}
 
-		private bool MakeScreenshot(Result result)
+		private bool MakeScreenshot(IntPtr window, Result result)
 		{			
 			try
 			{
 				_view.PrepareBeforeScreenshot();
-				_modelItem.MakeScreenshot(result, _view.GetOuputFolderPath());
+				_modelItem.MakeScreenshot(window, result, _view.GetOuputFolderPath());
 			}
 			catch (Exception exception)
 			{
@@ -82,14 +82,14 @@ namespace ScreenshotMaker.BLL
 			return true;
 		}
 
-		public Func<bool> ActionPassed
+		public Func<IntPtr, bool> ActionPassed
 		{
-			get { return () =>  MakeScreenshot(BLL.Result.Passed); }
+			get { return (window) =>  MakeScreenshot(window, BLL.Result.Passed); }
 		}
 
 		public Func<bool> ActionFailed
 		{
-			get { return () => MakeScreenshot(BLL.Result.Failed); }
+			get { return () => MakeScreenshot(new IntPtr(), BLL.Result.Failed); }
 		}
 
 		private bool Skip()

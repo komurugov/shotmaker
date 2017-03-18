@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace ScreenshotMaker.BLL
@@ -10,18 +11,38 @@ namespace ScreenshotMaker.BLL
 	{
 		public static readonly ImageFormat ImageFormat = ImageFormat.Png;
 
-		private static Bitmap TakeScreenshot()
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct RECT
+        {
+            public int Left;        // x position of upper-left corner
+            public int Top;         // y position of upper-left corner
+            public int Right;       // x position of lower-right corner
+            public int Bottom;      // y position of lower-right corner
+        }
+
+        private static Bitmap TakeScreenshot(IntPtr window)
 		{
-			var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb);
+            RECT rectangle;
+            if (!GetWindowRect(window, out rectangle))
+                return null;
+            var bitmap = new Bitmap(rectangle.Right - rectangle.Left, rectangle.Bottom - rectangle.Top, PixelFormat.Format32bppArgb);
+//			var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb);
 			Graphics graphics = Graphics.FromImage(bitmap);
 			try
 			{
-				graphics.CopyFromScreen(SystemInformation.VirtualScreen.X,
-					SystemInformation.VirtualScreen.Y,
-					0,
-					0,
-					SystemInformation.VirtualScreen.Size,
-					CopyPixelOperation.SourceCopy);
+                graphics.CopyFromScreen(rectangle.Left,
+                    rectangle.Top,
+                    //				graphics.CopyFromScreen(SystemInformation.VirtualScreen.X,
+                    //					SystemInformation.VirtualScreen.Y,
+                    0,
+                    0,
+                    bitmap.Size);
+//					SystemInformation.VirtualScreen.Size,
+//					CopyPixelOperation.SourceCopy);
 			}
 			catch (Exception exception)
 			{
@@ -66,7 +87,7 @@ namespace ScreenshotMaker.BLL
 			}
 		}
 
-		public static void TakeAndSaveScreenshot(FileInfoDto pathAndFileName)
+		public static void TakeAndSaveScreenshot(IntPtr window, FileInfoDto pathAndFileName)
 		{
 			try
 			{
@@ -76,7 +97,7 @@ namespace ScreenshotMaker.BLL
 			{
 				throw new InvalidOperationException(string.Format("Can't create path '{0}': {1}", pathAndFileName.Path, exception.Message));
 			}
-			Bitmap bitmap = TakeScreenshot();
+			Bitmap bitmap = TakeScreenshot(window);
 			bitmap.Save(pathAndFileName);
 		}
 
