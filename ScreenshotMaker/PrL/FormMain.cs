@@ -4,6 +4,7 @@ using ScreenshotMaker.BLL;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using ScreenshotMaker.BLL.Win32Interop;
+using System.Collections.Generic;
 
 namespace ScreenshotMaker.PrL
 {
@@ -288,8 +289,17 @@ namespace ScreenshotMaker.PrL
 
         //Declare the mouse hook constant.
         //For other hook types, you can obtain these values from Winuser.h in the Microsoft SDK.
-        public const int WH_MOUSE_LL = 14;
-
+        const int WH_MOUSE_LL = 14;
+        const uint WM_MOUSEMOVE = 0x200;
+        const uint WM_LBUTTONDOWN = 0x201;
+        const uint WM_LBUTTONUP = 0x202;
+        const uint WM_LBUTTONDBLCLK = 0x203;
+        const uint WM_RBUTTONDOWN = 0x204;
+        const uint WM_RBUTTONUP = 0x205;
+        const uint WM_RBUTTONDBLCLK = 0x206;
+        const uint WM_MBUTTONDOWN = 0x207;
+        const uint WM_MBUTTONUP = 0x208;
+        const uint WM_MBUTTONDBLCLK = 0x209;
         //Declare MouseHookProcedure as a HookProc type.
         HookProc MouseHookProcedure;
 
@@ -362,11 +372,23 @@ namespace ScreenshotMaker.PrL
             {
                 return CallNextHookEx(hHook, nCode, wParam, lParam);
             }
-            else if (wParam.ToInt64() == 0x201 || wParam.ToInt64() == 0x204)
+            var code = wParam.ToInt64();
+            if (new List<long> { WM_LBUTTONUP, WM_MBUTTONUP, WM_RBUTTONUP }.Contains(code))
+                return 2;
+            else if (new List<long> { WM_LBUTTONDOWN, WM_MBUTTONDOWN, WM_RBUTTONDOWN }.Contains(code))
             {
+                bool ret = UnhookWindowsHookEx(hHook);
+                //If the UnhookWindowsHookEx function fails.
+                if (ret == false)
+                {
+                    MessageBox.Show("UnhookWindowsHookEx Failed");
+                }
+                hHook = 0;
+
                 var tempForm = Program.MainForm;
 
                 tempForm.MakeScreenshot(tempForm.GetSelectedPresenterItem()?.ActionPassed, WindowFromPoint(MyMouseHookStruct.pt));
+                tempForm.RestoreAfterScreenshot();
 
                 return 1;
             }
@@ -376,8 +398,12 @@ namespace ScreenshotMaker.PrL
 
         private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
+            PrepareBeforeScreenshot();
             if (IsEntireScreenNeededToBeCaptured())
+            {
                 MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, GetDesktopWindow());
+                RestoreAfterScreenshot();
+            }
             else
             {
                 button1_Click(null, null);

@@ -66,17 +66,12 @@ namespace ScreenshotMaker.BLL
 		{			
 			try
 			{
-				_view.PrepareBeforeScreenshot();
 				_modelItem.MakeScreenshot(window, result, _view.GetOuputFolderPath());
 			}
 			catch (Exception exception)
 			{
 				_view.ShowMessage("Can't make and save screenshot: " + exception.Message);
 				return false;
-			}
-			finally
-			{
-				_view.RestoreAfterScreenshot();
 			}
 			_view.RefreshData();
 			return true;
