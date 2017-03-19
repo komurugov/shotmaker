@@ -169,7 +169,7 @@ namespace ScreenshotMaker.PrL
 
 		public void PrepareBeforeScreenshot()
 		{
-			// This two ways works too slowly:
+			// This two ways work too slowly:
 			//WindowState = FormWindowState.Minimized;
 			//Visible = false;
 
@@ -273,11 +273,11 @@ namespace ScreenshotMaker.PrL
         {
             return radioButtonScreenshotAreaScreen.Checked;
         }
-        private void MakeScreenshot(Func<IntPtr, bool> action)
+        private void MakeScreenshot(Func<IntPtr, bool> action, IntPtr window)
         {
             if (action == null)
                 return;
-            if (action(GetDesktopWindow()))
+            if (action(window))
                 SelectNextSelectableTreeItem();
         }
 
@@ -293,14 +293,30 @@ namespace ScreenshotMaker.PrL
         //Declare MouseHookProcedure as a HookProc type.
         HookProc MouseHookProcedure;
 
-        //Declare the wrapper managed POINT class.
         [StructLayout(LayoutKind.Sequential)]
-        public class POINT
+        public struct POINT
         {
-            public int x;
-            public int y;
-        }
+            public int X;
+            public int Y;
 
+            public POINT(int x, int y)
+            {
+                this.X = x;
+                this.Y = y;
+            }
+
+            public POINT(System.Drawing.Point pt) : this(pt.X, pt.Y) { }
+
+            public static implicit operator System.Drawing.Point(POINT p)
+            {
+                return new System.Drawing.Point(p.X, p.Y);
+            }
+
+            public static implicit operator POINT(System.Drawing.Point p)
+            {
+                return new POINT(p.X, p.Y);
+            }
+        }
         //Declare the wrapper managed MouseHookStruct class.
         [StructLayout(LayoutKind.Sequential)]
         public class MouseHookStruct
@@ -348,16 +364,10 @@ namespace ScreenshotMaker.PrL
             }
             else if (wParam.ToInt64() == 0x201 || wParam.ToInt64() == 0x204)
             {
-                //Create a string variable that shows the current mouse coordinates.
-                String strCaption = "x = " +
-                MyMouseHookStruct.pt.x.ToString("d") +
-                "  y = " +
-                MyMouseHookStruct.pt.y.ToString("d");
-
                 var tempForm = Program.MainForm;
 
-                //Set the caption of the form.
-                tempForm.Text = strCaption;
+                tempForm.MakeScreenshot(tempForm.GetSelectedPresenterItem()?.ActionPassed, WindowFromPoint(MyMouseHookStruct.pt));
+
                 return 1;
             }
             else
@@ -367,8 +377,11 @@ namespace ScreenshotMaker.PrL
         private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
             if (IsEntireScreenNeededToBeCaptured())
-                MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed);
-            else;
+                MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, GetDesktopWindow());
+            else
+            {
+                button1_Click(null, null);
+            }
                 
         }
         private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
@@ -456,7 +469,7 @@ namespace ScreenshotMaker.PrL
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (hHook == 0)
+ //           if (hHook == 0)
             {
                 // Create an instance of HookProc.
                 MouseHookProcedure = new HookProc(MouseHookProc);
@@ -476,19 +489,19 @@ namespace ScreenshotMaker.PrL
                 }
                 button1.Text = "UnHook Windows Hook";
             }
-            else
-            {
-                bool ret = UnhookWindowsHookEx(hHook);
-                //If the UnhookWindowsHookEx function fails.
-                if (ret == false)
-                {
-                    MessageBox.Show("UnhookWindowsHookEx Failed");
-                    return;
-                }
-                hHook = 0;
-                button1.Text = "Set Windows Hook";
-                this.Text = "Mouse Hook";
-            }
+            //else
+            //{
+            //    bool ret = UnhookWindowsHookEx(hHook);
+            //    //If the UnhookWindowsHookEx function fails.
+            //    if (ret == false)
+            //    {
+            //        MessageBox.Show("UnhookWindowsHookEx Failed");
+            //        return;
+            //    }
+            //    hHook = 0;
+            //    button1.Text = "Set Windows Hook";
+            //    this.Text = "Mouse Hook";
+            //}
         }
     }
 }
