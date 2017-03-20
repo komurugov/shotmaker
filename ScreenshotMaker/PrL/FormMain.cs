@@ -361,7 +361,22 @@ namespace ScreenshotMaker.PrL
 
         [DllImport("user32.dll", SetLastError = false)]
         static extern IntPtr GetDesktopWindow();
+        //        [DllImport("user32.dll", ExactSpelling = true, CharSet = CharSet.Auto)]
+        //      public static extern IntPtr GetParent(IntPtr hWnd);
+        /// <summary>
+        /// Retrieves the handle to the ancestor of the specified window. 
+        /// </summary>
+        /// <param name="hwnd">A handle to the window whose ancestor is to be retrieved. 
+        /// If this parameter is the desktop window, the function returns NULL. </param>
+        /// <param name="flags">The ancestor to be retrieved.</param>
+        /// <returns>The return value is the handle to the ancestor window.</returns>
+        [DllImport("user32.dll", ExactSpelling = true)]
+        static extern IntPtr GetAncestor(IntPtr hwnd, uint flags);
+        private const uint GA_PARENT = 1; // Retrieves the parent window.This does not include the owner, as it does with the GetParent function.
 
+        private const uint GA_ROOT = 2; // Retrieves the root window by walking the chain of parent windows.
+
+        private const uint GA_ROOTOWNER = 3; // Retrieves the owned root window by walking the chain of parent and owner windows returned by GetParent.
 
         public static int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
         {
@@ -387,7 +402,10 @@ namespace ScreenshotMaker.PrL
 
                 var tempForm = Program.MainForm;
 
-                tempForm.MakeScreenshot(tempForm.GetSelectedPresenterItem()?.ActionPassed, WindowFromPoint(MyMouseHookStruct.pt));
+                var window = WindowFromPoint(MyMouseHookStruct.pt);
+                var windowP = GetAncestor(window, GA_ROOTOWNER);
+
+                tempForm.MakeScreenshot(tempForm.GetSelectedPresenterItem()?.ActionPassed, windowP == null ? window : windowP);
                 tempForm.RestoreAfterScreenshot();
 
                 return 1;
