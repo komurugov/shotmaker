@@ -153,7 +153,6 @@ namespace ScreenshotMaker.PrL
 			_inputFileName = name;
 		}
 
-
 		private void buttonChooseTestCase_Click(object sender, EventArgs e)
 		{
 			if (openFileDialog.ShowDialog() == DialogResult.OK)
@@ -271,10 +270,14 @@ namespace ScreenshotMaker.PrL
                     node = node.PrevVisibleNode;
             Refresh();
         }
+
         private bool IsEntireScreenNeededToBeCaptured()
         {
             return radioButtonScreenshotAreaScreen.Checked;
         }
+
+
+
         private void MakeScreenshot(Func<IntPtr, bool> action, IntPtr window)
         {
             if (action == null)
@@ -288,51 +291,13 @@ namespace ScreenshotMaker.PrL
         //Declare the hook handle as an int.
         static int hHook = 0;
 
-        //Declare the mouse hook constant.
-        //For other hook types, you can obtain these values from Winuser.h in the Microsoft SDK.
-        const int WH_MOUSE_LL = 14;
-        const uint WM_MOUSEMOVE = 0x200;
-        const uint WM_LBUTTONDOWN = 0x201;
-        const uint WM_LBUTTONUP = 0x202;
-        const uint WM_LBUTTONDBLCLK = 0x203;
-        const uint WM_RBUTTONDOWN = 0x204;
-        const uint WM_RBUTTONUP = 0x205;
-        const uint WM_RBUTTONDBLCLK = 0x206;
-        const uint WM_MBUTTONDOWN = 0x207;
-        const uint WM_MBUTTONUP = 0x208;
-        const uint WM_MBUTTONDBLCLK = 0x209;
-        //Declare MouseHookProcedure as a HookProc type.
         HookProc MouseHookProcedure;
 
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int X;
-            public int Y;
-
-            public POINT(int x, int y)
-            {
-                this.X = x;
-                this.Y = y;
-            }
-
-            public POINT(System.Drawing.Point pt) : this(pt.X, pt.Y) { }
-
-            public static implicit operator System.Drawing.Point(POINT p)
-            {
-                return new System.Drawing.Point(p.X, p.Y);
-            }
-
-            public static implicit operator POINT(System.Drawing.Point p)
-            {
-                return new POINT(p.X, p.Y);
-            }
-        }
         //Declare the wrapper managed MouseHookStruct class.
         [StructLayout(LayoutKind.Sequential)]
         public class MouseHookStruct
         {
-            public POINT pt;
+            public Win32Interop.POINT pt;
             public int hwnd;
             public int wHitTestCode;
             public int dwExtraInfo;
@@ -389,9 +354,9 @@ namespace ScreenshotMaker.PrL
                 return CallNextHookEx(hHook, nCode, wParam, lParam);
             }
             var code = wParam.ToInt64();
-            if (new List<long> { WM_LBUTTONUP, WM_MBUTTONUP, WM_RBUTTONUP }.Contains(code))
+            if (new List<Int64> { (Int64)Win32Interop.WindowsMessages.WM_LBUTTONUP, (Int64)Win32Interop.WindowsMessages.WM_MBUTTONUP, (Int64)Win32Interop.WindowsMessages.WM_RBUTTONUP }.Contains(code))
                 return 2;
-            else if (new List<long> { WM_LBUTTONDOWN, WM_MBUTTONDOWN, WM_RBUTTONDOWN }.Contains(code))
+            else if (new List<Int64> { (Int64)Win32Interop.WindowsMessages.WM_LBUTTONDOWN, (Int64)Win32Interop.WindowsMessages.WM_MBUTTONDOWN, (Int64)Win32Interop.WindowsMessages.WM_RBUTTONDOWN }.Contains(code))
             {
                 bool ret = UnhookWindowsHookEx(hHook);
                 //If the UnhookWindowsHookEx function fails.
@@ -521,7 +486,7 @@ namespace ScreenshotMaker.PrL
 
                 var thread = System.Threading.Thread.CurrentThread.ManagedThreadId;
 
-                hHook = SetWindowsHookEx(WH_MOUSE_LL,
+                hHook = SetWindowsHookEx((int)Win32Interop.WindowsHooks.WH_MOUSE_LL,
                 MouseHookProcedure,
                 (IntPtr)0,
                 0);
@@ -532,21 +497,7 @@ namespace ScreenshotMaker.PrL
                     MessageBox.Show("SetWindowsHookEx Failed: " + errorCode);
                     return;
                 }
-                button1.Text = "UnHook Windows Hook";
             }
-            //else
-            //{
-            //    bool ret = UnhookWindowsHookEx(hHook);
-            //    //If the UnhookWindowsHookEx function fails.
-            //    if (ret == false)
-            //    {
-            //        MessageBox.Show("UnhookWindowsHookEx Failed");
-            //        return;
-            //    }
-            //    hHook = 0;
-            //    button1.Text = "Set Windows Hook";
-            //    this.Text = "Mouse Hook";
-            //}
         }
     }
 }

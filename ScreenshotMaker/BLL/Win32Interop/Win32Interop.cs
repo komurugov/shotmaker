@@ -33,6 +33,49 @@ namespace ScreenshotMaker.BLL.Win32Interop
 			ERROR_ALREADY_EXISTS = 183
 		}
 
+		public enum WindowsHooks : int
+		{
+			WH_MOUSE_LL = 14
+		}
+
+		public enum WindowsMessages : uint
+		{
+			WM_MOUSEMOVE = 0x200,
+			WM_LBUTTONDOWN = 0x201,
+			WM_LBUTTONUP = 0x202,
+			WM_LBUTTONDBLCLK = 0x203,
+			WM_RBUTTONDOWN = 0x204,
+			WM_RBUTTONUP = 0x205,
+			WM_RBUTTONDBLCLK = 0x206,
+			WM_MBUTTONDOWN = 0x207,
+			WM_MBUTTONUP = 0x208,
+			WM_MBUTTONDBLCLK = 0x209
+		}
+
+		[StructLayout(LayoutKind.Sequential)]
+		public struct POINT
+		{
+			public int X;
+			public int Y;
+			public POINT(int x, int y)
+			{
+				X = x;
+				Y = y;
+			}
+			public POINT(System.Drawing.Point pt) : this(pt.X, pt.Y)
+			{
+			}
+			public static implicit operator System.Drawing.Point(POINT p)
+			{
+				return new System.Drawing.Point(p.X, p.Y);
+			}
+			public static implicit operator POINT(System.Drawing.Point p)
+			{
+				return new POINT(p.X, p.Y);
+			}
+		}
+
+
 		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern bool MoveFileEx(string lpExistingFileName, string lpNewFileName, MoveFileFlags dwFlags);
 

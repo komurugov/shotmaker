@@ -53,7 +53,6 @@
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonApply = new System.Windows.Forms.Button();
             this.panelMetaEdit = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.panelEdit.SuspendLayout();
             this.panelWork.SuspendLayout();
             this.groupBoxMakeScreenshot.SuspendLayout();
@@ -336,7 +335,6 @@
             this.panelMetaEdit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelMetaEdit.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelMetaEdit.Controls.Add(this.button1);
             this.panelMetaEdit.Controls.Add(this.buttonApply);
             this.panelMetaEdit.Controls.Add(this.panelEdit);
             this.panelMetaEdit.Controls.Add(this.buttonEdit);
@@ -344,16 +342,6 @@
             this.panelMetaEdit.Name = "panelMetaEdit";
             this.panelMetaEdit.Size = new System.Drawing.Size(661, 148);
             this.panelMetaEdit.TabIndex = 44;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(290, 120);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 44;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormMain
             // 
@@ -402,7 +390,6 @@
         private System.Windows.Forms.GroupBox groupBoxMakeScreenshot;
         private System.Windows.Forms.RadioButton radioButtonScreenshotAreaScreen;
         private System.Windows.Forms.RadioButton radioButtonScreenshotAreaWindow;
-        private System.Windows.Forms.Button button1;
     }
 }
 
