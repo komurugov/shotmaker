@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace ScreenshotMaker.PrL
 {
-	public partial class FormMain : Form, IView
+    public partial class FormMain : Form, IView
 	{
 		private IPresenter _presenter;
 
@@ -181,6 +181,7 @@ namespace ScreenshotMaker.PrL
 		public void RestoreAfterScreenshot()
 		{
 			Opacity = _normalOpacity;
+            Activate();
 		}
 
 		private IPresenterItem GetSelectedPresenterItem()
