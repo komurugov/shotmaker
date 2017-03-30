@@ -76,6 +76,18 @@ namespace ScreenshotMaker.BLL.Win32Interop
 		}
 
 
+		public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
+
+		[StructLayout(LayoutKind.Sequential)]
+		public class MouseHookStruct
+		{
+			public POINT pt;
+			public int hwnd;
+			public int wHitTestCode;
+			public int dwExtraInfo;
+		}
+
+
 		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern bool MoveFileEx(string lpExistingFileName, string lpNewFileName, MoveFileFlags dwFlags);
 
@@ -88,5 +100,27 @@ namespace ScreenshotMaker.BLL.Win32Interop
 
 		[DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
 		public static extern FileAttributesFlags GetFileAttributes(string lpFileName);
+
+		[DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+		public static extern int SetWindowsHookEx(int idHook, HookProc lpfn, IntPtr hInstance, int threadId);
+
+		[DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+		public static extern bool UnhookWindowsHookEx(int idHook);
+
+		[DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+		public static extern int CallNextHookEx(int idHook, int nCode, IntPtr wParam, IntPtr lParam);
+
+		[DllImport("user32.dll")]
+		public static extern IntPtr WindowFromPoint(System.Drawing.Point p);
+
+		[DllImport("user32.dll", SetLastError = false)]
+		public static extern IntPtr GetDesktopWindow();
+
+		public const uint GA_PARENT = 1;
+		public const uint GA_ROOT = 2;
+		public const uint GA_ROOTOWNER = 3;
+
+		[DllImport("user32.dll", ExactSpelling = true)]
+		public static extern IntPtr GetAncestor(IntPtr hwnd, uint flags);
 	}
 }

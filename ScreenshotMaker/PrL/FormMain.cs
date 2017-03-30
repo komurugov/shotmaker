@@ -5,10 +5,11 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using ScreenshotMaker.BLL.Win32Interop;
 using System.Collections.Generic;
+using static ScreenshotMaker.BLL.Win32Interop.Win32Interop;
 
 namespace ScreenshotMaker.PrL
 {
-    public partial class FormMain : Form, IView
+	public partial class FormMain : Form, IView
 	{
 		private IPresenter _presenter;
 
@@ -22,9 +23,9 @@ namespace ScreenshotMaker.PrL
 
 			SetControlsPropertiesForEditing();
 
-            textBoxTestExecution.Text = "318";
-            textBoxTestCase.Text = @"D:\my\proj\shotmaker\task\test case.xml";
-            textBoxOutputFolder.Text = @"D:\my\_temp";
+			textBoxTestExecution.Text = "318";
+			textBoxTestCase.Text = @"D:\my\proj\shotmaker\task\test case.xml";
+			textBoxOutputFolder.Text = @"D:\my\_temp";
 		}
 
 		private void SetControlsPropertiesForEditing()
@@ -33,7 +34,7 @@ namespace ScreenshotMaker.PrL
 			buttonEdit.Enabled = false;
 			panelEdit.Enabled = true;
 			buttonApply.Enabled = true;
-            textBoxTestCase.Focus();
+			textBoxTestCase.Focus();
 		}
 
 		private void SetControlsPropertiesForWorking()
@@ -42,7 +43,7 @@ namespace ScreenshotMaker.PrL
 			buttonApply.Enabled = false;
 			panelWork.Enabled = true;
 			buttonEdit.Enabled = true;
-            treeViewTestExecution.Focus();
+			treeViewTestExecution.Focus();
 		}
 
 		public string GetTestExecutionName()
@@ -129,7 +130,7 @@ namespace ScreenshotMaker.PrL
 				}
 			node.Text = prefix + presenterItem.Text;
 			node.NodeFont = new Font(node.TreeView.Font, presenterItem.Selectable ? FontStyle.Underline : FontStyle.Regular);
-			node.ForeColor = color; 
+			node.ForeColor = color;
 		}
 
 		public void RefreshData()
@@ -180,7 +181,7 @@ namespace ScreenshotMaker.PrL
 		public void RestoreAfterScreenshot()
 		{
 			Opacity = _normalOpacity;
-            Activate();
+			Activate();
 		}
 
 		private IPresenterItem GetSelectedPresenterItem()
@@ -229,172 +230,121 @@ namespace ScreenshotMaker.PrL
 			return presenterItemTree?.Value != null && presenterItemTree.Value.Selectable;
 		}
 
-        private void SelectNextSelectableTreeItem()
-        {
-            TreeNode node = null;
-            if (treeViewTestExecution.SelectedNode == null)
-            {
-                if (treeViewTestExecution.Nodes.Count > 0)
-                    node = treeViewTestExecution.Nodes[0];
-            }
-            else
-                node = treeViewTestExecution.SelectedNode.NextVisibleNode;
-            while (node != null)
-                if (IsNodeSelectable(node))
-                {
-                    treeViewTestExecution.SelectedNode = node;
-                    return;
-                }
-                else
-                    node = node.NextVisibleNode;
-            Refresh();
-        }
-
-        private void SelectPreviousSelectableTreeItem()
-        {
-            TreeNode node = null;
-            if (treeViewTestExecution.SelectedNode == null)
-            {
-                if (treeViewTestExecution.Nodes.Count > 0)
-                    node = treeViewTestExecution.Nodes[treeViewTestExecution.Nodes.Count - 1];
-            }
-            else
-                node = treeViewTestExecution.SelectedNode.PrevVisibleNode;
-            while (node != null)
-                if (IsNodeSelectable(node))
-                {
-                    treeViewTestExecution.SelectedNode = node;
-                    return;
-                }
-                else
-                    node = node.PrevVisibleNode;
-            Refresh();
-        }
-
-        private bool IsEntireScreenNeededToBeCaptured()
-        {
-            return radioButtonScreenshotAreaScreen.Checked;
-        }
-
-
-
-        private void MakeScreenshot(Func<IntPtr, bool> action, IntPtr window)
-        {
-            if (action == null)
-                return;
-            if (action(window))
-                SelectNextSelectableTreeItem();
-        }
-
-        public delegate int HookProc(int nCode, IntPtr wParam, IntPtr lParam);
-
-        //Declare the hook handle as an int.
-        static int hHook = 0;
-
-        HookProc MouseHookProcedure;
-
-        //Declare the wrapper managed MouseHookStruct class.
-        [StructLayout(LayoutKind.Sequential)]
-        public class MouseHookStruct
-        {
-            public Win32Interop.POINT pt;
-            public int hwnd;
-            public int wHitTestCode;
-            public int dwExtraInfo;
-        }
-
-        //This is the Import for the SetWindowsHookEx function.
-        //Use this function to install a thread-specific hook.
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
-         CallingConvention = CallingConvention.StdCall, SetLastError = true)]
-        public static extern int SetWindowsHookEx(int idHook, HookProc lpfn,
-        IntPtr hInstance, int threadId);
-
-        //This is the Import for the UnhookWindowsHookEx function.
-        //Call this function to uninstall the hook.
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
-         CallingConvention = CallingConvention.StdCall)]
-        public static extern bool UnhookWindowsHookEx(int idHook);
-
-        //This is the Import for the CallNextHookEx function.
-        //Use this function to pass the hook information to the next hook procedure in chain.
-        [DllImport("user32.dll", CharSet = CharSet.Auto,
-         CallingConvention = CallingConvention.StdCall)]
-        public static extern int CallNextHookEx(int idHook, int nCode,
-        IntPtr wParam, IntPtr lParam);
-        [DllImport("user32.dll")]
-        static extern IntPtr WindowFromPoint(System.Drawing.Point p);
-
-        [DllImport("user32.dll", SetLastError = false)]
-        static extern IntPtr GetDesktopWindow();
-        //        [DllImport("user32.dll", ExactSpelling = true, CharSet = CharSet.Auto)]
-        //      public static extern IntPtr GetParent(IntPtr hWnd);
-        /// <summary>
-        /// Retrieves the handle to the ancestor of the specified window. 
-        /// </summary>
-        /// <param name="hwnd">A handle to the window whose ancestor is to be retrieved. 
-        /// If this parameter is the desktop window, the function returns NULL. </param>
-        /// <param name="flags">The ancestor to be retrieved.</param>
-        /// <returns>The return value is the handle to the ancestor window.</returns>
-        [DllImport("user32.dll", ExactSpelling = true)]
-        static extern IntPtr GetAncestor(IntPtr hwnd, uint flags);
-        private const uint GA_PARENT = 1; // Retrieves the parent window.This does not include the owner, as it does with the GetParent function.
-
-        private const uint GA_ROOT = 2; // Retrieves the root window by walking the chain of parent windows.
-
-        private const uint GA_ROOTOWNER = 3; // Retrieves the owned root window by walking the chain of parent and owner windows returned by GetParent.
-
-        public static int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
-        {
-            //Marshall the data from the callback.
-            MouseHookStruct MyMouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
-
-            if (nCode < 0)
-            {
-                return CallNextHookEx(hHook, nCode, wParam, lParam);
-            }
-            var code = wParam.ToInt64();
-            if (new List<Int64> { (Int64)Win32Interop.WindowsMessages.WM_LBUTTONUP, (Int64)Win32Interop.WindowsMessages.WM_MBUTTONUP, (Int64)Win32Interop.WindowsMessages.WM_RBUTTONUP }.Contains(code))
-                return 2;
-            else if (new List<Int64> { (Int64)Win32Interop.WindowsMessages.WM_LBUTTONDOWN, (Int64)Win32Interop.WindowsMessages.WM_MBUTTONDOWN, (Int64)Win32Interop.WindowsMessages.WM_RBUTTONDOWN }.Contains(code))
-            {
-                bool ret = UnhookWindowsHookEx(hHook);
-                //If the UnhookWindowsHookEx function fails.
-                if (ret == false)
-                {
-                    MessageBox.Show("UnhookWindowsHookEx Failed");
-                }
-                hHook = 0;
-
-                var tempForm = Program.MainForm;
-
-                var window = WindowFromPoint(MyMouseHookStruct.pt);
-                var windowP = GetAncestor(window, GA_ROOTOWNER);
-
-                tempForm.MakeScreenshot(tempForm.GetSelectedPresenterItem()?.ActionPassed, windowP == null ? window : windowP);
-                tempForm.RestoreAfterScreenshot();
-
-                return 1;
-            }
-            else
-                return CallNextHookEx(hHook, nCode, wParam, lParam);
-        }
-
-        private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
+		private void SelectNextSelectableTreeItem()
 		{
-            PrepareBeforeScreenshot();
-            if (IsEntireScreenNeededToBeCaptured())
-            {
-                MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, GetDesktopWindow());
-                RestoreAfterScreenshot();
-            }
-            else
-            {
-                button1_Click(null, null);
-            }
-                
-        }
-        private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
+			TreeNode node = null;
+			if (treeViewTestExecution.SelectedNode == null)
+			{
+				if (treeViewTestExecution.Nodes.Count > 0)
+					node = treeViewTestExecution.Nodes[0];
+			}
+			else
+				node = treeViewTestExecution.SelectedNode.NextVisibleNode;
+			while (node != null)
+				if (IsNodeSelectable(node))
+				{
+					treeViewTestExecution.SelectedNode = node;
+					return;
+				}
+				else
+					node = node.NextVisibleNode;
+			Refresh();
+		}
+
+		private void SelectPreviousSelectableTreeItem()
+		{
+			TreeNode node = null;
+			if (treeViewTestExecution.SelectedNode == null)
+			{
+				if (treeViewTestExecution.Nodes.Count > 0)
+					node = treeViewTestExecution.Nodes[treeViewTestExecution.Nodes.Count - 1];
+			}
+			else
+				node = treeViewTestExecution.SelectedNode.PrevVisibleNode;
+			while (node != null)
+				if (IsNodeSelectable(node))
+				{
+					treeViewTestExecution.SelectedNode = node;
+					return;
+				}
+				else
+					node = node.PrevVisibleNode;
+			Refresh();
+		}
+
+		private bool IsEntireScreenNeededToBeCaptured()
+		{
+			return radioButtonScreenshotAreaScreen.Checked;
+		}
+
+
+
+		private void MakeScreenshot(Func<IntPtr, bool> action, IntPtr window)
+		{
+			if (action == null)
+				return;
+			if (action(window))
+				SelectNextSelectableTreeItem();
+		}
+
+		private static int _hHook = 0;
+
+		private void OnMouseHook(POINT point)
+		{
+			var window = WindowFromPoint(point);
+			var windowP = GetAncestor(window, GA_ROOTOWNER);
+
+			MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, windowP == null ? window : windowP);
+			RestoreAfterScreenshot();
+
+			if (UnhookWindowsHookEx(_hHook))
+				_hHook = 0;
+		}
+
+		public static int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
+		{
+			if (nCode < 0)
+				return CallNextHookEx(_hHook, nCode, wParam, lParam);
+			long code = wParam.ToInt64();
+			if (new List<long>
+			{
+				(long)WindowsMessages.WM_LBUTTONUP,
+				(long)WindowsMessages.WM_MBUTTONUP,
+				(long)WindowsMessages.WM_RBUTTONUP
+			}.Contains(code))
+				return 1;
+			else if (new List<long>
+			{
+				(long)WindowsMessages.WM_LBUTTONDOWN,
+				(long)WindowsMessages.WM_MBUTTONDOWN,
+				(long)WindowsMessages.WM_RBUTTONDOWN
+			}.Contains(code))
+			{
+				var mouseHookStruct = (MouseHookStruct)Marshal.PtrToStructure(lParam, typeof(MouseHookStruct));
+
+				Program.MainForm.OnMouseHook(mouseHookStruct.pt);
+
+				return 1;
+			}
+			else
+				return CallNextHookEx(_hHook, nCode, wParam, lParam);
+		}
+
+		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
+		{
+			PrepareBeforeScreenshot();
+			if (IsEntireScreenNeededToBeCaptured())
+			{
+				MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, GetDesktopWindow());
+				RestoreAfterScreenshot();
+			}
+			else
+			{
+				button1_Click(null, null);
+			}
+
+		}
+		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionFailed != null)
@@ -422,15 +372,15 @@ namespace ScreenshotMaker.PrL
 			OnChangeSelectedNode();
 		}
 
-        private void Apply()
-        {
-            if (_presenter.OpenFile())
-                SetControlsPropertiesForWorking();
-        }
-
-        private void buttonApply_Click(object sender, EventArgs e)
+		private void Apply()
 		{
-            Apply();
+			if (_presenter.OpenFile())
+				SetControlsPropertiesForWorking();
+		}
+
+		private void buttonApply_Click(object sender, EventArgs e)
+		{
+			Apply();
 		}
 
 		private void buttonEdit_Click(object sender, EventArgs e)
@@ -453,51 +403,51 @@ namespace ScreenshotMaker.PrL
 			e.Cancel = true;
 		}
 
-        private void editTextBoxesOnKeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter)
-            {
-                Apply();
-                e.Handled = true;
-            }
-        }
+		private void editTextBoxesOnKeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter)
+			{
+				Apply();
+				e.Handled = true;
+			}
+		}
 
-        private void treeViewTestExecution_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.Down:
-                    SelectNextSelectableTreeItem();
-                    e.Handled = true;
-                    break;
-                case Keys.Up:
-                    SelectPreviousSelectableTreeItem();
-                    e.Handled = true;
-                    break;
-            }
-        }
+		private void treeViewTestExecution_KeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.Down:
+					SelectNextSelectableTreeItem();
+					e.Handled = true;
+					break;
+				case Keys.Up:
+					SelectPreviousSelectableTreeItem();
+					e.Handled = true;
+					break;
+			}
+		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
- //           if (hHook == 0)
-            {
-                // Create an instance of HookProc.
-                MouseHookProcedure = new HookProc(MouseHookProc);
+		private void button1_Click(object sender, EventArgs e)
+		{
+			//           if (hHook == 0)
+			{
+				// Create an instance of HookProc.
+				HookProc MouseHookProcedure = new HookProc(MouseHookProc);
 
-                var thread = System.Threading.Thread.CurrentThread.ManagedThreadId;
+				var thread = System.Threading.Thread.CurrentThread.ManagedThreadId;
 
-                hHook = SetWindowsHookEx((int)Win32Interop.WindowsHooks.WH_MOUSE_LL,
-                MouseHookProcedure,
-                (IntPtr)0,
-                0);
-                //If the SetWindowsHookEx function fails.
-                if (hHook == 0)
-                {
-                    Win32Interop.ErrorCodes errorCode = (Win32Interop.ErrorCodes)Marshal.GetLastWin32Error();
-                    MessageBox.Show("SetWindowsHookEx Failed: " + errorCode);
-                    return;
-                }
-            }
-        }
-    }
+				_hHook = SetWindowsHookEx((int)Win32Interop.WindowsHooks.WH_MOUSE_LL,
+				MouseHookProcedure,
+				(IntPtr)0,
+				0);
+				//If the SetWindowsHookEx function fails.
+				if (_hHook == 0)
+				{
+					Win32Interop.ErrorCodes errorCode = (Win32Interop.ErrorCodes)Marshal.GetLastWin32Error();
+					MessageBox.Show("SetWindowsHookEx Failed: " + errorCode);
+					return;
+				}
+			}
+		}
+	}
 }
