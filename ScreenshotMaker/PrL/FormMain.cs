@@ -279,26 +279,29 @@ namespace ScreenshotMaker.PrL
 
 
 
-		private void MakeScreenshot(Func<IntPtr, bool> action, IntPtr window)
+		private void MakeScreenshot(IntPtr window)
 		{
-			if (action == null)
+			if (_choosedActionForMadeScreenshot == null)
 				return;
-			if (action(window))
+			if (_choosedActionForMadeScreenshot(window))
 				SelectNextSelectableTreeItem();
 		}
 
-		private static int _hHook = 0;
+		private static int _hHook;
+
+		Func<IntPtr, bool> _choosedActionForMadeScreenshot;
 
 		private void OnMouseHook(POINT point)
 		{
-			var window = WindowFromPoint(point);
-			var windowP = GetAncestor(window, GA_ROOTOWNER);
-
-			MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, windowP == null ? window : windowP);
-			RestoreAfterScreenshot();
-
 			if (UnhookWindowsHookEx(_hHook))
 				_hHook = 0;
+
+			IntPtr window = GetAncestor(WindowFromPoint(point), GA_ROOTOWNER);
+			if (window == null)
+				ShowMessage("A window wasn't pointed!");
+			else
+				MakeScreenshot(window);
+			RestoreAfterScreenshot();
 		}
 
 		public static int MouseHookProc(int nCode, IntPtr wParam, IntPtr lParam)
@@ -332,24 +335,28 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
-			PrepareBeforeScreenshot();
-			if (IsEntireScreenNeededToBeCaptured())
-			{
-				MakeScreenshot(GetSelectedPresenterItem()?.ActionPassed, GetDesktopWindow());
-				RestoreAfterScreenshot();
-			}
-			else
-			{
-				button1_Click(null, null);
-			}
-
+			_choosedActionForMadeScreenshot = GetSelectedPresenterItem()?.ActionPassed;
+			ExecuteChoosedAction();
 		}
+
 		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
 			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
 			if (selectedPresenterItem?.ActionFailed != null)
 				if (selectedPresenterItem.ActionFailed())
 					SelectNextSelectableTreeItem();
+		}
+
+		private void ExecuteChoosedAction()
+		{
+			PrepareBeforeScreenshot();
+			if (IsEntireScreenNeededToBeCaptured())
+			{
+				MakeScreenshot(GetDesktopWindow());
+				RestoreAfterScreenshot();
+			}
+			else
+				SetHook();
 		}
 
 		private void buttonTestExecutionSelectedItemSkip_Click(object sender, EventArgs e)
@@ -427,26 +434,17 @@ namespace ScreenshotMaker.PrL
 			}
 		}
 
-		private void button1_Click(object sender, EventArgs e)
+		private void SetHook()
 		{
-			//           if (hHook == 0)
-			{
-				// Create an instance of HookProc.
-				HookProc MouseHookProcedure = new HookProc(MouseHookProc);
-
-				var thread = System.Threading.Thread.CurrentThread.ManagedThreadId;
-
-				_hHook = SetWindowsHookEx((int)Win32Interop.WindowsHooks.WH_MOUSE_LL,
-				MouseHookProcedure,
+			_hHook = SetWindowsHookEx(
+				(int)WindowsHooks.WH_MOUSE_LL,
+				new HookProc(MouseHookProc),
 				(IntPtr)0,
 				0);
-				//If the SetWindowsHookEx function fails.
-				if (_hHook == 0)
-				{
-					Win32Interop.ErrorCodes errorCode = (Win32Interop.ErrorCodes)Marshal.GetLastWin32Error();
-					MessageBox.Show("SetWindowsHookEx Failed: " + errorCode);
-					return;
-				}
+			if (_hHook == 0)
+			{
+				ErrorCodes errorCode = (ErrorCodes)Marshal.GetLastWin32Error();
+				ShowMessage("SetWindowsHookEx failed: " + errorCode);
 			}
 		}
 	}
