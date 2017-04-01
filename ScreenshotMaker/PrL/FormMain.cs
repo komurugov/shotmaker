@@ -6,12 +6,15 @@ using System.Runtime.InteropServices;
 using ScreenshotMaker.BLL.Win32Interop;
 using System.Collections.Generic;
 using static ScreenshotMaker.BLL.Win32Interop.Win32Interop;
+using ScreenshotMakerHook;
 
 namespace ScreenshotMaker.PrL
 {
 	public partial class FormMain : Form, IView
 	{
 		private IPresenter _presenter;
+
+		private Library _library;
 
 		public FormMain(IPresenter presenter)
 		{
@@ -22,6 +25,9 @@ namespace ScreenshotMaker.PrL
 			_presenter = presenter;
 
 			SetControlsPropertiesForEditing();
+
+			_library = new Library();
+			_library.DoIt(MouseHookProc);
 
 			textBoxTestExecution.Text = "318";
 			textBoxTestCase.Text = @"D:\my\proj\shotmaker\task\test case.xml";
@@ -291,6 +297,11 @@ namespace ScreenshotMaker.PrL
 
 		Func<IntPtr, bool> _choosedActionForMadeScreenshot;
 
+		private void OnMouseHookFromDll(int x, int y)
+		{
+			OnMouseHook(new POINT(x, y));
+		}
+
 		private void OnMouseHook(POINT point)
 		{
 			if (UnhookWindowsHookEx(_hHook))
@@ -435,7 +446,7 @@ namespace ScreenshotMaker.PrL
 		{
 			_hHook = SetWindowsHookEx(
 				(int)WindowsHooks.WH_MOUSE_LL,
-				new HookProc(MouseHookProc),
+				Library.MouseHookProc,
 				(IntPtr)0,
 				0);
 			if (_hHook == 0)
