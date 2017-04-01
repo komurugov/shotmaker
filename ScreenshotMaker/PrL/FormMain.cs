@@ -335,20 +335,17 @@ namespace ScreenshotMaker.PrL
 
 		private void buttonTestExecutionSelectedItemPassed_Click(object sender, EventArgs e)
 		{
-			_choosedActionForMadeScreenshot = GetSelectedPresenterItem()?.ActionPassed;
-			ExecuteChoosedAction();
+			ExecuteChoosedAction(GetSelectedPresenterItem()?.ActionPassed);
 		}
 
 		private void buttonTestExecutionSelectedItemFailed_Click(object sender, EventArgs e)
 		{
-			IPresenterItem selectedPresenterItem = GetSelectedPresenterItem();
-			if (selectedPresenterItem?.ActionFailed != null)
-				if (selectedPresenterItem.ActionFailed())
-					SelectNextSelectableTreeItem();
+			ExecuteChoosedAction(GetSelectedPresenterItem()?.ActionFailed);
 		}
 
-		private void ExecuteChoosedAction()
+		private void ExecuteChoosedAction(Func<IntPtr, bool> action)
 		{
+			_choosedActionForMadeScreenshot = action;
 			PrepareBeforeScreenshot();
 			if (IsEntireScreenNeededToBeCaptured())
 			{

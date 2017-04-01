@@ -79,12 +79,12 @@ namespace ScreenshotMaker.BLL
 
 		public Func<IntPtr, bool> ActionPassed
 		{
-			get { return (window) =>  MakeScreenshot(window, BLL.Result.Passed); }
+			get { return (window) => MakeScreenshot(window, BLL.Result.Passed); }
 		}
 
-		public Func<bool> ActionFailed
+		public Func<IntPtr, bool> ActionFailed
 		{
-			get { return () => MakeScreenshot(new IntPtr(), BLL.Result.Failed); }
+			get { return (window) => MakeScreenshot(window, BLL.Result.Failed); }
 		}
 
 		private bool Skip()

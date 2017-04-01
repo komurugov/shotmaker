@@ -31,7 +31,7 @@ namespace ScreenshotMaker.BLL
 			get { return null; }
 		}
 
-		public Func<bool> ActionFailed
+		public Func<IntPtr, bool> ActionFailed
 		{
 			get { return null; }
 		}
