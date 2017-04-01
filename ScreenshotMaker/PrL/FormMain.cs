@@ -435,7 +435,7 @@ namespace ScreenshotMaker.PrL
 		{
 			_hHook = SetWindowsHookEx(
 				(int)WindowsHooks.WH_MOUSE_LL,
-				new HookProc(MouseHookProc),
+				MouseHookProc,
 				(IntPtr)0,
 				0);
 			if (_hHook == 0)
