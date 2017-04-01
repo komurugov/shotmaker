@@ -23,9 +23,9 @@ namespace ScreenshotMaker.PrL
 
 			SetControlsPropertiesForEditing();
 
-			textBoxTestExecution.Text = "318";
-			textBoxTestCase.Text = @"D:\my\proj\shotmaker\task\test case.xml";
-			textBoxOutputFolder.Text = @"D:\my\_temp";
+			//textBoxTestExecution.Text = "318";
+			//textBoxTestCase.Text = @"D:\my\proj\shotmaker\task\test case.xml";
+			//textBoxOutputFolder.Text = @"D:\my\_temp";
 		}
 
 		private void SetControlsPropertiesForEditing()
@@ -181,6 +181,7 @@ namespace ScreenshotMaker.PrL
 		public void RestoreAfterScreenshot()
 		{
 			Opacity = _normalOpacity;
+			SetForegroundWindow(Handle);
 			Activate();
 		}
 

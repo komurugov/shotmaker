@@ -135,5 +135,9 @@ namespace ScreenshotMaker.BLL.Win32Interop
 
 		[DllImport("user32.dll", ExactSpelling = true)]
 		public static extern IntPtr GetAncestor(IntPtr hwnd, uint flags);
+
+		[DllImport("user32.dll")]
+		[return: MarshalAs(UnmanagedType.Bool)]
+		public static extern bool SetForegroundWindow(IntPtr hWnd);
 	}
 }
