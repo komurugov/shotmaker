@@ -2,8 +2,7 @@
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
+using static ScreenshotMaker.BLL.Win32Interop.Win32Interop;
 
 namespace ScreenshotMaker.BLL
 {
@@ -11,38 +10,21 @@ namespace ScreenshotMaker.BLL
 	{
 		public static readonly ImageFormat ImageFormat = ImageFormat.Png;
 
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct RECT
-        {
-            public int Left;        // x position of upper-left corner
-            public int Top;         // y position of upper-left corner
-            public int Right;       // x position of lower-right corner
-            public int Bottom;      // y position of lower-right corner
-        }
-
-        private static Bitmap TakeScreenshot(IntPtr window)
+		private static Bitmap TakeScreenshot(IntPtr window)
 		{
-            RECT rectangle;
-            if (!GetWindowRect(window, out rectangle))
-                return null;
-            var bitmap = new Bitmap(rectangle.Right - rectangle.Left, rectangle.Bottom - rectangle.Top, PixelFormat.Format32bppArgb);
-//			var bitmap = new Bitmap(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height, PixelFormat.Format32bppArgb);
+			RECT rectangle;
+			if (!GetWindowRect(window, out rectangle))
+				throw new Exception("Can't get boundaries of the window.");
+			var bitmap = new Bitmap(rectangle.Right - rectangle.Left, rectangle.Bottom - rectangle.Top, PixelFormat.Format32bppArgb);
 			Graphics graphics = Graphics.FromImage(bitmap);
 			try
 			{
-                graphics.CopyFromScreen(rectangle.Left,
-                    rectangle.Top,
-                    //				graphics.CopyFromScreen(SystemInformation.VirtualScreen.X,
-                    //					SystemInformation.VirtualScreen.Y,
-                    0,
-                    0,
-                    bitmap.Size);
-//					SystemInformation.VirtualScreen.Size,
-//					CopyPixelOperation.SourceCopy);
+				graphics.CopyFromScreen(
+					rectangle.Left,
+					rectangle.Top,
+					0,
+					0,
+					bitmap.Size);
 			}
 			catch (Exception exception)
 			{
@@ -63,7 +45,7 @@ namespace ScreenshotMaker.BLL
 				throw new InvalidOperationException(string.Format("Can't save the temporary file in {0}: {1}", Environment.CurrentDirectory, exception.Message));
 			}
 			try
-			{ 
+			{
 				Win32Interop.File.Move(
 					Path.Combine(Environment.CurrentDirectory, fileInfo.FileName),
 					destination);
